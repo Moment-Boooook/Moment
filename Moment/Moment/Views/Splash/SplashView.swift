@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct SplashView: View {
-    @Binding var isActive: Bool
-    @State var degreeChange: Bool = false
+//    @Binding var isActive: Bool
+//    @State var degreeChange: Bool = false
+	let store: StoreOf<SplashFeature>
     
     var body: some View {
         ZStack {
@@ -28,7 +30,7 @@ struct SplashView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 150)
-                        .rotationEffect(.degrees(degreeChange ? -9 : 0))
+						.rotationEffect(.degrees(store.degreeChange ? -9 : 0))
                 }
                 
                 Text("Moment")
@@ -54,19 +56,21 @@ struct SplashView: View {
             }
         }
         .onAppear {
-            
-            withAnimation(.easeOut(duration: 2)) {
-                self.degreeChange = true
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.75) {
-                withAnimation {
-                    self.isActive = false
-                }
-            }
+//            withAnimation(.easeOut(duration: 2)) {
+//                self.degreeChange = true
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.75) {
+//                withAnimation {
+//                    self.isActive = false
+//                }
+//            }
+			store.send(.degreeChange, animation: .easeOut(duration: 2))
+			
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1.75) {
+				store.send(.animationFinish, animation: .default)
+			}
         }
     }
 }
-//
-//#Preview {
-//    SplashView()
-//}
+
+
