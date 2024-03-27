@@ -74,12 +74,3 @@ struct BookApiSearchBar: View {
         }
     }
 }
-
-//struct BookApiSearchBar_Previews: PreviewProvider {
-//    @State static var results: [Book] = []
-//
-//    static var previews: some View {
-//        BookApiSearchBar()
-//    }
-//}
-

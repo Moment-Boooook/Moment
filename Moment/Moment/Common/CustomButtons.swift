@@ -43,6 +43,7 @@ struct CustomButtons: View {
 struct CircledButton: ButtonStyle {
     let color: Color
     let frameSize: CGFloat
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: frameSize, height: frameSize)
@@ -60,6 +61,7 @@ struct CircledButton: ButtonStyle {
 struct CapsuledButton: ButtonStyle {
     let color: Color
     let frameWidth: CGFloat
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: frameWidth)
@@ -77,6 +79,7 @@ struct CapsuledButton: ButtonStyle {
 // MARK: - 커스텀 Prominent Button
 struct CustomProminentButton: ButtonStyle {
     let color: Color
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(minWidth: 0, maxWidth: .infinity)
