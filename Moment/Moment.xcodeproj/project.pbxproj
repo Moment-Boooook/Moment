@@ -50,6 +50,8 @@
 		7B649C252B38767F00586040 /* APIKEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B649C242B38767F00586040 /* APIKEY.plist */; };
 		7B649C272B38789100586040 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B649C262B38789100586040 /* MainViewModel.swift */; };
 		7BE6E0B72B2820FC00D8842D /* RecordLocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE6E0B62B2820FC00D8842D /* RecordLocalData.swift */; };
+		7BEC6C452BB4138A00FB10E6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 7BEC6C442BB4138A00FB10E6 /* ComposableArchitecture */; };
+		7BEC6C472BB413BA00FB10E6 /* SplashFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC6C462BB413BA00FB10E6 /* SplashFeature.swift */; };
 		AC4CA6752B26CFCA0066E9EB /* BookApiSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4CA6742B26CFCA0066E9EB /* BookApiSearchBar.swift */; };
 		AC4CA6772B26CFFA0066E9EB /* SegmentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4CA6762B26CFFA0066E9EB /* SegmentBar.swift */; };
 		AC4CA6792B26D0210066E9EB /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4CA6782B26D0210066E9EB /* SectionHeader.swift */; };
@@ -118,6 +120,7 @@
 		7B649C242B38767F00586040 /* APIKEY.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKEY.plist; sourceTree = "<group>"; };
 		7B649C262B38789100586040 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		7BE6E0B62B2820FC00D8842D /* RecordLocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLocalData.swift; sourceTree = "<group>"; };
+		7BEC6C462BB413BA00FB10E6 /* SplashFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
 		AC4CA6742B26CFCA0066E9EB /* BookApiSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookApiSearchBar.swift; sourceTree = "<group>"; };
 		AC4CA6762B26CFFA0066E9EB /* SegmentBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentBar.swift; sourceTree = "<group>"; };
 		AC4CA6782B26D0210066E9EB /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEC6C452BB4138A00FB10E6 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				2CBA62CD2B2A282500D075B7 /* SplashView.swift */,
+				7BEC6C462BB413BA00FB10E6 /* SplashFeature.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -414,6 +419,9 @@
 			dependencies = (
 			);
 			name = Moment;
+			packageProductDependencies = (
+				7BEC6C442BB4138A00FB10E6 /* ComposableArchitecture */,
+			);
 			productName = Moment;
 			productReference = 09AB7CE02B26A1350073EAD5 /* Moment.app */;
 			productType = "com.apple.product-type.application";
@@ -426,7 +434,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					09AB7CDF2B26A1350073EAD5 = {
 						CreatedOnToolsVersion = 15.0;
@@ -442,6 +450,9 @@
 				Base,
 			);
 			mainGroup = 09AB7CD72B26A1350073EAD5;
+			packageReferences = (
+				7BEC6C432BB4138A00FB10E6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = 09AB7CE12B26A1350073EAD5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -480,29 +491,25 @@
 				09D7750F2B296F2D00D45EE6 /* MainView.swift in Sources */,
 				AC72AD1B2B27ED260082A9DB /* NoContentView.swift in Sources */,
 				09731F7D2B26C5980045F6B4 /* OnboardingMainView.swift in Sources */,
-				09731F7D2B26C5980045F6B4 /* OnboardingMainView.swift in Sources */,
 				AC4CA6772B26CFFA0066E9EB /* SegmentBar.swift in Sources */,
+				7BEC6C472BB413BA00FB10E6 /* SplashFeature.swift in Sources */,
 				09AB7CE62B26A1350073EAD5 /* ContentView.swift in Sources */,
 				AC4CA67B2B26D0770066E9EB /* StartButtonView.swift in Sources */,
 				09731F772B26C5780045F6B4 /* DataTest.swift in Sources */,
 				B1C938592B27E294006EFB70 /* CustomListDivider.swift in Sources */,
 				AC4CA6752B26CFCA0066E9EB /* BookApiSearchBar.swift in Sources */,
 				2C6588FD2B2B575500C8BB93 /* View +.swift in Sources */,
-				AC4CA6752B26CFCA0066E9EB /* BookApiSearchBar.swift in Sources */,
 				7B39C0C72B2ADC7400460278 /* UIImage +.swift in Sources */,
 				B1C9385F2B27F010006EFB70 /* MapToRecordListView.swift in Sources */,
 				2CBA62CE2B2A282500D075B7 /* SplashView.swift in Sources */,
 				AC72AD1D2B27ED4E0082A9DB /* CustomShelf.swift in Sources */,
-				09731F7D2B26C5980045F6B4 /* OnboardingMainView.swift in Sources */,
 				09731F842B26C8AB0045F6B4 /* ImageHorizontalScrollView.swift in Sources */,
 				2CA6BED32B26DF46002E3589 /* AddRecordView.swift in Sources */,
 				098F93312B26DE4E005D93AB /* MiniMapView.swift in Sources */,
 				AC72AD1F2B27ED750082A9DB /* ContentShelfView.swift in Sources */,
 				B1C938572B27E24F006EFB70 /* ShelfRecordCellView.swift in Sources */,
 				09731F8E2B26D6CC0045F6B4 /* RecordDetailView.swift in Sources */,
-				09AB7CE62B26A1350073EAD5 /* ContentView.swift in Sources */,
 				09731F8C2B26D1500045F6B4 /* ButtonStyle +.swift in Sources */,
-				09731F772B26C5780045F6B4 /* DataTest.swift in Sources */,
 				095131622B31216200F6BC4C /* FormattedTime.swift in Sources */,
 				AC72AD2A2B284FC90082A9DB /* NetworkErrorCase.swift in Sources */,
 				B1C9385D2B27E2E8006EFB70 /* ShelfRecordListView.swift in Sources */,
@@ -753,6 +760,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7BEC6C432BB4138A00FB10E6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7BEC6C442BB4138A00FB10E6 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BEC6C432BB4138A00FB10E6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 09AB7CD82B26A1350073EAD5 /* Project object */;
 }

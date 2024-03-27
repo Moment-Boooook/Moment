@@ -7,9 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import ComposableArchitecture
 
 @main
 struct MomentApp: App {
+	static let store = Store(initialState: SplashFeature.State()) {
+		SplashFeature()
+	}
 	@State private var isLoading = true
 	
 	var sharedModelContainer: ModelContainer = {
@@ -27,8 +31,9 @@ struct MomentApp: App {
 	
 	var body: some Scene {
 		WindowGroup {
-			if isLoading {
-				SplashView(isActive: $isLoading)
+			if MomentApp.store.isActive {
+//				SplashView(isActive: $isLoading)
+				SplashView(store: MomentApp.store)
 			} else {
 				ContentView()
 					.modelContainer(sharedModelContainer)
