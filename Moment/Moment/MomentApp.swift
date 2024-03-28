@@ -11,8 +11,8 @@ import ComposableArchitecture
 
 @main
 struct MomentApp: App {
-	static let store = Store(initialState: SplashFeature.State()) {
-		SplashFeature()
+	static let store = Store(initialState: AppFeature.State()) {
+		AppFeature()
 	}
 	@State private var isLoading = true
 	
@@ -31,11 +31,10 @@ struct MomentApp: App {
 	
 	var body: some Scene {
 		WindowGroup {
-			if MomentApp.store.isActive {
-//				SplashView(isActive: $isLoading)
-				SplashView(store: MomentApp.store)
+			if MomentApp.store.splash.isActive {
+				SplashView(store: MomentApp.store.scope(state: \.splash, action: \.splash))
 			} else {
-				ContentView()
+				ContentView(store: MomentApp.store.scope(state: \.root, action: \.root))
 					.modelContainer(sharedModelContainer)
 			}
 		}
