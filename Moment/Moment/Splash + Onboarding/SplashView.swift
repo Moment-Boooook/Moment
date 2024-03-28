@@ -11,8 +11,8 @@ import ComposableArchitecture
 
 // MARK: - Splash View
 struct SplashView: View {
-    @Bindable var store: StoreOf<SplashViewFeature>
-    
+    let store: StoreOf<AppStartFeature>
+
     var body: some View {
         VStack(alignment: .center) {
             //
@@ -61,9 +61,9 @@ struct SplashView: View {
 #Preview {
     SplashView(
         store: Store(
-            initialState: SplashViewFeature.State()
+            initialState: AppStartFeature.State()
         ) {
-            SplashViewFeature()
+            AppStartFeature()
         }
     )
 }

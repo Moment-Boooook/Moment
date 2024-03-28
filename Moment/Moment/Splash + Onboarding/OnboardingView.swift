@@ -11,8 +11,7 @@ import ComposableArchitecture
 
 // MARK: - Onboarding View
 struct OnboardingView: View {
-    @AppStorage("firstTimeUser") var firstTimeUser: Bool?
-    let store: StoreOf<OnboardingViewFeature>
+    let store: StoreOf<AppStartFeature>
     
     private let onboardingData: [OnboardingData] = [
         OnboardingData(content: "모멘트와 함께\n기억 속에 남겨두고 싶은\n책의 내용을 기록해보세요.", image: "onboarding01"),
@@ -34,7 +33,7 @@ struct OnboardingView: View {
                 .tabViewStyle(.page(indexDisplayMode: .always))
                 // 버튼
                 Button {
-                    firstTimeUser = false
+                    store.send(.startButtonTapped)
                 } label: {
                     Text("시작하기")
                         .foregroundStyle(.white)
@@ -78,9 +77,9 @@ private struct OnboardingData: Identifiable {
 #Preview {
     OnboardingView(
         store: Store(
-            initialState: OnboardingViewFeature.State()
+            initialState: AppStartFeature.State()
         ) {
-            OnboardingViewFeature()
+            AppStartFeature()
         }
     )
 }

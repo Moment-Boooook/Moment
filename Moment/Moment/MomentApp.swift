@@ -12,14 +12,14 @@ import ComposableArchitecture
 
 @main
 struct MomentApp: App {
-    static let store = Store(initialState: HomeViewFeature.State()) {
-        HomeViewFeature()
+    static let store = Store(initialState: AppContentViewFeature.State()) {
+        AppContentViewFeature()
             ._printChanges()
     }
-	
+    
 	var body: some Scene {
 		WindowGroup {
-            HomeView(store: MomentApp.store)
+            AppContentView(store: MomentApp.store)
                 .modelContainer(for: [
                     MomentRecord.self, MomentBook.self
                 ])
