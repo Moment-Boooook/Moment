@@ -7,19 +7,16 @@
 
 
 import SwiftUI
+import ComposableArchitecture
 
 struct ContentView: View {
-    @AppStorage("isOnboarding") var isOnboarding: Bool = true
-    
+	let store: StoreOf<RootFeature>
+	
     var body: some View {
-        if isOnboarding {
-            OnboardingMainView()
+		if store.scope(state: \.onboarding, action: \.onboarding).isOnboardingCompleted {
+			OnboardingMainView(store: store.scope(state: \.onboarding, action: \.onboarding))
         } else {
-            MainView()
+			MainView()
         }
     }
 }
-
-//#Preview {
-//    ContentView()
-//}
