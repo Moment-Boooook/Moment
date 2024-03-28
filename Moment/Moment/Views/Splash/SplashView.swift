@@ -15,7 +15,6 @@ struct SplashView: View {
     
     var body: some View {
         ZStack {
-            
             VStack(alignment: .center) {
                 Spacer()
                 
@@ -64,11 +63,12 @@ struct SplashView: View {
 //                    self.isActive = false
 //                }
 //            }
-			store.send(.degreeChange, animation: .easeOut(duration: 2))
-			
-			DispatchQueue.main.asyncAfter(deadline: .now() + 1.75) {
-				store.send(.animationFinish, animation: .default)
-			}
+//			store.send(.degreeChange, animation: .easeOut(duration: 2))
+//			
+//			DispatchQueue.main.asyncAfter(deadline: .now() + 1.75) {
+//				store.send(.animationFinish, animation: .default)
+//			}
+			store.send(.appStart)
         }
     }
 }
