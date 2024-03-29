@@ -31,14 +31,14 @@ struct ContentShelfView: View {
 						})
                         .zIndex(1)
                         
-                        CustomShelfUP()
-                            .fill(.offBrown)
-                            .frame(width: (geo.size.width - 80) / 2)
-                            .padding(.bottom, 5)
-                        CustomShelfDOWN()
-                            .fill(.mainBrown)
-                            .frame(width: (geo.size.width - 80) / 2)
-                            .shadow(radius: 5, x: 0, y: 1)
+//                        CustomShelfUP()
+//                            .fill(.offBrown)
+//                            .frame(width: (geo.size.width - 80) / 2)
+//                            .padding(.bottom, 5)
+//                        CustomShelfDOWN()
+//                            .fill(.mainBrown)
+//                            .frame(width: (geo.size.width - 80) / 2)
+//                            .shadow(radius: 5, x: 0, y: 1)
 					}
                     .padding(.top, 10)
 				}

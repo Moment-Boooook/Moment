@@ -16,6 +16,7 @@ struct SwiftDataService {
     @Query private var recordList: [MomentRecord]
     
     var bookListFetch: () throws -> [MomentBook]
+    var recordListFetch: () throws -> [MomentRecord]
 
     enum SwiftDataError: Error {
         case fetchError
@@ -33,6 +34,17 @@ extension SwiftDataService: DependencyKey {
                 let bookListContext = try context()
                 let descriptor = FetchDescriptor<MomentBook>(sortBy: [SortDescriptor(\.bookISBN)])
                 return try bookListContext.fetch(descriptor)
+            } catch {
+                throw SwiftDataError.fetchError
+            }
+        },
+        // Record List Fetch
+        recordListFetch: {
+            do {
+                @Dependency(\.databaseService.context) var context
+                let recordListContext = try context()
+                let descriptor = FetchDescriptor<MomentRecord>()
+                return try recordListContext.fetch(descriptor)
             } catch {
                 throw SwiftDataError.fetchError
             }

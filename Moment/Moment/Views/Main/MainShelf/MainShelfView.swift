@@ -21,8 +21,8 @@ struct MainShelfView: View {
 	var body: some View {
 		ZStack(alignment: .bottomTrailing) {
 			if bookList.isEmpty {
-				NoContentView()
-					.padding(EdgeInsets(top: 0, leading: 20, bottom: 60, trailing: 20))
+//				NoContentView()
+//					.padding(EdgeInsets(top: 0, leading: 20, bottom: 60, trailing: 20))
 			} else {
 				ScrollView(.vertical, showsIndicators: false) {
 					ContentShelfView(bookList: $bookList, geo: geo)

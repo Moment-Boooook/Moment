@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 
+// MARK: - 기록
 @Model
 class MomentRecord: Identifiable {
 	@Attribute(.unique) var id = UUID()
@@ -40,6 +41,7 @@ class MomentRecord: Identifiable {
 	}
 }
 
+// MARK: - 책
 @Model
 class MomentBook: SelectedBook, Hashable {
 	@Attribute(.unique) var bookISBN: String

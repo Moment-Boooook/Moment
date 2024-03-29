@@ -38,7 +38,7 @@ struct MainView: View {
 									  isSearch: $isSearch,
 									  isSearchFocused: _isSearchFocused)
 							.padding(.horizontal, 20)
-							SegmentBar(preselectedIndex: $selectedOption, geo: geo)
+//							SegmentBar(preselectedIndex: $selectedOption, geo: geo)
 							
 							MainShelfView(bookList: isSearch ? $searchBookList : $mainBookList,
 										  recordSearchText: $recordSearchText,
@@ -54,7 +54,7 @@ struct MainView: View {
 										  isSearch: $isSearch,
 										  isSearchFocused: _isSearchFocused)
 								.padding(.horizontal, 20)
-								SegmentBar(preselectedIndex: $selectedOption, geo: geo)
+//								SegmentBar(preselectedIndex: $selectedOption, geo: geo)
 							}
 						}
 					}

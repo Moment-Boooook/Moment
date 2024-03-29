@@ -7,38 +7,6 @@
 
 import SwiftUI
 
-struct CustomButtons: View {
-    var body: some View {
-        VStack(spacing: 20) {
-            Button {
-                // Just Design example
-            } label: {
-                Image(systemName: "plus")
-                    .font(.system(size: 30))
-                    .fontWeight(.medium)
-            }
-            .buttonStyle(.circled(color: .lightBrown, size: 40))
-            
-            Button {
-                // Just Design example
-            } label: {
-                Text("Capsuled Button")
-                    .font(.bold18)
-            }
-            .buttonStyle(.capsuled(color: .lightBrown, width: 200))
-            
-            Button {
-                // Just Design example
-            } label: {
-                Text("Custom Prominent")
-                    .font(.regular18)
-            }
-            .buttonStyle(.customProminent(color: .offBrown))
-        }
-        .padding()
-    }
-}
-
 // MARK: - 원형 Button
 struct CircledButton: ButtonStyle {
     let color: Color
@@ -91,6 +59,39 @@ struct CustomProminentButton: ButtonStyle {
             )
             .foregroundStyle(Color.white)
             .opacity(configuration.isPressed ? 0.6 : 1.0)
+    }
+}
+
+// MARK: - 예시
+private struct CustomButtons: View {
+    fileprivate var body: some View {
+        VStack(spacing: 20) {
+            Button {
+                // Just Design example
+            } label: {
+                Image(systemName: "plus")
+                    .font(.system(size: 30))
+                    .fontWeight(.medium)
+            }
+            .buttonStyle(.circled(color: .lightBrown, size: 40))
+            
+            Button {
+                // Just Design example
+            } label: {
+                Text("Capsuled Button")
+                    .font(.bold18)
+            }
+            .buttonStyle(.capsuled(color: .lightBrown, width: 200))
+            
+            Button {
+                // Just Design example
+            } label: {
+                Text("Custom Prominent")
+                    .font(.regular18)
+            }
+            .buttonStyle(.customProminent(color: .offBrown))
+        }
+        .padding()
     }
 }
 

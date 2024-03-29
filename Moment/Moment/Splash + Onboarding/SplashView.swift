@@ -37,17 +37,17 @@ struct SplashView: View {
                 .padding(5)
             Text("그 날, 그 곳, 그 구절")
                 .foregroundStyle(.mainBrown)
-                .font(.light20)
+                .font(.regular20)
                 .opacity(0.5)
             //
             Spacer()
             // 앱 제작 정보
             VStack(alignment: .center) {
                 Text("2023, Moment all rights reserved.")
-                    .font(.footnote)
+                    .font(.light14)
                     .foregroundStyle(.gray2)
                 Text("Powered by PJ2T3_BOOOOOK")
-                    .font(.footnote)
+                    .font(.light14)
                     .foregroundStyle(.gray2)
             }
         }

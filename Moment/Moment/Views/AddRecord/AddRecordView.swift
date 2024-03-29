@@ -259,10 +259,7 @@ struct AddRecordView: View {
 	}
 	
 	func formattedDateToCustom() {
-		let dividedTime = FormattedTime.init(date: Date())
-		year = dividedTime.formattedYearToInt()
-		monthAndDay = dividedTime.formattedDayToString()
-		time = dividedTime.formattedTimeToString()
+        (self.year, self.monthAndDay, self.time) = Formatter.formattedDateToString(date: Date())
 	}
 }
 
