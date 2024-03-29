@@ -111,7 +111,8 @@ struct HomeViewFeature {
                 return .none
             // 지역 별 기록 리스트
             case .fetchRecordDictionary:
-                state.recordDictionary = Dictionary(grouping: state.records) { record in
+                let records = state.isSearching ? state.searchedRecords : state.records
+                state.recordDictionary = Dictionary(grouping: records) { record in
                     if let localName = state.localNames.first(where: { $0.rawValue == record.localName }) {
                         return localName
                     } else {

@@ -43,7 +43,7 @@ struct SelectedBooktoAPIView: View {
 //										SelectedBookCell(bookInfo: book)
 //									}
 									NavigationLink(value: book) {
-										SelectedBookCell(bookInfo: book)
+//										SelectedBookCell(bookInfo: book)
 									}
 									CustomListDivider()
 								}
@@ -71,7 +71,7 @@ struct SelectedBooktoAPIView: View {
 							VStack(alignment: .leading, spacing: -30) {
 								ForEach(searchResults, id: \.self) { book in
 									NavigationLink(value: book) {
-										SelectedBookCell(bookInfo: book)
+//										SelectedBookCell(bookInfo: book)
 									}
 //									NavigationLink {
 //                                        AddRecordView(isRecord: $isRecord, bookInfo: book)

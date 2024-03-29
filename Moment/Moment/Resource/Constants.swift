@@ -97,3 +97,8 @@ enum NetworkError: Error {
         }
     }
 }
+
+// MARK: - HTTP Method
+enum HTTPMethod: String {
+    case get = "GET"
+}

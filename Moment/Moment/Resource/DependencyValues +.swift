@@ -28,4 +28,10 @@ extension DependencyValues {
         get { self[SwiftDataService.self] }
         set { self[SwiftDataService.self] = newValue }
     }
+    
+    // Naver Book API Service
+    var naverBookService: NaverBookAPIService {
+        get { self[NaverBookAPIService.self] }
+        set { self[NaverBookAPIService.self] = newValue }
+    }
 }
