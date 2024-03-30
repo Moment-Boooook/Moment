@@ -98,6 +98,13 @@ enum NetworkError: Error {
     }
 }
 
+// MARK: - 네트워크 에러
+enum LocationManagerError: Error {
+    case invalidManager
+    case geoCoding
+    case authorizationDenied
+}
+
 // MARK: - HTTP Method
 enum HTTPMethod: String {
     case get = "GET"

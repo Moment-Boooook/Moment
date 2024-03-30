@@ -34,4 +34,10 @@ extension DependencyValues {
         get { self[NaverBookAPIService.self] }
         set { self[NaverBookAPIService.self] = newValue }
     }
+    
+    // CLLocation Service
+    var locationManagerService: LocationManagerService {
+        get { self[LocationManagerService.self] }
+        set { self[LocationManagerService.self] = newValue }
+    }
 }

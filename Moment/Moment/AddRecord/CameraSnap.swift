@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-import UIKit
+
+import ComposableArchitecture
 
 // MARK: - UIKit 의 UIImagePickerController 로, 카메라 사용
 struct CameraSnap: UIViewControllerRepresentable {
-    @Binding var selectedPhoto: UIImage?
-    @Binding var isCameraPresented: Bool
+    @Bindable var store: StoreOf<AddRecordViewFeature>
 
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         var parent: CameraSnap
@@ -22,13 +22,13 @@ struct CameraSnap: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let uiImage = info[.originalImage] as? UIImage {
-                parent.selectedPhoto = uiImage
+                parent.store.filmedPhoto = uiImage
             }
-            parent.isCameraPresented = false
+            parent.store.isCameraSnapSheet = false
         }
         
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            parent.isCameraPresented = false
+            parent.store.isCameraSnapSheet = false
         }
     }
     

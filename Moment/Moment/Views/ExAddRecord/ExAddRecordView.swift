@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 import MapKit
 
-struct AddRecordView: View {
+struct ExAddRecordView: View {
 	@Environment(\.dismiss) private var dismiss
 	
 	@State private var showPickerMap: Bool = false

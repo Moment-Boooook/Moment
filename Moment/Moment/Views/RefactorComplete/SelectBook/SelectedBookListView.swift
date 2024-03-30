@@ -87,10 +87,10 @@ struct SelectedBooktoAPIView: View {
 			}
 		}
 		.navigationDestination(for: MomentBook.self) { value in
-			AddRecordView(isRecord: $isRecord, bookInfo: value)
+            ExAddRecordView(isRecord: $isRecord, bookInfo: value)
 		}
 		.navigationDestination(for: Book.self) { value in
-			AddRecordView(isRecord: $isRecord, bookInfo: value)
+            ExAddRecordView(isRecord: $isRecord, bookInfo: value)
 		}
 		.onChange(of: isRecord) {
 			if isRecord {
