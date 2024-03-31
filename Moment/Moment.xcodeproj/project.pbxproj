@@ -278,8 +278,6 @@
 			children = (
 				2CA6BED22B26DF46002E3589 /* ExAddRecordView.swift */,
 				098F934F2B275B6C005D93AB /* ImageSelectHorizontalScrollView.swift */,
-				09D774F02B275DB700D45EE6 /* PhotoPicker.swift */,
-				09D774FA2B283C2100D45EE6 /* PickerMap.swift */,
 				09D774FC2B283C7500D45EE6 /* LocationPickerMapView.swift */,
 			);
 			path = ExAddRecord;
@@ -425,6 +423,8 @@
 				09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */,
 				09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */,
 				09D774EE2B275D9C00D45EE6 /* CameraSnap.swift */,
+				09D774F02B275DB700D45EE6 /* PhotoPicker.swift */,
+				09D774FA2B283C2100D45EE6 /* PickerMap.swift */,
 			);
 			path = AddRecord;
 			sourceTree = "<group>";

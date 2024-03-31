@@ -52,19 +52,16 @@ struct AddRecordView: View {
                             //
                             Button {
                                 // 지도 피커 열기
+                                store.send(.togglePickerMapSheet)
                             } label: {
                                 Image(systemName: "map")
                                     .foregroundStyle(.lightBrown)
                             }
-//                            .sheet(isPresented: $showPickerMap) {
-//                                LocationPickerMapView(showPickerMap: $showPickerMap,
-//                                                      latitude: $latitude,
-//                                                      longitude: $longitude,
-//                                                      localName: $localName,
-//                                                      place: $place)
+//                            .sheet(isPresented: $store.isPickerMapSheet) {
+//                                LocationPickerMap(store: store)
 //                            }
                         }
-                        .padding(20)
+                        .padding(10)
                     }
                     //
                     TextField("위치를 기억할 이름을 지어주세요.",
@@ -199,26 +196,23 @@ struct AddRecordView: View {
                             isPresented: $store.showPhotoConfimationDialog,
                             titleVisibility: .hidden) {
             Button {
-//                isCameraPresented.toggle()
+//                store.isCameraSnapSheet.toggle()
             } label: {
                 Text("카메라")
             }
             Button {
-//                isLibraryPresented.toggle()
+//                store.isPhotoPickerSheet.toggle()
             } label: {
                 Text("라이브러리")
             }
         } message: {
             Text("불러올 사진 위치를 선택해주세요")
         }
-//        .sheet(isPresented: $isCameraPresented) {
+//        .sheet(isPresented: $store.isCameraSnapSheet) {
 //            CameraSnap(store: store)
 //        }
-//        .sheet(isPresented: $isLibraryPresented) {
-//            let remainingSpaces = getRemainigSpaces()
-//            PhotoPicker(selectedPhotos: $photoDummyData,
-//                        isLibraryPresented: $isLibraryPresented,
-//                        remainingSpaces: remainingSpaces)
+//        .sheet(isPresented: $store.isPhotoPickerSheet) {
+//            PhotoPicker(store: store)
 //        }
     }
     

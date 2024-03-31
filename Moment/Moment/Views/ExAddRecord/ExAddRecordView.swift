@@ -82,11 +82,11 @@ struct ExAddRecordView: View {
 									.foregroundStyle(.lightBrown)
 							}
 							.sheet(isPresented: $showPickerMap) {
-								LocationPickerMapView(showPickerMap: $showPickerMap,
-													  latitude: $latitude,
-													  longitude: $longitude,
-													  localName: $localName,
-													  place: $place)
+//								LocationPickerMapView(showPickerMap: $showPickerMap,
+//													  latitude: $latitude,
+//													  longitude: $longitude,
+//													  localName: $localName,
+//													  place: $place)
 							}
 						}
 						.padding(10)

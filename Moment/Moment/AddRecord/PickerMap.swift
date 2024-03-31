@@ -8,7 +8,84 @@
 import SwiftUI
 import MapKit
 
-struct PickerMap: UIViewRepresentable {
+import ComposableArchitecture
+
+// MARK: - 지도에서 위치 선택하는 시트 뷰
+struct LocationPickerMap: View {
+    @Bindable var store: StoreOf<AddRecordViewFeature>
+    @StateObject private var locationManager = LocationManager()
+
+    var body: some View {
+        VStack {
+            ZStack {
+                PickerMap(locationManager: locationManager)
+                    .ignoresSafeArea(.all)
+                MapBalloon()
+                    .frame(width: 30, height: 55)
+                    .foregroundStyle(locationManager.isChanging ? .pink.opacity(0.7) : .pink)
+                    .offset(y: locationManager.isChanging ? -20 : -15)
+                Circle()
+                    .fill(locationManager.isChanging ? .white.opacity(0.7) : .white)
+                    .frame(width: 12)
+                    .offset(y: locationManager.isChanging ? -20 : -15)
+            }
+            .overlay(alignment: .bottomTrailing) {
+                Button {
+                    locationManager.mapViewFocusChange()
+                } label: {
+                    ZStack {
+                        Circle()
+                            .fill(.white.opacity(0.9))
+                            .frame(width: 40)
+                        Image(systemName: "location")
+                            .foregroundStyle(.darkBrown)
+                            .fontWeight(.bold)
+                    }
+                }
+                .padding([.bottom, .trailing])
+            }
+            VStack(alignment: .leading, spacing: 30) {
+                Text(locationManager.place)
+                    .font(.bold20)
+                Button {
+                    if !locationManager.isChanging {
+                        store.latitude = locationManager.latitude
+                        store.longitude = locationManager.longitude
+                        store.localName = locationManager.localName
+                        store.place = locationManager.place
+                    }
+                    store.isPickerMapSheet = false
+                } label: {
+                    Text("이 위치로 설정하기")
+                        .font(.bold18)
+                        .foregroundStyle(.white)
+                }
+                .buttonStyle(.customProminent(color: locationManager.isChanging ? .gray3 : .lightBrown))
+            }
+            .padding()
+        }
+    }
+}
+
+// MARK: - 지도 에서 위치 선택하는 핀
+private struct MapBalloon: Shape {
+    fileprivate func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX, y: rect.maxY))
+        path.addCurve(to: CGPoint(x: rect.minX, y: rect.midY),
+                      control1: CGPoint(x: rect.midX, y: rect.maxY),
+                      control2: CGPoint(x: rect.minX, y: rect.midY + rect.height / 5))
+        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2,
+                    startAngle: .degrees(180), endAngle: .degrees(0), clockwise: false)
+        path.addCurve(to: CGPoint(x: rect.midX, y: rect.maxY),
+                      control1: CGPoint(x: rect.maxX, y: rect.midY + rect.height / 5),
+                      control2: CGPoint(x: rect.midX, y: rect.maxY))
+        return path
+    }
+}
+
+// MARK: - 지도에서 위치 선택하는 뷰
+private struct PickerMap: UIViewRepresentable {
     @ObservedObject var locationManager: LocationManager
     
     func makeUIView(context: Context) -> some UIView {
@@ -20,7 +97,8 @@ struct PickerMap: UIViewRepresentable {
     }
 }
 
-class LocationManager: NSObject, ObservableObject, MKMapViewDelegate, CLLocationManagerDelegate {
+// MARK: - Location Manager : ObservableObject ( Not TCA )
+final class LocationManager: NSObject, ObservableObject, MKMapViewDelegate, CLLocationManagerDelegate {
     @Published var mapView: MKMapView = .init()
     @Published var isChanging: Bool = false
     @Published var latitude: Double = 0

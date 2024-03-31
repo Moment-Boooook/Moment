@@ -7,89 +7,87 @@
 
 import SwiftUI
 
-struct LocationPickerMapView: View {
-    @Binding var showPickerMap: Bool
-    @Binding var latitude: Double
-    @Binding var longitude: Double
-    @Binding var localName: String
-    @Binding var place: String
-    @StateObject private var locationManager = LocationManager()
+//struct LocationPickerMapView: View {
+//    @Binding var showPickerMap: Bool
+//    @Binding var latitude: Double
+//    @Binding var longitude: Double
+//    @Binding var localName: String
+//    @Binding var place: String
+//    @StateObject private var locationManager = LocationManager()
+//
+//    var body: some View {
+//        VStack {
+//            ZStack {
+//                PickerMap(locationManager: locationManager)
+//                    .ignoresSafeArea(.all)
+//                MapBalloon()
+//                    .frame(width: 30, height: 55)
+//                    .foregroundStyle(locationManager.isChanging ? .pink.opacity(0.7) : .pink)
+//                    .offset(y: locationManager.isChanging ? -20 : -15)
+//                Circle()
+//                    .fill(locationManager.isChanging ? .white.opacity(0.7) : .white)
+//                    .frame(width: 12)
+//                    .offset(y: locationManager.isChanging ? -20 : -15)
+//            }
+//            .overlay(alignment: .bottomTrailing) {
+//                Button {
+//                    locationManager.mapViewFocusChange()
+//                } label: {
+//                    ZStack {
+//                        Circle()
+//                            .fill(.white.opacity(0.9))
+//                            .frame(width: 40)
+//                        Image(systemName: "location")
+//                            .foregroundStyle(.darkBrown)
+//                            .fontWeight(.bold)
+//                    }
+//                }
+//                .padding([.bottom, .trailing])
+//            }
+//            VStack(alignment: .leading, spacing: 30) {
+//                Text(locationManager.place)
+//                    .font(.bold20)
+//                Button {
+//                    if !locationManager.isChanging {
+//                        self.latitude = locationManager.latitude
+//                        self.longitude = locationManager.longitude
+//                        self.localName = locationManager.localName
+//                        self.place = locationManager.place
+//                    }
+//                    self.showPickerMap = false
+//                } label: {
+//                    Text("이 위치로 설정하기")
+//                        .font(.bold18)
+//                        .foregroundStyle(.white)
+//                }
+//                .buttonStyle(.customProminent(color: locationManager.isChanging ? .gray3 : .lightBrown))
+//            }
+//            .padding()
+//        }
+//    }
+//}
 
-    var body: some View {
-        VStack {
-            ZStack {
-                PickerMap(locationManager: locationManager)
-                    .ignoresSafeArea(.all)
-                MapBalloon()
-                    .frame(width: 30, height: 55)
-                    .foregroundStyle(locationManager.isChanging ? .pink.opacity(0.7) : .pink)
-                    .offset(y: locationManager.isChanging ? -20 : -15)
-                Circle()
-                    .fill(locationManager.isChanging ? .white.opacity(0.7) : .white)
-                    .frame(width: 12)
-                    .offset(y: locationManager.isChanging ? -20 : -15)
-            }
-            .overlay(alignment: .bottomTrailing) {
-                Button {
-                    locationManager.mapViewFocusChange()
-                } label: {
-                    ZStack {
-                        Circle()
-                            .fill(.white.opacity(0.9))
-                            .frame(width: 40)
-                        Image(systemName: "location")
-                            .foregroundStyle(.darkBrown)
-                            .fontWeight(.bold)
-                    }
-                }
-                .padding([.bottom, .trailing])
-            }
-            VStack(alignment: .leading, spacing: 30) {
-                Text(locationManager.place)
-                    .font(.bold20)
-                Button {
-                    if !locationManager.isChanging {
-                        self.latitude = locationManager.latitude
-                        self.longitude = locationManager.longitude
-                        self.localName = locationManager.localName
-                        self.place = locationManager.place
-                    }
-                    self.showPickerMap = false
-                } label: {
-                    Text("이 위치로 설정하기")
-                        .font(.bold18)
-                        .foregroundStyle(.white)
-                }
-                .buttonStyle(.customProminent(color: locationManager.isChanging ? .gray3 : .lightBrown))
-            }
-            .padding()
-        }
-    }
-}
+//// MARK: - 지도 에서 위치 선택하는 핀
+//private struct MapBalloon: Shape {
+//    fileprivate func path(in rect: CGRect) -> Path {
+//        var path = Path()
+//        path.move(to: CGPoint(x: rect.midX, y: rect.maxY))
+//        path.addCurve(to: CGPoint(x: rect.minX, y: rect.midY),
+//                      control1: CGPoint(x: rect.midX, y: rect.maxY),
+//                      control2: CGPoint(x: rect.minX, y: rect.midY + rect.height / 5))
+//        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2,
+//                    startAngle: .degrees(180), endAngle: .degrees(0), clockwise: false)
+//        path.addCurve(to: CGPoint(x: rect.midX, y: rect.maxY),
+//                      control1: CGPoint(x: rect.maxX, y: rect.midY + rect.height / 5),
+//                      control2: CGPoint(x: rect.midX, y: rect.maxY))
+//        return path
+//    }
+//}
 
-struct MapBalloon: Shape {
-    var startAngle: Angle = .degrees(180)
-    var endAngle: Angle = .degrees(0)
-
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        path.move(to: CGPoint(x: rect.midX, y: rect.maxY))
-        path.addCurve(to: CGPoint(x: rect.minX, y: rect.midY),
-                      control1: CGPoint(x: rect.midX, y: rect.maxY),
-                      control2: CGPoint(x: rect.minX, y: rect.midY + rect.height / 5))
-        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2,
-                    startAngle: startAngle, endAngle: endAngle, clockwise: false)
-        path.addCurve(to: CGPoint(x: rect.midX, y: rect.maxY),
-                      control1: CGPoint(x: rect.maxX, y: rect.midY + rect.height / 5),
-                      control2: CGPoint(x: rect.midX, y: rect.maxY))
-        return path
-    }
-}
-
-#Preview {
-    LocationPickerMapView(showPickerMap: .constant(true),
-                          latitude: .constant(23.12432),
-                          longitude: .constant(120.12414),
-                          localName: .constant("서울특별시"),
-                          place: .constant("어딘가 어딘가 어디"))
-}
+//#Preview {
+//    LocationPickerMapView(showPickerMap: .constant(true),
+//                          latitude: .constant(23.12432),
+//                          longitude: .constant(120.12414),
+//                          localName: .constant("서울특별시"),
+//                          place: .constant("어딘가 어딘가 어디"))
+//}

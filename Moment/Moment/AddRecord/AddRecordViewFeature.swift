@@ -31,6 +31,7 @@ struct AddRecordViewFeature {
         var isSaveable: Bool {                          // 기록 저장이 가능한지
             [myLocationAlias, paragraph, content].contains("") || page.isEmpty || selectedImages.isEmpty
         }
+        var isPickerMapSheet: Bool = false              // 위치 선택 지도 시트 열기
         var showPhotoConfimationDialog: Bool = false    // 카메라 / 라이브러리 선택 다이얼로그
         var isCameraSnapSheet: Bool = false             // 카메라 사진 찍기 시트 열기
         var isPhotoPickerSheet: Bool = false            // 라이브러리 사진 선택하기 시트 열기
@@ -59,6 +60,7 @@ struct AddRecordViewFeature {
         case setParagraph(String)
         case setLocationInfo((Double, Double, String, String))
         case togglePhotoConfimationDialog
+        case togglePickerMapSheet
         // alert
         enum Alert: Equatable {
             
@@ -140,6 +142,10 @@ struct AddRecordViewFeature {
             // 'showPhotoConfimationDialog' 값 토글 변경
             case .togglePhotoConfimationDialog:
                 state.showPhotoConfimationDialog.toggle()
+                return .none
+            // 'isPickerMapSheet' 값 토글 변경
+            case .togglePickerMapSheet:
+                state.isPickerMapSheet.toggle()
                 return .none
             }
         }
