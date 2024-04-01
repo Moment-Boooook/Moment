@@ -16,6 +16,7 @@ struct HomeViewFeature {
     
     @ObservableState
     struct State: Equatable {
+        var path = StackState<Path.State>()                     // 네비게이션 스택 Path
         var selectedOption: HomeSegment = .bookShelf            // 세그먼트 옵션
         var searchText: String = ""                             // 서치바 - 검색어
         var tappedSearchButton = false                          // 서치바 - 검색 버튼
@@ -58,6 +59,7 @@ struct HomeViewFeature {
         case fetchRecords
         case fetchRecordDictionary
         case removeSearchText
+        case path(StackAction<Path.State, Path.Action>)
         case searchButtonTapped
         case searchBooks(String)
         case searchRecords([MomentBook])
@@ -65,7 +67,7 @@ struct HomeViewFeature {
         case startSearch
         case toggleSelectedOption(HomeSegment)
     }
-        
+    
     @Dependency(\.swiftDataService) var swiftData
     
     var body: some ReducerOf<Self> {
@@ -73,9 +75,6 @@ struct HomeViewFeature {
         
         Reduce { state, action in
             switch action {
-            // focusedField 연결
-            case .binding(\.focusedField):
-                return .none
             //
             case .binding:
                 return .none
@@ -129,6 +128,12 @@ struct HomeViewFeature {
             case .removeSearchText:
                 state.searchText = ""
                 return .none
+            // NavigationPath
+            case let .path(action):
+                switch action {
+                default:
+                    return .none
+                }
             // 서치바 - 검색
             case .searchButtonTapped:
                 return .concatenate(
@@ -161,6 +166,37 @@ struct HomeViewFeature {
             // 세그먼트 - 값 토글
             case let .toggleSelectedOption(newOption):
                 return .send(.changeSelectedOption(newOption), animation: .interactiveSpring)
+            }
+        }
+        .forEach(\.path, action: \.path) {
+            Path()
+        }
+    }
+}
+
+// MARK: - Path
+extension HomeViewFeature {
+    @Reducer
+    struct Path {
+        
+        @ObservableState
+        enum State: Equatable {
+            case addBook(AddBookViewFeature.State)
+            case addRecord(AddRecordViewFeature.State)
+        }
+        
+        enum Action {
+            case addBook(AddBookViewFeature.Action)
+            case addRecord(AddRecordViewFeature.Action)
+        }
+        
+        var body: some ReducerOf<Self> {
+            Scope(state: \.addBook, action: \.addBook) {
+                AddBookViewFeature()
+            }
+            
+            Scope(state: \.addRecord, action: \.addRecord) {
+                AddRecordViewFeature()
             }
         }
     }

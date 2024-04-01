@@ -24,19 +24,13 @@ struct BookShelf: View {
                 ContentShelf(maxWidth: maxWidth, books: books)
                     .padding(.bottom, 40)
             }
-//            NavigationLink(store: ) { // SelectedBooktoAPIView
-            Button {
-                //
-            } label: {
+            NavigationLink(state: HomeViewFeature.Path.State.addBook(.init())) {
                 Image(systemName: "plus")
                     .font(.medium30)
             }
-            .buttonStyle(.circled(color: .lightBrown, size: 30))            
+            .buttonStyle(.circled(color: .lightBrown, size: 30))
             .padding(.trailing, 20)
             .padding(.bottom, 30)
-//            .navigationDestination(for: Route.self) { _ in
-//                SelectedBooktoAPIView()
-//            }
         }
         .ignoresSafeArea()
     }

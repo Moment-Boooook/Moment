@@ -65,9 +65,9 @@ struct ImageSelectHorizontalScrollView: View {
         }
         .sheet(isPresented: $isLibraryPresented) {
             let remainingSpaces = getRemainigSpaces()
-            PhotoPicker(selectedPhotos: $photoDummyData,
-                        isLibraryPresented: $isLibraryPresented,
-                        remainingSpaces: remainingSpaces)
+//            PhotoPicker(selectedPhotos: $photoDummyData,
+//                        isLibraryPresented: $isLibraryPresented,
+//                        remainingSpaces: remainingSpaces)
         }
     }
     

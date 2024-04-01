@@ -18,7 +18,7 @@ struct HomeView: View {
         GeometryReader { geo in
             let size = geo.size
             // 뷰
-            NavigationStack {
+            NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
                 VStack(spacing: 0) {
                     switch store.selectedOption {
                     // 책장
@@ -60,6 +60,18 @@ struct HomeView: View {
 //                        }
 //                    }
 //                }
+            // 네비게이션 이동
+            } destination: { store in
+                switch store.state {
+                case .addBook:
+                    if let store = store.scope(state: \.addBook, action: \.addBook) {
+                        AddBookView(store: store)
+                    }
+                case .addRecord:
+                    if let store = store.scope(state: \.addRecord, action: \.addRecord) {
+                        AddRecordView(store: store)
+                    }
+                }
             }
             .tint(.darkBrown)
             // books / records - SwiftData 에서 받아오기
@@ -85,7 +97,7 @@ struct HomeView: View {
             // 검색 창
             TextField("책 제목 검색", text: $store.searchText.sending(\.setSearchText))
                 .textInputAutocapitalization(.never)
-                .autocorrectionDisabled(false)
+                .autocorrectionDisabled(true)
                 .focused($focusedField)
                 .onSubmit {
                     store.send(.searchButtonTapped)

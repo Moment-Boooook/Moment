@@ -13,24 +13,23 @@ import ComposableArchitecture
 struct AddRecordView: View {
     @Bindable var store: StoreOf<AddRecordViewFeature>
     @FocusState var focusedField: AddRecordViewFeature.State.Field?
-    let book: SelectedBook
     
     var body: some View {
         ScrollView {
             VStack {
                 // 책 제목
-                Text(book.title)
+                Text(store.book.title)
                     .font(.bold20)
                     .padding(.horizontal, 20)
                 // 이미지
-                AsyncImage(url: URL(string: book.theCoverOfBook)) { image in
+                AsyncImage(url: URL(string: store.book.theCoverOfBook)) { image in
                     image.resizable()
                 } placeholder: {
                     ProgressView()
                 }
                 .frame(width: 70, height: 87)
                 // 작가
-                Text(book.author)
+                Text(store.book.author)
                     .font(.regular16)
                     .padding(.horizontal, 20)
                 //
@@ -70,7 +69,7 @@ struct AddRecordView: View {
                         .focused($focusedField, equals: .myLocationAlias)
                         .padding(.bottom, 20)
                         .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled(false)
+                        .autocorrectionDisabled(true)
                         .onSubmit {
                             store.send(.changeFocusedField)
                         }
@@ -82,7 +81,7 @@ struct AddRecordView: View {
                         .textFieldStyle(BorderedTextFieldStyle())
                         .focused($focusedField, equals: .paragraph)
                         .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled(false)
+                        .autocorrectionDisabled(true)
                         .onSubmit {
                             store.send(.changeFocusedField)
                         }
@@ -106,7 +105,7 @@ struct AddRecordView: View {
                                 .stroke(.lightBrown)
                         )
                         .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled(false)
+                        .autocorrectionDisabled(true)
                         .keyboardType(.default)
                         .onSubmit {
                             store.send(.changeFocusedField)

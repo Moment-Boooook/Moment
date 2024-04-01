@@ -15,43 +15,51 @@ struct AddBookView: View {
     @FocusState var focusedField: Bool
     
     var body: some View {
-        VStack(spacing: -30) {
+        VStack(spacing: 10) {
             // 서치 바
             searchBar()
-                .padding(20)
+                .padding(.top, 10)
             //
-            VStack(alignment: .leading) {
-                // 검색 텍스트가 비어있을 경우
-                if store.searchText.isEmpty {
-                    Text(store.books.isEmpty ? "" : "기억에 남겨진 책")
-                        .font(.semibold18)
-                        .padding(30)
-                    // 기존 보유 책 목록
-                    BookCellList(books: store.books)
-                    // 책 검색 시,
-                } else {
-                    // 검색 결과가 있을 경우
-                    if !store.searchedBooks.isEmpty {
-                        Text("책 검색 결과")
-                            .font(.semibold18)
-                            .opacity(store.completedSearch ? 1.0 : 0.0)
-                            .padding(30)
-                        // 검색 된 책 목록
-                        BookCellList(books: store.searchedBooks)
-                        // 검색 결과가 없을 경우
-                    } else {
-                        VStack {
-                            Spacer()
-                            Text("책 검색 결과가 없어요.")
+            ZStack {
+                Rectangle()
+                    .fill(.background)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                VStack(alignment: .leading) {
+                    // 검색 했을 경우,
+                    if store.completedSearch {
+                        // 결과 있을 때,
+                        if !store.searchedBooks.isEmpty {
+                            Text("책 검색 결과")
                                 .font(.semibold18)
-                                .foregroundStyle(.lightBrown)
                                 .opacity(store.completedSearch ? 1.0 : 0.0)
-                                .padding(30)
+                                .padding(.vertical, 10)
+                            // 검색 된 책 목록
+                            BookCellList(books: store.searchedBooks)
+                        // 결과 없을 떄,
+                        } else {
+                            VStack {
+                                Text("책 검색 결과가 없어요.")
+                                    .font(.semibold18)
+                                    .foregroundStyle(.lightBrown)
+                                    .opacity(store.completedSearch ? 1.0 : 0.0)
+                            }
+                            .frame(maxHeight: .infinity, alignment: .center)
                         }
+                    // 검색 안했을 경우,
+                    } else {
+                        Text(store.books.isEmpty ? "" : "기억에 남겨진 책")
+                            .font(.semibold18)
+                            .padding(.vertical, 10)
+                        // 기존 보유 책 목록
+                        BookCellList(books: store.books)
                     }
                 }
             }
+            .onTapGesture {
+                store.send(.clearFocusState)
+            }
         }
+        .padding(.horizontal, 20)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -83,7 +91,7 @@ struct AddBookView: View {
             // 검색 창
             TextField("책 제목 검색", text: $store.searchText.sending(\.setSearchText))
                 .textInputAutocapitalization(.never)
-                .autocorrectionDisabled(false)
+                .autocorrectionDisabled(true)
                 .focused($focusedField)
                 .onSubmit {
                     store.send(.searchButtonTapped)
@@ -92,6 +100,7 @@ struct AddBookView: View {
             if !store.searchText.isEmpty {
                 Button {
                     store.send(.removeSearchText)
+                    store.send(.clearFocusState)
                 } label: {
                     Image(systemName: "xmark")
                         .foregroundStyle(.mainBrown)
@@ -101,6 +110,7 @@ struct AddBookView: View {
             // 검색 버튼
             Button {
                 store.send(.searchButtonTapped)
+                store.send(.clearFocusState)
             } label: {
                 Text("검색")
                     .padding(.horizontal, 20)
@@ -111,6 +121,11 @@ struct AddBookView: View {
             }
         }
         .bind($store.focusedField, to: $focusedField)
+        .onChange(of: store.searchText) { _, newValue in
+            if newValue == "" {
+                store.send(.endSearch)
+            }
+        }
         .frame(height: 40, alignment: .leading)
         .background(.white)
         .clipShape(.rect(cornerRadius: 15))
@@ -127,22 +142,20 @@ private struct BookCellList: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: -30) {
+            VStack(alignment: .leading) {
                 ForEach(0..<books.count, id: \.self) { index in
                     let book = books[index]
-//                    NavigationLink(store: ) {
-//                        // AddRecordView
-//                    }
-                    Button {
-                        //
-                    } label: {
-                        BookCell(book: book)
+                    NavigationLink(
+                        state: HomeViewFeature.Path.State.addRecord(.init(book: book))) {
+                            BookCell(book: book)
                     }
                     //
                     CustomListDivider()
                 }
             }
         }
+        .scrollIndicators(.hidden)
+        .scrollDismissesKeyboard(.immediately)
     }
 }
 
@@ -180,7 +193,6 @@ private struct BookCell: View {
                 }
             }
         }
-        .padding(30)
     }
 }
 

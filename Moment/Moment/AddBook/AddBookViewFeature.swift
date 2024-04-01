@@ -24,6 +24,8 @@ struct AddBookViewFeature {
     
     enum Action: BindableAction {
         case binding(BindingAction<State>)
+        case clearFocusState
+        case clearSearchedBooks
         case dismiss
         case endSearch
         case fetchSearchedBooks([Book])
@@ -41,11 +43,16 @@ struct AddBookViewFeature {
         
         Reduce { state, action in
             switch action {
-            // focusedField 연결
-            case .binding(\.focusedField):
-                return .none
             //
             case .binding:
+                return .none
+            // focusedField 해제
+            case .clearFocusState:
+                state.focusedField = false
+                return .none
+            // 검색된 책 목록 초기화
+            case .clearSearchedBooks:
+                state.searchedBooks = []
                 return .none
             // 뒤로가기
             case .dismiss:
@@ -55,7 +62,9 @@ struct AddBookViewFeature {
             // 검색 종료
             case .endSearch:
                 state.completedSearch = false
-                return .none
+                return .run { send in
+                    await send(.clearSearchedBooks)
+                }
             // 검색 된 책 목록 할당
             case let .fetchSearchedBooks(books):
                 state.searchedBooks = books

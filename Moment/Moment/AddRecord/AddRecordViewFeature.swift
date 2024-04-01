@@ -17,6 +17,7 @@ struct AddRecordViewFeature {
     @ObservableState
     struct State: Equatable {
         @Presents var alert: AlertState<Action.Alert>?  // alert
+        var book: SelectedBook                          // 이전 화면에서 선택된 책
         var address: String = ""                        // 주소
         var latitude: Double = 0                        // 위치 정보 - 위도
         var longitude: Double = 0                       // 위치 정보 - 경도
@@ -37,6 +38,12 @@ struct AddRecordViewFeature {
         var isPhotoPickerSheet: Bool = false            // 라이브러리 사진 선택하기 시트 열기
         var filmedPhoto = UIImage()                     // 카메라로 촬영 된 사진 한장
         let maxSelectImageCount = 3                     // 최대 사진 선택 개순
+        
+        // Equatable
+        static func == (lhs: AddRecordViewFeature.State, rhs: AddRecordViewFeature.State) -> Bool {
+            return lhs.book.bookISBN == rhs.book.bookISBN
+        }
+        
         // focus state 필드 enum
         enum Field {
             case myLocationAlias
