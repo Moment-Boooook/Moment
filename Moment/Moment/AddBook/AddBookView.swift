@@ -27,8 +27,15 @@ struct AddBookView: View {
                 VStack(alignment: .leading) {
                     // 검색 했을 경우,
                     if store.completedSearch {
+                        // 검색 중일 때,
+                        if store.isSearching {
+                            VStack {
+                                ProgressView()
+                            }
+                            .frame(maxHeight: .infinity, alignment: .center)
+                            
                         // 결과 있을 때,
-                        if !store.searchedBooks.isEmpty {
+                        } else if !store.searchedBooks.isEmpty {
                             Text("책 검색 결과")
                                 .font(.semibold18)
                                 .opacity(store.completedSearch ? 1.0 : 0.0)

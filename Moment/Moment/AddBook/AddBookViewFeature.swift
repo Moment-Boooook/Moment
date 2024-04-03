@@ -19,6 +19,7 @@ struct AddBookViewFeature {
         var searchText: String = ""                 // 서치바 - 텍스트
         var searchedBooks: [Book] = []              // 검색 된 책 목록
         var focusedField: Bool = false              // 서치바 - focusstate
+        var isSearching: Bool = false               // 검색 중 ...
         var completedSearch: Bool = false           // 책 검색이 완료 되었을때, true
     }
     
@@ -33,6 +34,7 @@ struct AddBookViewFeature {
         case searchButtonTapped
         case setSearchText(String)
         case startSearch
+        case toggledIsSearching
     }
     
     @Dependency(\.dismiss) var dismiss
@@ -79,6 +81,9 @@ struct AddBookViewFeature {
             case .searchButtonTapped:
                 return .concatenate(
                     .run { send in
+                        await send(.toggledIsSearching)
+                    },
+                    .run { send in
                         await send(.startSearch)
                     },
                     .run { [searchText = state.searchText] send in
@@ -87,6 +92,9 @@ struct AddBookViewFeature {
                         } catch {
                             print("error :: AddBookView - searchButtonTapped()", error.localizedDescription)
                         }
+                    },
+                    .run { send in
+                        await send(.toggledIsSearching)
                     }
                 )
             // 서치바 - 텍스트 입력
@@ -96,6 +104,10 @@ struct AddBookViewFeature {
             // 검색 시작
             case .startSearch:
                 state.completedSearch = true
+                return .none
+            // 'isSearhing' 값 변경
+            case .toggledIsSearching:
+                state.isSearching.toggle()
                 return .none
             }
         }
