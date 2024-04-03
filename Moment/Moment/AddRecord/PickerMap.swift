@@ -148,7 +148,6 @@ final class LocationManager: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     
     // 지도 포커스 옮기는 메서드
     func mapViewFocusChange() {
-        print("OK - Map Focus Changed")
         let span = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
         // 현재 위치 받아서 위도 경도 넣어주기
         let region = MKCoordinateRegion(center: self.currentGeoPoint ?? CLLocationCoordinate2D(latitude: 37.5100, longitude: 126.9956),
@@ -173,7 +172,6 @@ final class LocationManager: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     
     // 사용자 위치 변경 시
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("OK - Did Update Locations")
     }
     
     // 현재 위치 가져오기 실패

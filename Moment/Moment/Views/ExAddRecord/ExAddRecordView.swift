@@ -237,25 +237,25 @@ struct ExAddRecordView: View {
 	}
 	
 	private func swiftDataInsert() async {
-		var imageData: [Data] = []
-		imageData = await imageToData()
-		
-		formattedDateToCustom()
-		
-		var flag = false
-		for book in bookList {
-			if book.bookISBN == bookInfo.bookISBN {
-				flag = true
-				break
-			}
-		}
-		if flag {
-			modelContext.insert(MomentRecord(latitude: latitude, longitude: longitude, localName: localName, myLocation: myLocation, year: year, monthAndDay: monthAndDay, time: time, paragraph: paragraph, page: page ?? 0, commentary: commentary, photos: imageData, bookISBN: bookInfo.bookISBN))
-		} else {
-			modelContext.insert(MomentBook(bookISBN: bookInfo.bookISBN, theCoverOfBook: bookInfo.theCoverOfBook, title: bookInfo.title, author: bookInfo.author, publisher: bookInfo.publisher, plot: bookInfo.plot))
-			
-			modelContext.insert(MomentRecord(latitude: latitude, longitude: longitude, localName: localName, myLocation: myLocation, year: year, monthAndDay: monthAndDay, time: time, paragraph: paragraph, page: page ?? 0, commentary: commentary, photos: imageData, bookISBN: bookInfo.bookISBN))
-		}
+//		var imageData: [Data] = []
+//		imageData = await imageToData()
+//		
+//		formattedDateToCustom()
+//		
+//		var flag = false
+//		for book in bookList {
+//			if book.bookISBN == bookInfo.bookISBN {
+//				flag = true
+//				break
+//			}
+//		}
+//		if flag {
+//			modelContext.insert(MomentRecord(latitude: latitude, longitude: longitude, localName: localName, myLocation: myLocation, year: year, monthAndDay: monthAndDay, time: time, paragraph: paragraph, page: page ?? 0, commentary: commentary, photos: imageData, bookISBN: bookInfo.bookISBN))
+//		} else {
+//			modelContext.insert(MomentBook(bookISBN: bookInfo.bookISBN, theCoverOfBook: bookInfo.theCoverOfBook, title: bookInfo.title, author: bookInfo.author, publisher: bookInfo.publisher, plot: bookInfo.plot))
+//			
+//			modelContext.insert(MomentRecord(latitude: latitude, longitude: longitude, localName: localName, myLocation: myLocation, year: year, monthAndDay: monthAndDay, time: time, paragraph: paragraph, page: page ?? 0, commentary: commentary, photos: imageData, bookISBN: bookInfo.bookISBN))
+//		}
 	}
 	
 	func formattedDateToCustom() {

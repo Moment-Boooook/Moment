@@ -31,6 +31,7 @@ struct HomeView: View {
                             // 책장 뷰
                             BookShelf(books: store.isSearching ? store.searchedBooks : store.books,
                                       maxWidth: size.width - 40)
+                            .padding(.top, -10)
                         }
                         .padding(.horizontal, 20)
                     // 지도
@@ -49,17 +50,6 @@ struct HomeView: View {
                     }
                 }
                 .navigationBarBackButtonHidden(true)
-//                .onChange(of: recordList) {
-//                    Task {
-//                        mainBookList = bookList
-//                        mainRecordList = recordList
-//                        
-//                        // Query로 저장되어있는 기록리스트 변경 시 검색된 데이터가 있다면 데이터 업데이트
-//                        if isSearch {
-//                            searchRecordList = await recordSearch(bookSearch: bookSearch)
-//                        }
-//                    }
-//                }
             // 네비게이션 이동
             } destination: { store in
                 switch store.state {

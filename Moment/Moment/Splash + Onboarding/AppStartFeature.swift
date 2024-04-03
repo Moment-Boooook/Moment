@@ -48,7 +48,7 @@ struct AppStartFeature {
                 }
                 return .concatenate(
                     .run { send in
-                        await send(.degreeChange, animation: .easeOut(duration: 2))
+                        await send(.degreeChange, animation: .easeOut(duration: 1.75))
                     },
                     .run { send in
                         // TODO: - 추후에 API 데이터 받아서 로컬 데이터(책 정보) 업데이트 해주는 작업 진행

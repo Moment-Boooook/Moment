@@ -22,9 +22,11 @@ struct BookShelf: View {
                     .padding(.horizontal, 20)
             } else {
                 ContentShelf(maxWidth: maxWidth, books: books)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 20)
             }
-            NavigationLink(state: HomeViewFeature.Path.State.addBook(.init())) {
+            NavigationLink(
+                state: HomeViewFeature.Path.State.addBook(
+                    .init(books: books))) {
                 Image(systemName: "plus")
                     .font(.medium30)
             }
@@ -63,7 +65,7 @@ private struct ContentShelf: View {
             }
         }
         .scrollIndicators(.hidden)
-        .padding([.top, .horizontal], 20)
+        .padding(.top, 10)
     }
 }
 

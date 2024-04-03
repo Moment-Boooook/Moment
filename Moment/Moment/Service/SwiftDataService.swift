@@ -18,6 +18,8 @@ struct SwiftDataService {
     var bookListFetch: () throws -> [MomentBook]
     var sortedByTitleBookListFetch: () throws -> [MomentBook]
     var recordListFetch: () throws -> [MomentRecord]
+    var addBook: (MomentBook) throws -> Void
+    var addRecord: (MomentRecord) throws -> Void
 
     enum SwiftDataError: Error {
         case fetchError
@@ -59,6 +61,26 @@ extension SwiftDataService: DependencyKey {
                 return try recordListContext.fetch(descriptor)
             } catch {
                 throw SwiftDataError.fetchError
+            }
+        },
+        // Add Book
+        addBook: { book in
+            do {
+                @Dependency(\.databaseService.context) var context
+                let bookContext = try context()
+                bookContext.insert(book)
+            } catch {
+                throw SwiftDataError.addError
+            }
+        },
+        // Add Record
+        addRecord: { record in
+            do {
+                @Dependency(\.databaseService.context) var context
+                let recordContext = try context()
+                recordContext.insert(record)
+            } catch {
+                throw SwiftDataError.addError
             }
         }
     )

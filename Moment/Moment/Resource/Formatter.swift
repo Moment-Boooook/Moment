@@ -5,7 +5,7 @@
 //  Created by phang on 12/19/23.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - Formatter
 enum Formatter {
@@ -33,5 +33,19 @@ enum Formatter {
             return 1.5
         }
         return 2.0
+    }
+    
+    // UIimage -> Data 변환 메서드
+    static func uiImageToData(images: [UIImage]) -> [Data] {
+        var imageDatas: [Data] = []
+        for image in images {
+            let image = image.resize(newWidth: 300)
+            if let jpegData = image.jpegData(compressionQuality: 1.0) {
+                imageDatas.append(jpegData)
+            } else if let pngData = image.pngData() {
+                imageDatas.append(pngData)
+            }
+        }
+        return imageDatas
     }
 }

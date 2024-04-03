@@ -41,7 +41,7 @@ struct AddBookView: View {
                                 .opacity(store.completedSearch ? 1.0 : 0.0)
                                 .padding(.vertical, 10)
                             // 검색 된 책 목록
-                            BookCellList(books: store.searchedBooks)
+                            BookCellList(searchedBooks: store.searchedBooks)
                         // 결과 없을 떄,
                         } else {
                             VStack {
@@ -58,7 +58,7 @@ struct AddBookView: View {
                             .font(.semibold18)
                             .padding(.vertical, 10)
                         // 기존 보유 책 목록
-                        BookCellList(books: store.books)
+                        BookCellList(searchedBooks: store.books)
                     }
                 }
             }
@@ -141,19 +141,17 @@ struct AddBookView: View {
                 .stroke(.mainBrown, lineWidth: 2)
         }
     }
-}
-
-// MARK: - 검색 결과 ( 책 목록 )
-private struct BookCellList: View {
-    let books: [SelectedBook]
     
-    var body: some View {
+    // MARK: - 검색 결과 ( 책 목록 )
+    @ViewBuilder
+    private func BookCellList(searchedBooks: [SelectedBook]) -> some View {
         ScrollView {
             VStack(alignment: .leading) {
-                ForEach(0..<books.count, id: \.self) { index in
-                    let book = books[index]
+                ForEach(0..<searchedBooks.count, id: \.self) { index in
+                    let book = searchedBooks[index]
                     NavigationLink(
-                        state: HomeViewFeature.Path.State.addRecord(.init(book: book))) {
+                        state: HomeViewFeature.Path.State.addRecord(
+                            .init(book: book, myBooks: store.books))) {
                             BookCell(book: book)
                     }
                     //
@@ -206,7 +204,7 @@ private struct BookCell: View {
 #Preview {
     AddBookView(
         store: Store(
-            initialState: AddBookViewFeature.State()
+            initialState: AddBookViewFeature.State(books: [])
         ) {
             AddBookViewFeature()
         }

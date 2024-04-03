@@ -44,21 +44,21 @@ struct AddRecordView: View {
                             .foregroundStyle(.clear)
                         HStack {
                             // 주소
-                            Text(store.address)
+                            Text(store.place)
                                 .font(.regular14)
                             //
                             Spacer()
                             //
                             Button {
                                 // 지도 피커 열기
-                                store.send(.togglePickerMapSheet)
+                                store.send(.openPickerMap)
                             } label: {
                                 Image(systemName: "map")
                                     .foregroundStyle(.lightBrown)
                             }
-//                            .sheet(isPresented: $store.isPickerMapSheet) {
-//                                LocationPickerMap(store: store)
-//                            }
+                            .sheet(isPresented: $store.isPickerMapSheet) {
+                                LocationPickerMap(store: store)
+                            }
                         }
                         .padding(10)
                     }
@@ -115,26 +115,14 @@ struct AddRecordView: View {
                         .padding(.vertical)
                     //
                     Button {
-                        // TODO: - 저장 alert 띄우기
+                        store.send(.saveRecord)
                     } label: {
                         Text(store.isSaveable ? "아직 다 작성되지 않았어요" : "기억 저장하기")
                             .font(.medium16)
                     }
-                    .disabled(!store.isSaveable)
+                    .disabled(store.isSaveable)
                     .buttonStyle(.customProminent(color: store.isSaveable ? .gray3 : .lightBrown))
-//                    .alert("기억을 남길까요?", isPresented: $showingAlert) {
-//                        Button("돌아가기") {}
-//                        Button("저장하기") {
-//                            isRecord = true
-//                            Task {
-//                                await swiftDataInsert()
-//                            }
-////                            showMainView = true
-//                            router.clear()
-//                        }
-//                    } message: {
-//                        Text("저장된 기억은 수정할 수 없어요...🥲")
-//                    }
+                    .alert($store.scope(state: \.alert, action: \.alert))
                 }
                 .padding(20)
             }
@@ -195,24 +183,24 @@ struct AddRecordView: View {
                             isPresented: $store.showPhotoConfimationDialog,
                             titleVisibility: .hidden) {
             Button {
-//                store.isCameraSnapSheet.toggle()
+                store.send(.openCamera)
             } label: {
                 Text("카메라")
             }
             Button {
-//                store.isPhotoPickerSheet.toggle()
+                store.send(.openPhotoLibrary)
             } label: {
                 Text("라이브러리")
             }
         } message: {
             Text("불러올 사진 위치를 선택해주세요")
         }
-//        .sheet(isPresented: $store.isCameraSnapSheet) {
-//            CameraSnap(store: store)
-//        }
-//        .sheet(isPresented: $store.isPhotoPickerSheet) {
-//            PhotoPicker(store: store)
-//        }
+        .sheet(isPresented: $store.isCameraSnapSheet) {
+            CameraSnap(store: store)
+        }
+        .sheet(isPresented: $store.isPhotoPickerSheet) {
+            PhotoPicker(store: store)
+        }
     }
     
     // MARK: - 선택된 사진들 보여주는 이미지

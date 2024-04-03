@@ -20,12 +20,12 @@ class MomentRecord: Identifiable {
 	var monthAndDay: String // "0000"
 	var time: String // "0000"
 	var paragraph: String
-	var page: Int
+	var page: String
 	var commentary: String
 	var photos: [Data]
 	var bookISBN: String
 	
-	init(latitude: Double, longitude: Double, localName: String, myLocation: String, year: Int, monthAndDay: String, time: String, paragraph: String, page: Int, commentary: String, photos: [Data], bookISBN: String) {
+	init(latitude: Double, longitude: Double, localName: String, myLocation: String, year: Int, monthAndDay: String, time: String, paragraph: String, page: String, commentary: String, photos: [Data], bookISBN: String) {
 		self.latitude = latitude
 		self.longitude = longitude
 		self.localName = localName

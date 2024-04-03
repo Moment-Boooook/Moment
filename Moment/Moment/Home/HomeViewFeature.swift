@@ -131,6 +131,14 @@ struct HomeViewFeature {
             // NavigationPath
             case let .path(action):
                 switch action {
+                case .element(id: _, action: .addRecord(.initialNavigationStack)):
+                    state.path.removeAll()
+                    return .none
+                case .element(id: _, action: .addRecord(.refetchBooksAndRecords)):
+                    return .run { @MainActor send in
+                        send(.fetchBooks)
+                        send(.fetchRecords)
+                    }
                 default:
                     return .none
                 }
