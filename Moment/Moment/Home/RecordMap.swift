@@ -27,15 +27,20 @@ struct RecordMap: View {
                     if let data = store.recordDictionary[local]?.first,
                        let count = store.recordDictionary[local]?.count,
                        let records = store.recordDictionary[local] {
-                        //
-//                        let bookISBNList = Set(records.map { $0.bookISBN }).map { $0 }
-                        Annotation("", coordinate: local.coodinate, anchor: .bottom) {
-//                            NavigationLink(store: ) {
-//                                // MapToRecordListView
-//                            }
-                            Button {
-                                //
-                            } label: {
+                        Annotation("", coordinate: local.coordinate, anchor: .bottom) {
+                            NavigationLink(
+                                state: HomeViewFeature.Path.State.recordList(
+                                    .init(usedTo: .usedToMap,
+                                          books: store.books,
+                                          records: store.records,
+                                          selectedBook: MomentBook(bookISBN: "",
+                                                                   theCoverOfBook: "",
+                                                                   title: "",
+                                                                   author: "",
+                                                                   publisher: "",
+                                                                   plot: ""),
+                                          localName: local.rawValue,
+                                          recordsOfLocal: records))) {
                                 MarkerButton(size: 65,
                                              innerSize: 60,
                                              data: data)
@@ -85,9 +90,6 @@ private struct MarkerButton: View {
                         .frame(width: innerSize, height: innerSize)
                         .clipShape(.rect(cornerRadius: 8))
                 }
-            }
-            .overlay {
-                NotificationCount(value: 100)
             }
         }
     }

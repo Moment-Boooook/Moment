@@ -105,5 +105,5 @@
 - 참여: [이창준](https://github.com/Phangg)
 
 ### 리팩토링 내용
-- TCA 아키텍처 적용 (1.9.2) [TCA](https://github.com/pointfreeco/swift-composable-architecture)
+- [TCA](https://github.com/pointfreeco/swift-composable-architecture) 아키텍처 적용 (1.9.2)
 - 불필요 코드 및 오탈자 / 오류 수정

@@ -12,6 +12,7 @@ import ComposableArchitecture
 // MARK: - 책장 View
 struct BookShelf: View {
     let books: [MomentBook]
+    let records: [MomentRecord]
     let maxWidth: CGFloat
     
     var body: some View {
@@ -21,7 +22,7 @@ struct BookShelf: View {
                     .padding(.bottom, 60)
                     .padding(.horizontal, 20)
             } else {
-                ContentShelf(maxWidth: maxWidth, books: books)
+                ContentShelf(books: books, records: records, maxWidth: maxWidth)
                     .padding(.bottom, 20)
             }
             NavigationLink(
@@ -41,8 +42,9 @@ struct BookShelf: View {
 // MARK: - 책장
 private struct ContentShelf: View {
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 20), count: 2)
-    let maxWidth: CGFloat
     let books: [MomentBook]
+    let records: [MomentRecord]
+    let maxWidth: CGFloat
 
     fileprivate var body: some View {
         ScrollView {
@@ -50,12 +52,18 @@ private struct ContentShelf: View {
                 ForEach(books, id: \.self) { book in
                     ZStack(alignment: .bottom) {
                         // 책 이미지
-//                        NavigationLink(store: ) { // ShelfRecordListView
-//                        }
-                        // TODO: - 위 네비 링크 내부에서 작동
-                        BookImage(urlString: book.theCoverOfBook,
-                                  maxWidth: maxWidth - 100)
-                            .padding(.bottom, 10)
+                        NavigationLink(
+                            state: HomeViewFeature.Path.State.recordList(
+                                .init(usedTo: .usedToShelf,
+                                      books: books,
+                                      records: records,
+                                      selectedBook: book,
+                                      localName: "",
+                                      recordsOfLocal: []))) {
+                            BookImage(urlString: book.theCoverOfBook,
+                                      maxWidth: maxWidth - 100)
+                                .padding(.bottom, 10)
+                        }
                         .zIndex(1)
                         // 책장 틀
                         CustomShelf(maxWidth: maxWidth - 40)
@@ -147,6 +155,6 @@ private struct CustomShelf: View {
 
 #Preview {
     GeometryReader { geo in
-        BookShelf(books: [], maxWidth: geo.size.width - 40)
+        BookShelf(books: [], records: [], maxWidth: geo.size.width - 40)
     }
 }

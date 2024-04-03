@@ -28,11 +28,11 @@ enum Formatter {
     static func widthMultiplier(_ value: Int) -> Double {
         if value < 10 {
             return 1.0
-        }
-        if value < 100 {
+        } else if value < 100 {
             return 1.5
+        } else {
+            return 2.0
         }
-        return 2.0
     }
     
     // UIimage -> Data 변환 메서드
@@ -47,5 +47,21 @@ enum Formatter {
             }
         }
         return imageDatas
+    }
+    
+    // 시간 (Int) -> 시간대 (String)
+    static func timeToTimeZone(timeString: String) -> String {
+        switch Int(timeString.prefix(2)) ?? 0 {
+        case 0...5: 
+            return "새벽"
+        case 6...11: 
+            return "아침"
+        case 12...16: 
+            return "낮"
+        case 17...23: 
+            return "밤"
+        default: 
+            return "새벽"
+        }
     }
 }

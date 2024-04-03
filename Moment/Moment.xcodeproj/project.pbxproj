@@ -51,6 +51,8 @@
 		09C4BD5C2BB7068B00AEC83D /* AddRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */; };
 		09C4BD5E2BB7084E00AEC83D /* AddRecordViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */; };
 		09C4BD602BB7220C00AEC83D /* LocationManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */; };
+		09C4BD632BBDA05000AEC83D /* RecordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD622BBDA05000AEC83D /* RecordListView.swift */; };
+		09C4BD652BBDA0FB00AEC83D /* RecordListViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD642BBDA0FB00AEC83D /* RecordListViewFeature.swift */; };
 		09D774EF2B275D9C00D45EE6 /* CameraSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D774EE2B275D9C00D45EE6 /* CameraSnap.swift */; };
 		09D774F12B275DB700D45EE6 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D774F02B275DB700D45EE6 /* PhotoPicker.swift */; };
 		09D774FB2B283C2100D45EE6 /* PickerMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D774FA2B283C2100D45EE6 /* PickerMap.swift */; };
@@ -127,6 +129,8 @@
 		09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordView.swift; sourceTree = "<group>"; };
 		09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordViewFeature.swift; sourceTree = "<group>"; };
 		09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerService.swift; sourceTree = "<group>"; };
+		09C4BD622BBDA05000AEC83D /* RecordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListView.swift; sourceTree = "<group>"; };
+		09C4BD642BBDA0FB00AEC83D /* RecordListViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewFeature.swift; sourceTree = "<group>"; };
 		09D774EE2B275D9C00D45EE6 /* CameraSnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSnap.swift; sourceTree = "<group>"; };
 		09D774F02B275DB700D45EE6 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		09D774FA2B283C2100D45EE6 /* PickerMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerMap.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 				09B59C652BB4087A009900E5 /* Home */,
 				09B59C832BB699FE009900E5 /* AddBook */,
 				09C4BD5A2BB705D900AEC83D /* AddRecord */,
+				09C4BD612BBDA03500AEC83D /* RecordList */,
 				09AB7D062B26A70A0073EAD5 /* Resource */,
 				09AB7CF62B26A1B80073EAD5 /* Views */,
 				09AB7CF82B26A21F0073EAD5 /* Common */,
@@ -232,8 +237,6 @@
 			children = (
 				09C4BD592BB7054300AEC83D /* RefactorComplete */,
 				09731F822B26C88F0045F6B4 /* RecordDetail */,
-				09AB7CFC2B26A27D0073EAD5 /* ExAddRecord */,
-				09AB7CFA2B26A2690073EAD5 /* RecordList */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,7 +245,6 @@
 			isa = PBXGroup;
 			children = (
 				2C6588FC2B2B575500C8BB93 /* View +.swift */,
-				7B39C0C62B2ADC7400460278 /* UIImage +.swift */,
 				AC4CA6742B26CFCA0066E9EB /* BookApiSearchBar.swift */,
 				AC4CA6782B26D0210066E9EB /* SectionHeader.swift */,
 				09731F872B26D0050045F6B4 /* BookInfoDialog.swift */,
@@ -252,14 +254,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		09AB7CFA2B26A2690073EAD5 /* RecordList */ = {
+		09AB7CFA2B26A2690073EAD5 /* ExRecordList */ = {
 			isa = PBXGroup;
 			children = (
 				B1C938552B27E1DE006EFB70 /* View */,
 				B1C938532B27E1CA006EFB70 /* Custom */,
 				B1C938522B27E166006EFB70 /* Cell */,
 			);
-			path = RecordList;
+			path = ExRecordList;
 			sourceTree = "<group>";
 		};
 		09AB7CFB2B26A2760073EAD5 /* Main */ = {
@@ -316,12 +318,13 @@
 				09731F8B2B26D1500045F6B4 /* ButtonStyle +.swift */,
 				09B59C802BB68AA5009900E5 /* Constants.swift */,
 				09731F892B26D12A0045F6B4 /* CustomButtons.swift */,
+				B1C938582B27E294006EFB70 /* CustomListDivider.swift */,
 				2CA6BED82B2733E0002E3589 /* CustomTextField.swift */,
 				09B59C5F2BB33D11009900E5 /* DependencyValues +.swift */,
 				09AB7D042B26A5500073EAD5 /* Font +.swift */,
 				095131612B31216200F6BC4C /* Formatter.swift */,
 				09B59C7E2BB68112009900E5 /* MKCoordinateRegion +.swift */,
-				B1C938582B27E294006EFB70 /* CustomListDivider.swift */,
+				7B39C0C62B2ADC7400460278 /* UIImage +.swift */,
 				09B59C532BB32267009900E5 /* Font */,
 			);
 			path = Resource;
@@ -411,8 +414,10 @@
 		09C4BD592BB7054300AEC83D /* RefactorComplete */ = {
 			isa = PBXGroup;
 			children = (
+				09AB7CFC2B26A27D0073EAD5 /* ExAddRecord */,
 				09AB7CFB2B26A2760073EAD5 /* Main */,
 				09AB7CFD2B26A2A40073EAD5 /* SelectBook */,
+				09AB7CFA2B26A2690073EAD5 /* ExRecordList */,
 			);
 			path = RefactorComplete;
 			sourceTree = "<group>";
@@ -427,6 +432,15 @@
 				09D774FA2B283C2100D45EE6 /* PickerMap.swift */,
 			);
 			path = AddRecord;
+			sourceTree = "<group>";
+		};
+		09C4BD612BBDA03500AEC83D /* RecordList */ = {
+			isa = PBXGroup;
+			children = (
+				09C4BD622BBDA05000AEC83D /* RecordListView.swift */,
+				09C4BD642BBDA0FB00AEC83D /* RecordListViewFeature.swift */,
+			);
+			path = RecordList;
 			sourceTree = "<group>";
 		};
 		7B1B0B662B26CFA100CD19AD /* MainMap */ = {
@@ -587,6 +601,7 @@
 				09B59C672BB4088D009900E5 /* HomeView.swift in Sources */,
 				B1C938572B27E24F006EFB70 /* ShelfRecordCellView.swift in Sources */,
 				09731F8E2B26D6CC0045F6B4 /* RecordDetailView.swift in Sources */,
+				09C4BD652BBDA0FB00AEC83D /* RecordListViewFeature.swift in Sources */,
 				09731F8C2B26D1500045F6B4 /* ButtonStyle +.swift in Sources */,
 				09B59C712BB577EC009900E5 /* AppStartFeature.swift in Sources */,
 				095131622B31216200F6BC4C /* Formatter.swift in Sources */,
@@ -607,6 +622,7 @@
 				09AB7D052B26A5500073EAD5 /* Font +.swift in Sources */,
 				098F93502B275B6C005D93AB /* ImageSelectHorizontalScrollView.swift in Sources */,
 				AC4CA6792B26D0210066E9EB /* SectionHeader.swift in Sources */,
+				09C4BD632BBDA05000AEC83D /* RecordListView.swift in Sources */,
 				7B39C0CB2B2AFCC700460278 /* APIDataModel.swift in Sources */,
 				09B749BA2B29DDE600514B6C /* RecordYearView.swift in Sources */,
 				ACF5657E2B29469400B1E150 /* SearchBar.swift in Sources */,

@@ -10,7 +10,7 @@ import SwiftUI
 struct CustomListDivider: View {
     var body: some View {
         Rectangle()
-            .fill(Color.offBrown)
+            .fill(.offBrown)
             .frame(height: 1)
             .padding(.horizontal, 20)
             .padding(.vertical, 5)

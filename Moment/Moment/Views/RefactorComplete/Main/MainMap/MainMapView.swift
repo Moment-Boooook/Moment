@@ -29,7 +29,7 @@ struct MainMapView: View {
 				ForEach(dict.map { $0.key }, id: \.self) { local in
 					if let data = dict[local]?.first, let count = dict[local]?.count, let bookRecordList = dict[local] {
 						let bookISBNList = Set(bookRecordList.map { $0.bookISBN }).map { $0 }
-						Annotation("", coordinate: local.coodinate, anchor: .bottom) {
+						Annotation("", coordinate: local.coordinate, anchor: .bottom) {
 							NavigationLink {
 								MapToRecordListView(bookISBNList: bookISBNList,
 													recordList: bookRecordList,

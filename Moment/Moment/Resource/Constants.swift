@@ -8,6 +8,12 @@
 import Foundation
 import CoreLocation
 
+// MARK: - Record List Type
+enum RecordListType {
+    case usedToMap
+    case usedToShelf
+}
+
 // MARK: - Home View Segment enum
 enum HomeSegment: String, CaseIterable {
     case bookShelf = "책장으로 보기"
@@ -35,7 +41,7 @@ enum LocalName: String, CaseIterable {
     case jeju = "제주특별자치도"
     case defaultCase = "없음"
     
-    var coodinate: CLLocationCoordinate2D {
+    var coordinate: CLLocationCoordinate2D {
         switch self {
         case .seoul:
             return CLLocationCoordinate2D(latitude: 37.5518911, longitude: 126.9917937)

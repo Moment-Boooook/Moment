@@ -191,20 +191,27 @@ extension HomeViewFeature {
         enum State: Equatable {
             case addBook(AddBookViewFeature.State)
             case addRecord(AddRecordViewFeature.State)
+            case recordList(RecordListViewFeature.State)
         }
         
         enum Action {
             case addBook(AddBookViewFeature.Action)
             case addRecord(AddRecordViewFeature.Action)
+            case recordList(RecordListViewFeature.Action)
         }
         
         var body: some ReducerOf<Self> {
+            // Add Book
             Scope(state: \.addBook, action: \.addBook) {
                 AddBookViewFeature()
             }
-            
+            // Add Record
             Scope(state: \.addRecord, action: \.addRecord) {
                 AddRecordViewFeature()
+            }
+            // Record List
+            Scope(state: \.recordList, action: \.recordList) {
+                RecordListViewFeature()
             }
         }
     }

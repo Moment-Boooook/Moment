@@ -30,6 +30,7 @@ struct HomeView: View {
                             segment()
                             // 책장 뷰
                             BookShelf(books: store.isSearching ? store.searchedBooks : store.books,
+                                      records: store.isSearching ? store.searchedRecords : store.records,
                                       maxWidth: size.width - 40)
                             .padding(.top, -10)
                         }
@@ -60,6 +61,10 @@ struct HomeView: View {
                 case .addRecord:
                     if let store = store.scope(state: \.addRecord, action: \.addRecord) {
                         AddRecordView(store: store)
+                    }
+                case .recordList:
+                    if let store = store.scope(state: \.recordList, action: \.recordList) {
+                        RecordListView(store: store)
                     }
                 }
             }
