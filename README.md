@@ -5,7 +5,6 @@
 
 ## 팀 소개
 
-  
   |👑|||||
   | :-----: | :-----: | :-----: | :-----: | :-----: |
   |<img width="120" height="120" border:0px src="https://avatars.githubusercontent.com/u/103061387?v=4"/>|<img width="120" height="120" border:0px src="https://avatars.githubusercontent.com/u/80156515?v=4"/>|<img width="120" height="120" border:0px src="https://avatars.githubusercontent.com/u/75058050?v=4"/>|<img width="120" height="120" border:0px src="https://avatars.githubusercontent.com/u/109324421?v=4"/>|<img width="120" height="120" border:0px src="https://avatars.githubusercontent.com/u/120158212?v=4"/>|
@@ -98,3 +97,13 @@
 - 위치 기록: MapKit
 - 데이터 저장: SwiftData
 
+
+---
+
+
+## 리팩토링 - [ 2024.03.28 ~ 2024.04 ]
+- 참여: [이창준](https://github.com/Phangg)
+
+### 리팩토링 내용
+- TCA 아키텍처 적용 (1.9.2) [TCA](https://github.com/pointfreeco/swift-composable-architecture)
+- 불필요 코드 및 오탈자 / 오류 수정
