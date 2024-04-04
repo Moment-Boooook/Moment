@@ -17,8 +17,8 @@ struct AddRecordViewFeature {
     @ObservableState
     struct State: Equatable {
         @Presents var alert: AlertState<Action.Alert>?  // alert
-        var book: SelectedBook                          // 이전 화면에서 선택된 책
-        var myBooks: [MomentBook]                       // 현재 내가 읽은 책 목록
+        let book: SelectedBook                          // 이전 화면에서 선택된 책
+        let myBooks: [MomentBook]                       // 현재 내가 읽은 책 목록
         var latitude: Double = 0                        // 위치 정보 - 위도
         var longitude: Double = 0                       // 위치 정보 - 경도
         var place: String = ""                          // 위치 정보 - 지역
@@ -250,7 +250,7 @@ struct AddRecordViewFeature {
 // MARK: - Alert in AddRecordViewFeature
 extension AlertState where Action == AddRecordViewFeature.Action.Alert {
     
-    // 삭제 알림
+    // 저장 알림
     static func saveConfirm() -> Self {
         Self {
             TextState("저장된 기억은 수정할 수 없어요...🥲")

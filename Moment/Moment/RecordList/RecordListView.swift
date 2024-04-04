@@ -69,12 +69,22 @@ struct RecordListView: View {
                             //
                             CustomListDivider()
                             //
-//                            NavigationLink {
-//                                RecordDetailView(recordID: record.id)
-//                            } label: {
-//                                ShelfRecordCellView(recordId: record.id)
-//                            }
-                            RecordListCell(recordData: record)
+                            if let book = store.books.first(where: { $0.bookISBN == record.bookISBN }) {
+                                NavigationLink(
+                                    state: HomeViewFeature.Path.State.recordDetail(
+                                        .init(record: record,
+                                              isRecordIsLast: store.records.filter {
+                                                  $0.bookISBN == record.bookISBN
+                                              }.count == 1,
+                                              book: book,
+                                              region: Formatter.getMapCameraPosition(
+                                                latitude: record.latitude,
+                                                longitude: record.longitude)))) {
+                                    RecordListCell(recordData: record)
+                                }
+                            } else {
+                                RecordListCell(recordData: record)
+                            }
                         }
                     }
                     .padding(.bottom, 40)
@@ -101,12 +111,16 @@ struct RecordListView: View {
                         //
                         CustomListDivider()
                         //
-//                        NavigationLink {
-//                            RecordDetailView(recordID: record.id)
-//                        } label: {
-//                            ShelfRecordCellView(recordId: record.id)
-//                        }
-                        RecordListCell(recordData: record)
+                        NavigationLink(
+                            state: HomeViewFeature.Path.State.recordDetail(
+                                .init(record: record,
+                                      isRecordIsLast: recordsOfLocal.count == 1,
+                                      book: book,
+                                      region: Formatter.getMapCameraPosition(
+                                        latitude: record.latitude,
+                                        longitude: record.longitude)))) {
+                            RecordListCell(recordData: record)
+                        }
                     }
                 }
                 .padding(.bottom, 40)

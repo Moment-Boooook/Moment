@@ -139,6 +139,14 @@ struct HomeViewFeature {
                         send(.fetchBooks)
                         send(.fetchRecords)
                     }
+                case .element(id: _, action: .recordDetail(.initialNavigationStack)):
+                    state.path.removeAll()
+                    return .none
+                case .element(id: _, action: .recordDetail(.refetchBooksAndRecords)):
+                    return .run { @MainActor send in
+                        send(.fetchBooks)
+                        send(.fetchRecords)
+                    }
                 default:
                     return .none
                 }
@@ -192,12 +200,16 @@ extension HomeViewFeature {
             case addBook(AddBookViewFeature.State)
             case addRecord(AddRecordViewFeature.State)
             case recordList(RecordListViewFeature.State)
+            case recordDetail(RecordDetailViewFeature.State)
+            case imageFull(ImageFullViewFeature.State)
         }
         
         enum Action {
             case addBook(AddBookViewFeature.Action)
             case addRecord(AddRecordViewFeature.Action)
             case recordList(RecordListViewFeature.Action)
+            case recordDetail(RecordDetailViewFeature.Action)
+            case imageFull(ImageFullViewFeature.Action)
         }
         
         var body: some ReducerOf<Self> {
@@ -212,6 +224,14 @@ extension HomeViewFeature {
             // Record List
             Scope(state: \.recordList, action: \.recordList) {
                 RecordListViewFeature()
+            }
+            // Record Detail
+            Scope(state: \.recordDetail, action: \.recordDetail) {
+                RecordDetailViewFeature()
+            }
+            // Image Full
+            Scope(state: \.imageFull, action: \.imageFull) {
+                ImageFullViewFeature()
             }
         }
     }

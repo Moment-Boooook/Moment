@@ -16,8 +16,8 @@ struct RecordListViewFeature {
     @ObservableState
     struct State: Equatable {
         let usedTo: RecordListType                  // 시용되는 뷰
-        var books: [MomentBook]                     // 유저의 책장 책 목록
-        var records: [MomentRecord]                 // 유저의 기록 목록
+        let books: [MomentBook]                     // 유저의 책장 책 목록
+        let records: [MomentRecord]                 // 유저의 기록 목록
         // 기록 연도에 따른 리스트 : in BookShelf
         let selectedBook: MomentBook                // 선택된 책
         var recordsOfBook: [MomentRecord] {         // 책에 대한 기록 목록

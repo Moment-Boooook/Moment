@@ -66,6 +66,14 @@ struct HomeView: View {
                     if let store = store.scope(state: \.recordList, action: \.recordList) {
                         RecordListView(store: store)
                     }
+                case .recordDetail:
+                    if let store = store.scope(state: \.recordDetail, action: \.recordDetail) {
+                        RecordDetailView(store: store)
+                    }
+                case .imageFull:
+                    if let store = store.scope(state: \.imageFull, action: \.imageFull) {
+                        ImageFullView(store: store)
+                    }
                 }
             }
             .tint(.darkBrown)

@@ -15,7 +15,7 @@ struct AddBookViewFeature {
     
     @ObservableState
     struct State: Equatable {
-        var books: [MomentBook]                     // 책 목록
+        let books: [MomentBook]                     // 책 목록
         var searchText: String = ""                 // 서치바 - 텍스트
         var searchedBooks: [Book] = []              // 검색 된 책 목록
         var focusedField: Bool = false              // 서치바 - focusstate

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 // MARK: - Formatter
 enum Formatter {
@@ -49,7 +50,7 @@ enum Formatter {
         return imageDatas
     }
     
-    // 시간 (Int) -> 시간대 (String)
+    // 시간 (Int) -> 시간대 (String) : 기록 리스트에서 사용
     static func timeToTimeZone(timeString: String) -> String {
         switch Int(timeString.prefix(2)) ?? 0 {
         case 0...5: 
@@ -63,5 +64,36 @@ enum Formatter {
         default: 
             return "새벽"
         }
+    }
+    
+    // 시간 (Int) -> 시간 (String) : 기록 디테일에서 사용
+    static func timeToString(timeString: String) -> String {
+        let hour = Int(timeString.prefix(2)) ?? 0
+        let minute = Int(timeString.suffix(2)) ?? 0
+        var result = ""
+        switch hour {
+        case 0:
+            result += "오전 12시"
+        case 1...11:
+            result += "오전 \(hour)시"
+        case 12:
+            result += "오후 \(hour)시"
+        default:
+            result += "오후 \(hour - 12)시"
+        }
+        
+        return result + " \(minute)분"
+    }
+    
+    // 카메라 포지션 반환 : 기록 디테일 미니 맵에서 사용 (리스트에서 디테일 갈 때 전달)
+    static func getMapCameraPosition(latitude: Double, longitude: Double) -> MapCameraPosition {
+        return MapCameraPosition.region(
+            MKCoordinateRegion(
+                center: CLLocationCoordinate2D(
+                    latitude: latitude,
+                    longitude: longitude),
+                span: MKCoordinateSpan(
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01)))
     }
 }

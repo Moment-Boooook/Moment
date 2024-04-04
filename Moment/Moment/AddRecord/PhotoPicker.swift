@@ -22,14 +22,13 @@ struct PhotoPicker: UIViewControllerRepresentable {
         }
         
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            for (idx, result) in results.enumerated() {
+            for result in results {
                 let itemProvider = result.itemProvider
                 guard itemProvider.canLoadObject(ofClass: UIImage.self) else { continue }
                 _ = itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
                     if let image = image as? UIImage {
                         DispatchQueue.main.async {
                             self.parent.store.selectedImages.append(image)
-//                            self.parent.selectedPhotos[self.parent.tatoalSpace - self.parent.remainingSpaces + idx] = image
                         }
                     }
                 }

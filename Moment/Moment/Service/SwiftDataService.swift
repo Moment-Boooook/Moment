@@ -20,6 +20,8 @@ struct SwiftDataService {
     var recordListFetch: () throws -> [MomentRecord]
     var addBook: (MomentBook) throws -> Void
     var addRecord: (MomentRecord) throws -> Void
+    var deleteBook: (MomentBook) throws -> Void
+    var deleteRecord: (MomentRecord) throws -> Void
 
     enum SwiftDataError: Error {
         case fetchError
@@ -81,6 +83,26 @@ extension SwiftDataService: DependencyKey {
                 recordContext.insert(record)
             } catch {
                 throw SwiftDataError.addError
+            }
+        },
+        // Delete Book
+        deleteBook: { book in
+            do {
+                @Dependency(\.databaseService.context) var context
+                let bookContext = try context()
+                bookContext.delete(book)
+            } catch {
+                throw SwiftDataError.deleteError
+            }
+        },
+        // Delete Record
+        deleteRecord: { record in
+            do {
+                @Dependency(\.databaseService.context) var context
+                let recordContext = try context()
+                recordContext.delete(record)
+            } catch {
+                throw SwiftDataError.deleteError
             }
         }
     )
