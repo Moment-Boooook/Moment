@@ -14,13 +14,15 @@ struct SelectedBooktoAPIView: View {
 	
 	@StateObject var network = BookAPI.shared
 	
-	@Query var bookList: [MomentBook]
+	// 기억된 책 리스트 이름순으로 정렬해서 쿼리 가져오는 프로퍼티
+	@Query(sort: \MomentBook.title) var bookList: [MomentBook]
+//	@Query var bookList: [MomentBook]
 	
 	@State private var searchResults: [Book] = []
 	@State private var searchBookText = ""
 	@State var showBool = false
 	@State var noResults = false
-    @State var isRecord = false
+	@State var isRecord = false
 	
 	var body: some View {
 		VStack(spacing: -30) {
@@ -28,16 +30,19 @@ struct SelectedBooktoAPIView: View {
 				.padding(20)
 			VStack(alignment: .leading, spacing: -30) {
 				if searchBookText == "" {
-                    Text(bookList.count == 0 ? "" : "기록된 책 목록")
+					Text(bookList.count == 0 ? "" : "기억에 남겨진 책")
 						.font(Font.semibold18)
 						.padding(30)
 					VStack {
 						ScrollView {
 							VStack(alignment: .leading, spacing: -30) {
 								ForEach(bookList, id: \.self) { book in
-									NavigationLink{
-										AddRecordView(isRecord: $isRecord, bookInfo: book)
-									} label: {
+//									NavigationLink{
+//										AddRecordView(isRecord: $isRecord, bookInfo: book)
+//									} label: {
+//										SelectedBookCell(bookInfo: book)
+//									}
+									NavigationLink(value: book) {
 										SelectedBookCell(bookInfo: book)
 									}
 									CustomListDivider()
@@ -65,11 +70,14 @@ struct SelectedBooktoAPIView: View {
 						ScrollView {
 							VStack(alignment: .leading, spacing: -30) {
 								ForEach(searchResults, id: \.self) { book in
-									NavigationLink {
-                                        AddRecordView(isRecord: $isRecord, bookInfo: book)
-									} label: {
+									NavigationLink(value: book) {
 										SelectedBookCell(bookInfo: book)
 									}
+//									NavigationLink {
+//                                        AddRecordView(isRecord: $isRecord, bookInfo: book)
+//									} label: {
+//										SelectedBookCell(bookInfo: book)
+//									}
 									CustomListDivider()
 								}
 							}
@@ -78,12 +86,24 @@ struct SelectedBooktoAPIView: View {
 				}
 			}
 		}
-        .onChange(of: isRecord) {
-            if isRecord {
-                searchBookText = ""
-                isRecord = false
-            }
-        }
+		.navigationDestination(for: MomentBook.self) { value in
+			AddRecordView(isRecord: $isRecord, bookInfo: value)
+		}
+		.navigationDestination(for: Book.self) { value in
+			AddRecordView(isRecord: $isRecord, bookInfo: value)
+		}
+		.onChange(of: isRecord) {
+			if isRecord {
+				searchBookText = ""
+				isRecord = false
+			}
+		}
+		.onChange(of: searchBookText) {
+			if searchBookText.isEmpty {
+				searchResults = []
+				showBool = false
+			}
+		}
 		.navigationBarBackButtonHidden(true)
 		.toolbar {
 			ToolbarItem(placement: .topBarLeading) {
@@ -95,7 +115,7 @@ struct SelectedBooktoAPIView: View {
 				}
 			}
 			ToolbarItem(placement: .principal) {
-				Text("기록할 책 선택하기")
+				Text("기억하고 싶은 책 선택하기")
 					.fontWeight(.semibold)
 					.foregroundStyle(Color.darkBrown)
 			}

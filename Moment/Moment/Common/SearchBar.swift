@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchBar: View {
 	@Binding var searchText: String
 	@Binding var isTapButton: Bool
+	@Binding var isSearch: Bool
 	@FocusState var isSearchFocused: Bool
 	
 	var body: some View {
@@ -23,13 +24,15 @@ struct SearchBar: View {
 			TextField("책 제목", text: $searchText)
 				.textInputAutocapitalization(.never)
 				.focused($isSearchFocused)
-                .onSubmit {
-                    isTapButton = true
-                }
+				.onSubmit {
+					isTapButton = true
+				}
 			
 			if !searchText.isEmpty {
 				Button(action: {
 					searchText = ""
+					isSearchFocused = true
+					isSearch = false
 				}, label: {
 					Image(systemName: "xmark")
 						.foregroundStyle(.mainBrown)
@@ -39,6 +42,7 @@ struct SearchBar: View {
 			
 			Button(action: {
 				isTapButton = true
+				isSearch = true
 				isSearchFocused = false
 				print("검색 버튼이 클릭되었습니다.")
 			}) {
@@ -46,12 +50,12 @@ struct SearchBar: View {
 					.frame(width: 100,height: 40)
 					.background(Color.mainBrown)
 					.foregroundColor(Color.white)
-					.clipShape(.rect(bottomTrailingRadius: 10, topTrailingRadius: 10))
+					.clipShape(.rect(bottomTrailingRadius: 12, topTrailingRadius: 12))
 			}
 		}
 		.frame(height: 40, alignment: .leading)
 		.background(Color.white)
-		.cornerRadius(10)
+		.cornerRadius(15)
 		.overlay(
 			RoundedRectangle(cornerRadius: 15)
 				.stroke(Color.mainBrown, lineWidth: 2)
@@ -61,6 +65,6 @@ struct SearchBar: View {
 
 
 
-#Preview {
-	SearchBar(searchText: .constant("안뇽"), isTapButton: .constant(false))
-}
+//#Preview {
+//	SearchBar(searchText: .constant("안뇽"), isTapButton: .constant(false))
+//}
