@@ -56,7 +56,8 @@ struct RecordDetailViewFeature {
                     // 책에 다른 기록이 더 남아 있을 때,
                     } else {
                         send(.deleteRecord)
-                        send(.dismiss)
+                        // TODO: - 첫화면 대신 뒤로가기를 해야하는데, 스택의 첫 화면의 데이터만 변경되고 중간에 전달 받았던 화면들은 데이터 변경이 일어나지 않음
+                        send(.initialNavigationStack)
                     }
                 }
             //

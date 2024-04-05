@@ -53,15 +53,12 @@ struct RecordMap: View {
                 }
             }
         }
+        .onChange(of: store.isSearching) { _, _ in
+            store.send(.fetchRecordDictionary)
+        }
         .task {
             store.send(.fetchRecordDictionary)
         }
-//        .onChange(of: recordList) {
-//            Task {
-//                print("MainMapView에서 recordList 변경사항 있음")
-//                await fetchLocalData()
-//            }
-//        }
     }
 }
 

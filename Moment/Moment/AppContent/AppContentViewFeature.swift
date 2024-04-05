@@ -31,8 +31,5 @@ struct AppContentViewFeature {
         Scope(state: \.home, action: \.home) {
             HomeViewFeature()
         }
-        Reduce { state, action in
-            return .none
-        }
     }
 }

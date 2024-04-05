@@ -13,7 +13,7 @@ import ComposableArchitecture
 // MARK: - Home View Reducer
 @Reducer
 struct HomeViewFeature {
-    
+
     @ObservableState
     struct State: Equatable {
         var path = StackState<Path.State>()                     // 네비게이션 스택 Path
@@ -61,7 +61,7 @@ struct HomeViewFeature {
         case removeSearchText
         case path(StackAction<Path.State, Path.Action>)
         case searchButtonTapped
-        case searchBooks(String)
+        case searchBooksAndRecords(String)
         case searchRecords([MomentBook])
         case setSearchText(String)
         case startSearch
@@ -128,7 +128,7 @@ struct HomeViewFeature {
             case .removeSearchText:
                 state.searchText = ""
                 return .none
-            // NavigationPath
+            // Navigation Path
             case let .path(action):
                 switch action {
                 case .element(id: _, action: .addRecord(.initialNavigationStack)):
@@ -152,25 +152,24 @@ struct HomeViewFeature {
                 }
             // 서치바 - 검색
             case .searchButtonTapped:
-                return .concatenate(
-                    .run { @MainActor [searchText = state.searchText] send in
-                        send(.searchBooks(searchText))
-                    },
-                    .run { @MainActor [searchedBooks = state.searchedBooks] send in
-                        send(.searchRecords(searchedBooks))
-                    }
-                )
-            // 검색 된 책
-            case let .searchBooks(searchText):
+                return .run { [searchText = state.searchText] send in
+                    await send(.searchBooksAndRecords(searchText))
+                }
+            // 검색 된 책 + 기록
+            case let .searchBooksAndRecords(searchText):
                 state.searchedBooks = state.books.filter { $0.title.localizedStandardContains(searchText) }
-                return .none
+                return .run { [searchedBooks = state.searchedBooks] send in
+                    await send(.searchRecords(searchedBooks))
+                }
             // 검색 된 기록
             case let .searchRecords(searchedBooks):
                 state.searchedRecords = searchedBooks
                     .reduce(into: [MomentRecord](), { records, book in
                         records += state.records.filter { $0.bookISBN == book.bookISBN }
                     })
-                return .none
+                return .run { send in
+                    await send(.fetchRecordDictionary)
+                }
             // 서치바 - 검색 텍스트 입력
             case let .setSearchText(searchText):
                 state.searchText = searchText
