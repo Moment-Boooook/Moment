@@ -8,21 +8,31 @@
 import SwiftUI
 import SwiftData
 
-import ComposableArchitecture
-
 @main
 struct MomentApp: App {
-    static let store = Store(initialState: AppContentViewFeature.State()) {
-        AppContentViewFeature()
-            ._printChanges()
-    }
-    
+	@State private var isLoading = true
+	
+	var sharedModelContainer: ModelContainer = {
+		let schema = Schema([
+			MomentRecord.self, MomentBook.self
+		])
+		let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+		
+		do {
+			return try ModelContainer(for: schema, configurations: [modelConfiguration])
+		} catch {
+			fatalError("Could not create ModelContainer: \(error)")
+		}
+	}()
+	
 	var body: some Scene {
 		WindowGroup {
-            AppContentView(store: MomentApp.store)
-                .modelContainer(for: [
-                    MomentRecord.self, MomentBook.self
-                ])
+			if isLoading {
+				SplashView(isActive: $isLoading)
+			} else {
+				ContentView()
+					.modelContainer(sharedModelContainer)
+			}
 		}
 	}
 }
