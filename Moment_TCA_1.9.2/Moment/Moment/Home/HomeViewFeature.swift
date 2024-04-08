@@ -19,7 +19,6 @@ struct HomeViewFeature {
         var path = StackState<Path.State>()                     // 네비게이션 스택 Path
         var selectedOption: HomeSegment = .bookShelf            // 세그먼트 옵션
         var searchText: String = ""                             // 서치바 - 검색어
-        var tappedSearchButton = false                          // 서치바 - 검색 버튼
         var focusedField: Bool = false                          // 서치바 - focus state
         var books: [MomentBook] = []                            // 유저의 전체 책 목록
         var records: [MomentRecord] = []                        // 유저의 전체 기록 목록
@@ -153,6 +152,7 @@ struct HomeViewFeature {
             // 서치바 - 검색
             case .searchButtonTapped:
                 return .run { [searchText = state.searchText] send in
+                    await send(.startSearch)
                     await send(.searchBooksAndRecords(searchText))
                 }
             // 검색 된 책 + 기록

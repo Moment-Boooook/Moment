@@ -105,7 +105,6 @@ struct HomeView: View {
                 .onSubmit {
                     if !store.searchText.isEmpty {
                         store.send(.searchButtonTapped)
-                        store.send(.startSearch)
                     }
                 }
             // 검색어 지우기
@@ -123,7 +122,6 @@ struct HomeView: View {
             Button {
                 if !store.searchText.isEmpty {
                     store.send(.searchButtonTapped)
-                    store.send(.startSearch)
                 }
             } label: {
                 Text("검색")

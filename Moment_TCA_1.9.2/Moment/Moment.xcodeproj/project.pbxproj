@@ -59,6 +59,7 @@
 		09E3B6DD2BC3DA23001BC529 /* AddRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3B6DC2BC3DA23001BC529 /* AddRecordTests.swift */; };
 		09E3B6DF2BC3DA2D001BC529 /* RecordListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3B6DE2BC3DA2D001BC529 /* RecordListTests.swift */; };
 		09E3B6E12BC3DA3B001BC529 /* RecordDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3B6E02BC3DA3B001BC529 /* RecordDetailTests.swift */; };
+		09E3B6E52BC418D0001BC529 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3B6E42BC418D0001BC529 /* TestData.swift */; };
 		09F6C0572BC0069900C8DBC7 /* APIKEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09F6C0562BC0069900C8DBC7 /* APIKEY.plist */; };
 		2CA6BED92B2733E0002E3589 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6BED82B2733E0002E3589 /* CustomTextField.swift */; };
 		2CBA62CE2B2A282500D075B7 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBA62CD2B2A282500D075B7 /* SplashView.swift */; };
@@ -85,7 +86,6 @@
 		09731F7C2B26C5980045F6B4 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		09731F892B26D12A0045F6B4 /* CustomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtons.swift; sourceTree = "<group>"; };
 		09731F8B2B26D1500045F6B4 /* ButtonStyle +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle +.swift"; sourceTree = "<group>"; };
-		09AB7CE02B26A1350073EAD5 /* Moment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Moment.app; path = "/Users/phang/Desktop/Moment/Moment_TCA_1.9.2/Moment/build/Debug-iphoneos/Moment.app"; sourceTree = "<absolute>"; };
 		09AB7CE32B26A1350073EAD5 /* MomentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentApp.swift; sourceTree = "<group>"; };
 		09AB7CE52B26A1350073EAD5 /* AppContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContentView.swift; sourceTree = "<group>"; };
 		09AB7CE72B26A1370073EAD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,13 +127,15 @@
 		09D774EE2B275D9C00D45EE6 /* CameraSnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSnap.swift; sourceTree = "<group>"; };
 		09D774F02B275DB700D45EE6 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		09D774FA2B283C2100D45EE6 /* PickerMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerMap.swift; sourceTree = "<group>"; };
-		09E3B6CA2BC3D866001BC529 /* MomentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MomentTests.xctest; path = "/Users/phang/Desktop/Moment/Moment_TCA_1.9.2/Moment/build/Debug-iphoneos/MomentTests.xctest"; sourceTree = "<absolute>"; };
 		09E3B6D62BC3D9EF001BC529 /* AppStartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartTests.swift; sourceTree = "<group>"; };
 		09E3B6D82BC3DA06001BC529 /* HomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTests.swift; sourceTree = "<group>"; };
 		09E3B6DA2BC3DA1B001BC529 /* AddBookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookTests.swift; sourceTree = "<group>"; };
 		09E3B6DC2BC3DA23001BC529 /* AddRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordTests.swift; sourceTree = "<group>"; };
 		09E3B6DE2BC3DA2D001BC529 /* RecordListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListTests.swift; sourceTree = "<group>"; };
 		09E3B6E02BC3DA3B001BC529 /* RecordDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailTests.swift; sourceTree = "<group>"; };
+		09E3B6E22BC3E8D4001BC529 /* Moment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moment.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		09E3B6E32BC3E8D4001BC529 /* MomentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		09E3B6E42BC418D0001BC529 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		09F6C0562BC0069900C8DBC7 /* APIKEY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = APIKEY.plist; path = "../../../../흐르미/모멘트/APIKEY.plist"; sourceTree = "<group>"; };
 		2CA6BED82B2733E0002E3589 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2CBA62CD2B2A282500D075B7 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -168,6 +170,8 @@
 			children = (
 				09AB7CE22B26A1350073EAD5 /* Moment */,
 				09E3B6CB2BC3D866001BC529 /* MomentTests */,
+				09E3B6E22BC3E8D4001BC529 /* Moment.app */,
+				09E3B6E32BC3E8D4001BC529 /* MomentTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -347,6 +351,7 @@
 		09E3B6CB2BC3D866001BC529 /* MomentTests */ = {
 			isa = PBXGroup;
 			children = (
+				09E3B6E42BC418D0001BC529 /* TestData.swift */,
 				09E3B6D62BC3D9EF001BC529 /* AppStartTests.swift */,
 				09E3B6D82BC3DA06001BC529 /* HomeTests.swift */,
 				09E3B6DA2BC3DA1B001BC529 /* AddBookTests.swift */,
@@ -377,7 +382,7 @@
 				09B59C502BB31F64009900E5 /* ComposableArchitecture */,
 			);
 			productName = Moment;
-			productReference = 09AB7CE02B26A1350073EAD5 /* Moment.app */;
+			productReference = 09E3B6E22BC3E8D4001BC529 /* Moment.app */;
 			productType = "com.apple.product-type.application";
 		};
 		09E3B6C92BC3D866001BC529 /* MomentTests */ = {
@@ -397,7 +402,7 @@
 			packageProductDependencies = (
 			);
 			productName = MomentTests;
-			productReference = 09E3B6CA2BC3D866001BC529 /* MomentTests.xctest */;
+			productReference = 09E3B6E32BC3E8D4001BC529 /* MomentTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -528,6 +533,7 @@
 				09E3B6D92BC3DA06001BC529 /* HomeTests.swift in Sources */,
 				09E3B6DB2BC3DA1B001BC529 /* AddBookTests.swift in Sources */,
 				09E3B6DD2BC3DA23001BC529 /* AddRecordTests.swift in Sources */,
+				09E3B6E52BC418D0001BC529 /* TestData.swift in Sources */,
 				09E3B6D72BC3D9EF001BC529 /* AppStartTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
