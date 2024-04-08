@@ -16,7 +16,7 @@ import ComposableArchitecture
 final class AppStartTests: XCTestCase {
     
     // splash 화면 테스트
-    func appLogoTest() async {
+    func testAppSplash() async {
         var isOnboardingCompleted: Bool = false
         let commons = Commons(isCompleteOnboarding: { isOnboardingCompleted },
                               completeOnboarding: { isOnboardingCompleted = true })
