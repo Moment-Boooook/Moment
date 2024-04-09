@@ -35,7 +35,11 @@ struct AppStartFeature {
         case startButtonTapped
     }
     
+    // Cancellable 에서 사용할 enum
+    enum CancelID { case timer }
+    
     @Dependency(\.commons) var commons
+    @Dependency(\.continuousClock) var clock
     
     var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -45,7 +49,7 @@ struct AppStartFeature {
             case .appStart:
                 return .merge(
                     .run { send in
-                        await send(.degreeChange, animation: .easeOut(duration: 1.75))
+                        await send(.degreeChange)
                     },
                     .run { send in
                         // TODO: - 추후에 API 데이터 받아서 로컬 데이터(책 정보) 업데이트 해주는 작업 진행
@@ -54,19 +58,23 @@ struct AppStartFeature {
                 )
             // 애니메이션 각도 변경
             case .degreeChange:
-                state.appLogoDegreeChange = true
+                withAnimation(.easeOut(duration: 1.75)) {
+                    state.appLogoDegreeChange = true
+                }
                 return .none
             // 온보딩 완료 여부 fetch - appstorage
             case .fetchOnboardingCompleted:
                 state.isOnboardingCompleted = commons.isCompleteOnboarding()
                 return .run { send in
-                        try await Task.sleep(nanoseconds: 1_750_000_000)
+                    for await _ in self.clock.timer(interval: .seconds(1.75)) {
                         await send(.quitSplash)
                     }
+                }
+                .cancellable(id: CancelID.timer)
             // 스플래쉬 뷰 닫기
             case .quitSplash:
                 state.isAppStarting = false
-                return .none
+                return .cancel(id: CancelID.timer)
             // MARK: - Onboarding
             // onboarding 완료
             case .completeOnboarding:

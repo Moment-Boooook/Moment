@@ -17,6 +17,8 @@ final class AppStartTests: XCTestCase {
     
     // splash 화면 테스트
     func testAppSplash() async {
+        let clock = TestClock()
+
         var isOnboardingCompleted: Bool = false
         let commons = Commons(isCompleteOnboarding: { isOnboardingCompleted },
                               completeOnboarding: { isOnboardingCompleted = true })
@@ -25,15 +27,15 @@ final class AppStartTests: XCTestCase {
             AppStartFeature()
         } withDependencies: {
             $0.commons = commons
+            $0.continuousClock = clock
         }
         
         await store.send(.appStart)
         await store.receive(\.degreeChange) {
             $0.appLogoDegreeChange = true
         }
-        await store.receive(\.fetchOnboardingCompleted) {
-            $0.isOnboardingCompleted = false
-        }
+        await store.receive(\.fetchOnboardingCompleted)
+        await clock.advance(by: .seconds(1.75))
         await store.receive(\.quitSplash) {
             $0.isAppStarting = false
         }

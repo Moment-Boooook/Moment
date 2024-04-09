@@ -129,5 +129,4 @@ final class HomeTests: XCTestCase {
             $0.recordDictionary = [LocalName: [MomentRecord]]()
         }
     }
-    
 }
