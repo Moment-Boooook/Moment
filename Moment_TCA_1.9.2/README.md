@@ -101,9 +101,10 @@
 ---
 
 
-## 리팩토링 - [ 2024.03.28 ~ 2024.04.05 ]
+## 리팩토링 - [ 2024.03.28 ~ 2024.04.09 ]
 - 참여: [이창준](https://github.com/Phangg)
 
 ### 리팩토링 내용
 - [TCA](https://github.com/pointfreeco/swift-composable-architecture) 아키텍처 적용 (1.9.2)
 - 불필요 코드 및 오탈자 / 오류 수정
+- TDD 코드 작성

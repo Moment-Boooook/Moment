@@ -16,7 +16,6 @@ struct SwiftDataService {
     @Query private var recordList: [MomentRecord]
     
     var bookListFetch: () throws -> [MomentBook]
-    var sortedByTitleBookListFetch: () throws -> [MomentBook]
     var recordListFetch: () throws -> [MomentRecord]
     var addBook: (MomentBook) throws -> Void
     var addRecord: (MomentRecord) throws -> Void
@@ -38,17 +37,6 @@ extension SwiftDataService: DependencyKey {
                 @Dependency(\.databaseService.context) var context
                 let bookListContext = try context()
                 let descriptor = FetchDescriptor<MomentBook>()
-                return try bookListContext.fetch(descriptor)
-            } catch {
-                throw SwiftDataError.fetchError
-            }
-        },
-        // Book List Fetch ( 책 제목 순서 정렬 )
-        sortedByTitleBookListFetch: {
-            do {
-                @Dependency(\.databaseService.context) var context
-                let bookListContext = try context()
-                let descriptor = FetchDescriptor<MomentBook>(sortBy: [SortDescriptor(\.title)])
                 return try bookListContext.fetch(descriptor)
             } catch {
                 throw SwiftDataError.fetchError

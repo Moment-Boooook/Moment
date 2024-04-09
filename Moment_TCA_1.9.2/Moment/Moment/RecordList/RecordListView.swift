@@ -192,7 +192,7 @@ struct RecordListView: View {
                     Spacer()
                     // 닫기 버튼
                     Button {
-                        store.send(.hideBookDataDialog)
+                        store.send(.toggledBookDataDialog)
                     } label: {
                         Image(systemName: "xmark")
                             .frame(width: 24, height: 24)

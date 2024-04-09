@@ -60,14 +60,8 @@ struct RecordListViewFeature {
                 }
             // 'BookDataDialog' 닫기
             case .hideBookDataDialog:
-                withAnimation(.spring()) {
-                    state.dialogOffset = 1000
-                }
-                return .run { send in
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + CATransaction.animationDuration()) {
-//                    }
-                    await send(.toggledBookDataDialog)
-                }
+                state.dialogOffset = 1000
+                return .none
             // 'BookDataDialog' 열기
             case .showBookDataDialog:
                 withAnimation(.spring()) {
@@ -77,7 +71,13 @@ struct RecordListViewFeature {
             // 'showBookDataDialog' 값 변경
             case .toggledBookDataDialog:
                 state.showBookDataDialog.toggle()
-                return .none
+                return .run { [showBookDataDialog = state.showBookDataDialog] send in
+                    if showBookDataDialog {
+                        await send(.showBookDataDialog)
+                    } else {
+                        await send(.hideBookDataDialog)
+                    }
+                }
             }
         }
     }
