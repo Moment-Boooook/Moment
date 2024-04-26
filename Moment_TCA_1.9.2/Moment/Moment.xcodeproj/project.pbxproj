@@ -27,7 +27,6 @@
 		09B59C512BB31F64009900E5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 09B59C502BB31F64009900E5 /* ComposableArchitecture */; };
 		09B59C552BB32372009900E5 /* AppContentViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C542BB32372009900E5 /* AppContentViewFeature.swift */; };
 		09B59C5E2BB33AE8009900E5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C5D2BB33AE8009900E5 /* Database.swift */; };
-		09B59C602BB33D11009900E5 /* DependencyValues +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C5F2BB33D11009900E5 /* DependencyValues +.swift */; };
 		09B59C622BB33F4B009900E5 /* SwiftDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C612BB33F4B009900E5 /* SwiftDataService.swift */; };
 		09B59C672BB4088D009900E5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C662BB4088D009900E5 /* HomeView.swift */; };
 		09B59C692BB4089A009900E5 /* HomeViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C682BB4089A009900E5 /* HomeViewFeature.swift */; };
@@ -41,6 +40,7 @@
 		09B59C852BB69A22009900E5 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C842BB69A22009900E5 /* AddBookView.swift */; };
 		09B59C872BB69B99009900E5 /* AddBookViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C862BB69B99009900E5 /* AddBookViewFeature.swift */; };
 		09B59C892BB69EA5009900E5 /* NaverBookAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */; };
+		09C31ADE2BDB605400623F5C /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31ADD2BDB605400623F5C /* Shared.swift */; };
 		09C4BD5C2BB7068B00AEC83D /* AddRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */; };
 		09C4BD5E2BB7084E00AEC83D /* AddRecordViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */; };
 		09C4BD602BB7220C00AEC83D /* LocationManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */; };
@@ -101,7 +101,6 @@
 		09AB7D1A2B26A82B0073EAD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		09B59C542BB32372009900E5 /* AppContentViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContentViewFeature.swift; sourceTree = "<group>"; };
 		09B59C5D2BB33AE8009900E5 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		09B59C5F2BB33D11009900E5 /* DependencyValues +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DependencyValues +.swift"; sourceTree = "<group>"; };
 		09B59C612BB33F4B009900E5 /* SwiftDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataService.swift; sourceTree = "<group>"; };
 		09B59C662BB4088D009900E5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		09B59C682BB4089A009900E5 /* HomeViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewFeature.swift; sourceTree = "<group>"; };
@@ -115,6 +114,7 @@
 		09B59C842BB69A22009900E5 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		09B59C862BB69B99009900E5 /* AddBookViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewFeature.swift; sourceTree = "<group>"; };
 		09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverBookAPIService.swift; sourceTree = "<group>"; };
+		09C31ADD2BDB605400623F5C /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordView.swift; sourceTree = "<group>"; };
 		09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordViewFeature.swift; sourceTree = "<group>"; };
 		09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerService.swift; sourceTree = "<group>"; };
@@ -224,7 +224,6 @@
 				09731F892B26D12A0045F6B4 /* CustomButtons.swift */,
 				B1C938582B27E294006EFB70 /* CustomListDivider.swift */,
 				2CA6BED82B2733E0002E3589 /* CustomTextField.swift */,
-				09B59C5F2BB33D11009900E5 /* DependencyValues +.swift */,
 				09AB7D042B26A5500073EAD5 /* Font +.swift */,
 				095131612B31216200F6BC4C /* Formatter.swift */,
 				09B59C7E2BB68112009900E5 /* MKCoordinateRegion +.swift */,
@@ -271,6 +270,7 @@
 				09B59C612BB33F4B009900E5 /* SwiftDataService.swift */,
 				09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */,
 				09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */,
+				09C31ADD2BDB605400623F5C /* Shared.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -497,11 +497,11 @@
 				09731F8C2B26D1500045F6B4 /* ButtonStyle +.swift in Sources */,
 				09B59C712BB577EC009900E5 /* AppStartFeature.swift in Sources */,
 				095131622B31216200F6BC4C /* Formatter.swift in Sources */,
+				09C31ADE2BDB605400623F5C /* Shared.swift in Sources */,
 				09C4BD5C2BB7068B00AEC83D /* AddRecordView.swift in Sources */,
 				09B59C5E2BB33AE8009900E5 /* Database.swift in Sources */,
 				09B59C6E2BB540D2009900E5 /* Common.swift in Sources */,
 				2CA6BED92B2733E0002E3589 /* CustomTextField.swift in Sources */,
-				09B59C602BB33D11009900E5 /* DependencyValues +.swift in Sources */,
 				09AB7D052B26A5500073EAD5 /* Font +.swift in Sources */,
 				09C4BD632BBDA05000AEC83D /* RecordListView.swift in Sources */,
 				7B39C0CB2B2AFCC700460278 /* APIDataModel.swift in Sources */,

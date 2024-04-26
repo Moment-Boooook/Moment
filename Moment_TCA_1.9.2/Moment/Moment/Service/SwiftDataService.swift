@@ -95,3 +95,12 @@ extension SwiftDataService: DependencyKey {
         }
     )
 }
+
+// MARK: - TCA : DependencyValues +
+extension DependencyValues {
+    // SwiftData Service
+    var swiftDataService: SwiftDataService {
+        get { self[SwiftDataService.self] }
+        set { self[SwiftDataService.self] = newValue }
+    }
+}

@@ -29,3 +29,12 @@ extension Commons: DependencyKey {
         }
     )
 }
+
+// MARK: - TCA : DependencyValues +
+extension DependencyValues {
+    // Commons
+    var commons: Commons {
+        get { self[Commons.self] }
+        set { self[Commons.self] = newValue }
+    }
+}

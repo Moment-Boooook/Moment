@@ -38,3 +38,12 @@ extension Database: DependencyKey {
         }
     )
 }
+
+// MARK: - TCA : DependencyValues +
+extension DependencyValues {
+    // Database
+    var databaseService: Database {
+        get { self[Database.self] }
+        set { self[Database.self] = newValue }
+    }
+}
