@@ -32,7 +32,7 @@ struct BookShelf: View {
             }
             NavigationLink(
                 state: HomeViewFeature.Path.State.addBook(
-                    .init(books: store.$books))) {
+                    .init(books: store.books))) {
                 Image(systemName: "plus")
                     .font(.medium30)
             }
@@ -67,9 +67,9 @@ struct BookShelf: View {
                         // 책 이미지
                         NavigationLink(
                             state: HomeViewFeature.Path.State.recordList(
-                                .init(usedTo: .usedToShelf,
-                                      books: books,
-                                      records: records,
+                                .init(books: store.$books,
+                                      records: store.$records,
+                                      usedTo: .usedToShelf,
                                       selectedBook: book,
                                       localName: "",
                                       recordsOfLocal: []))) {

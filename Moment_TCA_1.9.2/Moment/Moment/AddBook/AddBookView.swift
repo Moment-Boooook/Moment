@@ -152,8 +152,8 @@ struct AddBookView: View {
                     let book = searchedBooks[index]
                     NavigationLink(
                         state: HomeViewFeature.Path.State.addRecord(
-                            .init(myBooks: store.$books,
-                                  book: book))) {
+                            .init(book: book,
+                                  myBooks: store.books))) {
                             BookCell(book: book)
                     }
                     //
@@ -211,7 +211,7 @@ private struct BookCell: View {
 #Preview {
     AddBookView(
         store: Store(
-            initialState: AddBookViewFeature.State(books: Shared([]))
+            initialState: AddBookViewFeature.State(books: [])
         ) {
             AddBookViewFeature()
         }

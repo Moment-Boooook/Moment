@@ -17,10 +17,8 @@ struct AddRecordViewFeature {
     @ObservableState
     struct State: Equatable {
         @Presents var alert: AlertState<Action.Alert>?  // alert
-        @ObservationStateIgnored
-        @Shared var myBooks: [MomentBook]               // 현재 내가 읽은 책 목록
-        
         let book: SelectedBook                          // 이전 화면에서 선택된 책
+        let myBooks: [MomentBook]                       // 현재 내가 읽은 책 목록
         var latitude: Double = 0                        // 위치 정보 - 위도
         var longitude: Double = 0                       // 위치 정보 - 경도
         var place: String = ""                          // 위치 정보 - 지역

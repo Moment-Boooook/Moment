@@ -30,9 +30,9 @@ struct RecordMap: View {
                         Annotation("", coordinate: local.coordinate, anchor: .bottom) {
                             NavigationLink(
                                 state: HomeViewFeature.Path.State.recordList(
-                                    .init(usedTo: .usedToMap,
-                                          books: store.books,
-                                          records: store.records,
+                                    .init(books: store.$books,
+                                          records: store.$records,
+                                          usedTo: .usedToMap,
                                           selectedBook: MomentBook(bookISBN: "",
                                                                    theCoverOfBook: "",
                                                                    title: "",
