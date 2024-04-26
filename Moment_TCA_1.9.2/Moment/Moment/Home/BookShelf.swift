@@ -8,6 +8,7 @@
 import SwiftUI
 
 import ComposableArchitecture
+import Kingfisher
 
 // MARK: - 책장 View
 struct BookShelf: View {
@@ -95,14 +96,18 @@ private struct BookImage: View {
     let maxWidth: CGFloat
 
     fileprivate var body: some View {
-        AsyncImage(url: URL(string: urlString)) { image in
-            image.resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: maxWidth / 2)
-                .shadow(radius: 3, x: -3, y: -2)
-        } placeholder: {
-            ProgressView()
-        }
+        KFImage.url(URL(string: urlString))
+            .placeholder {
+                ProgressView()
+            }
+            .loadDiskFileSynchronously(true) // 디스크에서 동기적으로 이미지 가져오기
+            .cancelOnDisappear(true) // 화면 이동 시, 진행중인 다운로드 중단
+            .cacheMemoryOnly() // 메모리 캐시만 사용 (디스크 X)
+            .fade(duration: 0.2) // 이미지 부드럽게 띄우기
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: maxWidth / 2)
+            .shadow(radius: 3, x: -3, y: -2)
     }
 }
 
