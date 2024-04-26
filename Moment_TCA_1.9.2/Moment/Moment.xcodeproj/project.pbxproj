@@ -41,6 +41,7 @@
 		09B59C872BB69B99009900E5 /* AddBookViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C862BB69B99009900E5 /* AddBookViewFeature.swift */; };
 		09B59C892BB69EA5009900E5 /* NaverBookAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */; };
 		09C31ADE2BDB605400623F5C /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31ADD2BDB605400623F5C /* Shared.swift */; };
+		09C31AE12BDBF33D00623F5C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 09C31AE02BDBF33D00623F5C /* Kingfisher */; };
 		09C4BD5C2BB7068B00AEC83D /* AddRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */; };
 		09C4BD5E2BB7084E00AEC83D /* AddRecordViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */; };
 		09C4BD602BB7220C00AEC83D /* LocationManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */; };
@@ -151,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09C31AE12BDBF33D00623F5C /* Kingfisher in Frameworks */,
 				09B59C512BB31F64009900E5 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +381,7 @@
 			name = Moment;
 			packageProductDependencies = (
 				09B59C502BB31F64009900E5 /* ComposableArchitecture */,
+				09C31AE02BDBF33D00623F5C /* Kingfisher */,
 			);
 			productName = Moment;
 			productReference = 09E3B6E22BC3E8D4001BC529 /* Moment.app */;
@@ -434,6 +437,7 @@
 			mainGroup = 09AB7CD72B26A1350073EAD5;
 			packageReferences = (
 				09B59C4F2BB31F64009900E5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				09C31ADF2BDBF33D00623F5C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 09AB7CD72B26A1350073EAD5;
 			projectDirPath = "";
@@ -816,6 +820,14 @@
 				minimumVersion = 1.9.2;
 			};
 		};
+		09C31ADF2BDBF33D00623F5C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -823,6 +835,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 09B59C4F2BB31F64009900E5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		09C31AE02BDBF33D00623F5C /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09C31ADF2BDBF33D00623F5C /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
