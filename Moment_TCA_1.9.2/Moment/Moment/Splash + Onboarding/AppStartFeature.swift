@@ -66,6 +66,7 @@ struct AppStartFeature {
     
     @Dependency(\.commons) var commons
     @Dependency(\.continuousClock) var clock
+    @Dependency(\.naverBookService) var naverBookService
     
     var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -79,7 +80,7 @@ struct AppStartFeature {
                     },
                     .run { send in
                         await send(.fetchAllData)
-                        // TODO: - 표지가 비어있는 책만, 표지 정보 업데이트 확인
+                        // TODO: - 표지 정보 업데이트
                         await send(.fetchOnboardingCompleted)
                     }
                 )
