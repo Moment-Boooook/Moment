@@ -87,10 +87,10 @@ struct RecordListView: View {
                             }
                         }
                     }
+                    .padding(.top, 20)
                     .padding(.bottom, 40)
                 }
             }
-            .padding(.top, 20)
             if store.showBookDataDialog {
                 BookInfoDialog()
             }
@@ -123,10 +123,10 @@ struct RecordListView: View {
                         }
                     }
                 }
+                .padding(.top, 20)
                 .padding(.bottom, 40)
             }
         }
-        .padding(.top, 20)
     }
     
     // MARK: - 기록 리스트 셀
