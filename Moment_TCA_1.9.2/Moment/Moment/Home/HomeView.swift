@@ -77,10 +77,6 @@ struct HomeView: View {
                 }
             }
             .tint(.darkBrown)
-            // books / records - SwiftData 에서 받아오기
-            .task {
-                store.send(.onAppear)
-            }
             .onTapGesture {
                 store.send(.clearFocusState)
             }
@@ -179,9 +175,10 @@ struct HomeView: View {
     HomeView(
         store: Store(
             initialState: HomeViewFeature.State(
-                searchText: "",
-                books: [],
-                records: [])
+                books: Shared([]),
+                records: Shared([]),
+                searchText: ""
+            )
         ) {
             HomeViewFeature()
         }
