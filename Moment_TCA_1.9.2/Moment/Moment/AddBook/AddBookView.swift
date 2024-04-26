@@ -152,7 +152,8 @@ struct AddBookView: View {
                     let book = searchedBooks[index]
                     NavigationLink(
                         state: HomeViewFeature.Path.State.addRecord(
-                            .init(book: book, myBooks: store.books))) {
+                            .init(myBooks: store.$books,
+                                  book: book))) {
                             BookCell(book: book)
                     }
                     //
