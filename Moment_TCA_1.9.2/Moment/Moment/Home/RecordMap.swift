@@ -171,15 +171,16 @@ private struct NotificationCount: View {
     }
 }
 
-//#Preview {
-//    RecordMap(
-//        store: Store(
-//            initialState: HomeViewFeature.State(
-//                searchText: "",
-//                books: [],
-//                records: [])
-//        ) {
-//            HomeViewFeature()
-//        }
-//    )
-//}
+#Preview {
+    RecordMap(
+        store: Store(
+            initialState: HomeViewFeature.State(
+                books: Shared([]),
+                records: Shared([]),
+                searchText: ""
+            )
+        ) {
+            HomeViewFeature()
+        }
+    )
+}

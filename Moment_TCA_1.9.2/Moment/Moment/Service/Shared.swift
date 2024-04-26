@@ -13,7 +13,8 @@ import ComposableArchitecture
 @Observable
 @propertyWrapper
 final class Shared<Value> {
-    var wrappedValue: Value
+    var wrappedValue: Value                 // propertywrapper
+    var projectedValue: Shared { self }     // $ 공유 참조 접근 가능
     
     init(_ value: Value) {
         self.wrappedValue = value

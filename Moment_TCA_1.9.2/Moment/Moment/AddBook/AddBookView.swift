@@ -204,7 +204,7 @@ private struct BookCell: View {
 #Preview {
     AddBookView(
         store: Store(
-            initialState: AddBookViewFeature.State(books: [])
+            initialState: AddBookViewFeature.State(books: Shared([]))
         ) {
             AddBookViewFeature()
         }
