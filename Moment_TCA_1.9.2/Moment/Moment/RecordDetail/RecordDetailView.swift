@@ -27,7 +27,7 @@ struct RecordDetailView: View {
                         Text("\(store.record.page)페이지")
                             .font(.light14)
                         Text(store.record.paragraph)
-                            .font(.medium20)
+                            .font(.medium18)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 20)
                         Text(store.record.commentary)
