@@ -16,25 +16,40 @@ import ComposableArchitecture
 final class AppStartTests: XCTestCase {
     
     // splash 화면 테스트
+    // 책 목록 / 기록 목록 받아오기
     func testAppSplash() async {
         let clock = TestClock()
-
+        
         var isOnboardingCompleted: Bool = false
         let commons = Commons(isCompleteOnboarding: { isOnboardingCompleted },
                               completeOnboarding: { isOnboardingCompleted = true })
         
-        let store = TestStore(initialState: AppStartFeature.State()) {
-            AppStartFeature()
-        } withDependencies: {
-            $0.commons = commons
-            $0.continuousClock = clock
-        }
+        let store = TestStore(
+            initialState: AppStartFeature.State(
+                books: Shared([]),
+                records: Shared([]))) {
+                    AppStartFeature()
+                } withDependencies: {
+                    $0.commons = commons
+                    $0.continuousClock = clock
+                    $0.swiftDataService = .init(
+                        bookListFetch: { [TestData.testBook01, TestData.testBook02] },
+                        recordListFetch: { [TestData.testRecord01, TestData.testRecord02] },
+                        addBook: { _ in },
+                        addRecord: { _ in },
+                        deleteBook: { _ in },
+                        deleteRecord: { _ in }
+                    )
+                }
         
         await store.send(.appStart)
         await store.receive(\.degreeChange) {
             $0.appLogoDegreeChange = true
         }
+        await store.receive(\.fetchAllData)
         await store.receive(\.fetchOnboardingCompleted)
+        await store.receive(\.fetchBooks)
+        await store.receive(\.fetchRecords)
         await clock.advance(by: .seconds(1.75))
         await store.receive(\.quitSplash) {
             $0.isAppStarting = false
@@ -47,7 +62,10 @@ final class AppStartTests: XCTestCase {
         let commons = Commons(isCompleteOnboarding: { isOnboardingCompleted },
                               completeOnboarding: { isOnboardingCompleted = true })
         
-        let store = TestStore(initialState: AppStartFeature.State()) {
+        let store = TestStore(
+            initialState: AppStartFeature.State(
+                books: Shared([]),
+                records: Shared([]))) {
             AppStartFeature()
         } withDependencies: {
             $0.commons = commons
@@ -59,5 +77,4 @@ final class AppStartTests: XCTestCase {
             $0.isOnboardingCompleted = true
         }
     }
-    
 }
