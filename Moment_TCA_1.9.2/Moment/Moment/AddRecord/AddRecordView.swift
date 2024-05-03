@@ -71,7 +71,7 @@ struct AddRecordView: View {
                     //
                     TextField("위치를 기억할 이름을 지어주세요.",
                               text: $store.myLocationAlias.sending(\.setMyLocationAlias))
-                        .textFieldStyle(BorderedTextFieldStyle())
+                        .textFieldStyle(.bordered())
                         .focused($focusedField, equals: .myLocationAlias)
                         .padding(.bottom, 20)
                         .textInputAutocapitalization(.never)
@@ -84,7 +84,7 @@ struct AddRecordView: View {
                         .font(.regular16)
                     TextField("책에서 기억하고자 하는 문장을 적어주세요.",
                               text: $store.paragraph.sending(\.setParagraph))
-                        .textFieldStyle(BorderedTextFieldStyle())
+                        .textFieldStyle(.bordered())
                         .focused($focusedField, equals: .paragraph)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled(true)
@@ -94,7 +94,7 @@ struct AddRecordView: View {
                     //
                     TextField("해당 문장이 있는 페이지를 적어주세요.",
                               text: $store.page.sending(\.setPage))
-                        .textFieldStyle(BorderedTextFieldStyle())
+                        .textFieldStyle(.bordered())
                         .focused($focusedField, equals: .page)
                         .keyboardType(.asciiCapableNumberPad)
                         .onSubmit {
