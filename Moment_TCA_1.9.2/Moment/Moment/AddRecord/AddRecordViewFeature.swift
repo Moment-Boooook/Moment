@@ -30,13 +30,14 @@ struct AddRecordViewFeature {
         var selectedImages: [UIImage] = []              // 라이브러리에서 선택된 사진
         var focusedField: Field? = nil                  // focusstate
         var isSaveable: Bool {                          // 기록 저장이 가능한지
-            [myLocationAlias, paragraph, content].contains("") || page.isEmpty || selectedImages.isEmpty
+            [myLocationAlias, paragraph, content].contains("") ||
+            page.isEmpty ||
+            selectedImages.isEmpty
         }
         var isPickerMapSheet: Bool = false              // 위치 선택 지도 시트 열기
         var showPhotoConfimationDialog: Bool = false    // 카메라 / 라이브러리 선택 다이얼로그
         var isCameraSnapSheet: Bool = false             // 카메라 사진 찍기 시트 열기
         var isPhotoPickerSheet: Bool = false            // 라이브러리 사진 선택하기 시트 열기
-        var filmedPhoto = UIImage()                     // 카메라로 촬영 된 사진 한장
         let maxSelectImageCount = 3                     // 최대 사진 선택 개순
         
         // Equatable

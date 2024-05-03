@@ -22,7 +22,7 @@ struct CameraSnap: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let uiImage = info[.originalImage] as? UIImage {
-                parent.store.filmedPhoto = uiImage
+                parent.store.selectedImages.append(uiImage)
             }
             parent.store.isCameraSnapSheet = false
         }

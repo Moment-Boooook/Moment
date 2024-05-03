@@ -106,5 +106,6 @@
 
 ### 리팩토링 내용
 - [TCA](https://github.com/pointfreeco/swift-composable-architecture) 아키텍처 적용 (1.9.2)
-- 불필요 코드 및 오탈자 / 오류 수정
+- 불필요 코드 및 오탈자 / 오류 및 로직 일부분 수정
 - TDD 코드 작성
+- [Kingfisher](https://github.com/onevcat/Kingfisher) 라이브러리 적용

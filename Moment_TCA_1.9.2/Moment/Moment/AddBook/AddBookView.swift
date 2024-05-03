@@ -8,6 +8,7 @@
 import SwiftUI
 
 import ComposableArchitecture
+import Kingfisher
 
 // MARK: - 책 찾아서 선택하는 뷰
 struct AddBookView: View {
@@ -151,11 +152,13 @@ struct AddBookView: View {
                     let book = searchedBooks[index]
                     NavigationLink(
                         state: HomeViewFeature.Path.State.addRecord(
-                            .init(book: book, myBooks: store.books))) {
+                            .init(book: book,
+                                  myBooks: store.books))) {
                             BookCell(book: book)
                     }
                     //
                     CustomListDivider()
+                        .padding(.horizontal, -20)
                 }
             }
         }
@@ -172,14 +175,18 @@ private struct BookCell: View {
         VStack(spacing: 20) {
             HStack(alignment: .top, spacing: 20) {
                 // 이미지
-                AsyncImage(url: URL(string: book.theCoverOfBook)) { image in
-                    image.resizable()
-                        .aspectRatio(contentMode: .fill)
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: 70, height: 87)
-                .clipped()
+                KFImage.url(URL(string: book.theCoverOfBook))
+                    .placeholder {
+                        ProgressView()
+                    }
+                    .loadDiskFileSynchronously(true) // 디스크에서 동기적으로 이미지 가져오기
+                    .cancelOnDisappear(true) // 화면 이동 시, 진행중인 다운로드 중단
+                    .cacheMemoryOnly() // 메모리 캐시만 사용 (디스크 X)
+                    .fade(duration: 0.2) // 이미지 부드럽게 띄우기
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 70, height: 87)
+                    .clipped()
                 // 제목, 작가, 출판사
                 VStack(alignment: .leading, spacing: 10) {
                     Text(book.title)

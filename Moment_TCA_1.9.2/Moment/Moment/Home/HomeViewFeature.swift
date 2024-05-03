@@ -16,12 +16,15 @@ struct HomeViewFeature {
 
     @ObservableState
     struct State: Equatable {
+        @ObservationStateIgnored
+        @Shared var books: [MomentBook]                         // 유저의 전체 책 목록
+        @ObservationStateIgnored
+        @Shared var records: [MomentRecord]                     // 유저의 전체 기록 목록
+        
         var path = StackState<Path.State>()                     // 네비게이션 스택 Path
         var selectedOption: HomeSegment = .bookShelf            // 세그먼트 옵션
         var searchText: String = ""                             // 서치바 - 검색어
         var focusedField: Bool = false                          // 서치바 - focus state
-        var books: [MomentBook] = []                            // 유저의 전체 책 목록
-        var records: [MomentRecord] = []                        // 유저의 전체 기록 목록
         var recordDictionary = [LocalName: [MomentRecord]]()    // 지역 별 기록 딕셔너리
         var searchedBooks: [MomentBook] = []                    // 검색 된 책 목록
         var searchedRecords: [MomentRecord] = []                // 검색 된 기록 목록
@@ -53,7 +56,6 @@ struct HomeViewFeature {
         case changeSelectedOption(HomeSegment)
         case clearFocusState
         case endSearch
-        case onAppear
         case fetchBooks
         case fetchRecords
         case fetchRecordDictionary
@@ -89,16 +91,6 @@ struct HomeViewFeature {
             case .endSearch:
                 state.isSearching = false
                 return .none
-            // onAppear
-            case .onAppear:
-                return .merge(
-                    .run { send in
-                        await send(.fetchBooks)
-                    },
-                    .run { send in
-                        await send(.fetchRecords)
-                    }
-                )
             // 유저의 책 fetch
             case .fetchBooks:
                 state.fetchBooks()

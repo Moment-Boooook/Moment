@@ -8,26 +8,31 @@
 import SwiftUI
 
 import ComposableArchitecture
+import Kingfisher
 
 // MARK: - 책장 View
 struct BookShelf: View {
-    let books: [MomentBook]
-    let records: [MomentRecord]
+    @Bindable var store: StoreOf<HomeViewFeature>
+
     let maxWidth: CGFloat
+    
+    private let columns = Array(repeating: GridItem(.flexible(), spacing: 20), count: 2)
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            if books.isEmpty {
+            if store.books.isEmpty {
                 NoContent()
                     .padding(.bottom, 60)
                     .padding(.horizontal, 20)
             } else {
-                ContentShelf(books: books, records: records, maxWidth: maxWidth)
-                    .padding(.bottom, 20)
+                ContentShelf(books: store.isSearching ? store.searchedBooks : store.books,
+                             records: store.isSearching ? store.searchedRecords : store.records,
+                             maxWidth: maxWidth)
+                .padding(.bottom, 20)
             }
             NavigationLink(
                 state: HomeViewFeature.Path.State.addBook(
-                    .init(books: books))) {
+                    .init(books: store.books))) {
                 Image(systemName: "plus")
                     .font(.medium30)
             }
@@ -37,16 +42,24 @@ struct BookShelf: View {
         }
         .ignoresSafeArea()
     }
-}
-
-// MARK: - 책장
-private struct ContentShelf: View {
-    private let columns = Array(repeating: GridItem(.flexible(), spacing: 20), count: 2)
-    let books: [MomentBook]
-    let records: [MomentRecord]
-    let maxWidth: CGFloat
-
-    fileprivate var body: some View {
+    
+    // MARK: - 책이 책장에 없을 때 : No Content
+    @ViewBuilder
+    private func NoContent() -> some View {
+        VStack {
+            Text("책장이 비어있어요.\n 기억 속에 책을 남겨보세요.")
+                .font(.regular20)
+                .foregroundStyle(.lightBrown)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    
+    // MARK: - 책장
+    @ViewBuilder
+    private func ContentShelf(books: [MomentBook],
+                              records: [MomentRecord],
+                              maxWidth: CGFloat) -> some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 50) {
                 ForEach(books, id: \.self) { book in
@@ -54,9 +67,9 @@ private struct ContentShelf: View {
                         // 책 이미지
                         NavigationLink(
                             state: HomeViewFeature.Path.State.recordList(
-                                .init(usedTo: .usedToShelf,
-                                      books: books,
-                                      records: records,
+                                .init(books: store.$books,
+                                      records: store.$records,
+                                      usedTo: .usedToShelf,
                                       selectedBook: book,
                                       localName: "",
                                       recordsOfLocal: []))) {
@@ -83,27 +96,18 @@ private struct BookImage: View {
     let maxWidth: CGFloat
 
     fileprivate var body: some View {
-        AsyncImage(url: URL(string: urlString)) { image in
-            image.resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: maxWidth / 2)
-                .shadow(radius: 3, x: -3, y: -2)
-        } placeholder: {
-            ProgressView()
-        }
-    }
-}
-
-// MARK: - 책이 책장에 없을 때 : No Content
-private struct NoContent: View {
-    fileprivate var body: some View {
-        VStack {
-            Text("책장이 비어있어요.\n 기억 속에 책을 남겨보세요.")
-                .font(.regular20)
-                .foregroundStyle(.lightBrown)
-                .multilineTextAlignment(.center)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        KFImage.url(URL(string: urlString))
+            .placeholder {
+                ProgressView()
+            }
+            .loadDiskFileSynchronously(true) // 디스크에서 동기적으로 이미지 가져오기
+            .cancelOnDisappear(true) // 화면 이동 시, 진행중인 다운로드 중단
+            .cacheMemoryOnly() // 메모리 캐시만 사용 (디스크 X)
+            .fade(duration: 0.2) // 이미지 부드럽게 띄우기
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: maxWidth / 2)
+            .shadow(radius: 3, x: -3, y: -2)
     }
 }
 
@@ -155,6 +159,17 @@ private struct CustomShelf: View {
 
 #Preview {
     GeometryReader { geo in
-        BookShelf(books: [], records: [], maxWidth: geo.size.width - 40)
+        BookShelf(
+            store: Store(
+                initialState: HomeViewFeature.State(
+                    books: Shared([]),
+                    records: Shared([]),
+                    searchText: ""
+                )
+            ) {
+                HomeViewFeature()
+            },
+            maxWidth: geo.size.width - 40
+        )
     }
 }

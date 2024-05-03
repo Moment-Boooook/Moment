@@ -27,7 +27,8 @@ struct AppStartView: View {
 #Preview {
     AppStartView(
         store: Store(
-            initialState: AppStartFeature.State()
+            initialState: AppStartFeature.State(books: Shared([]),
+                                                records: Shared([]))
         ) {
             AppStartFeature()
         }

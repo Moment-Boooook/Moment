@@ -30,9 +30,9 @@ struct RecordMap: View {
                         Annotation("", coordinate: local.coordinate, anchor: .bottom) {
                             NavigationLink(
                                 state: HomeViewFeature.Path.State.recordList(
-                                    .init(usedTo: .usedToMap,
-                                          books: store.books,
-                                          records: store.records,
+                                    .init(books: store.$books,
+                                          records: store.$records,
+                                          usedTo: .usedToMap,
                                           selectedBook: MomentBook(bookISBN: "",
                                                                    theCoverOfBook: "",
                                                                    title: "",
@@ -175,9 +175,10 @@ private struct NotificationCount: View {
     RecordMap(
         store: Store(
             initialState: HomeViewFeature.State(
-                searchText: "",
-                books: [],
-                records: [])
+                books: Shared([]),
+                records: Shared([]),
+                searchText: ""
+            )
         ) {
             HomeViewFeature()
         }

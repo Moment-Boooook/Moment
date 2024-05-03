@@ -141,6 +141,8 @@ final class LocationManager: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let location: CLLocation = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         self.convertLocationToAddress(location: location)
+        self.latitude = location.coordinate.latitude
+        self.longitude = location.coordinate.longitude
         DispatchQueue.main.async {
             self.isChanging = false
         }

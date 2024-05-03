@@ -29,8 +29,7 @@ struct HomeView: View {
                             // 세그먼트
                             segment()
                             // 책장 뷰
-                            BookShelf(books: store.isSearching ? store.searchedBooks : store.books,
-                                      records: store.isSearching ? store.searchedRecords : store.records,
+                            BookShelf(store: store,
                                       maxWidth: size.width - 40)
                             .padding(.top, -10)
                         }
@@ -77,10 +76,6 @@ struct HomeView: View {
                 }
             }
             .tint(.darkBrown)
-            // books / records - SwiftData 에서 받아오기
-            .task {
-                store.send(.onAppear)
-            }
             .onTapGesture {
                 store.send(.clearFocusState)
             }
@@ -179,9 +174,10 @@ struct HomeView: View {
     HomeView(
         store: Store(
             initialState: HomeViewFeature.State(
-                searchText: "",
-                books: [],
-                records: [])
+                books: Shared([]),
+                records: Shared([]),
+                searchText: ""
+            )
         ) {
             HomeViewFeature()
         }

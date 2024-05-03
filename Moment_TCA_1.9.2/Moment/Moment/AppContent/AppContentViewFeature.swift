@@ -15,8 +15,23 @@ struct AppContentViewFeature {
     
     @ObservableState
     struct State: Equatable {
-        var appStart = AppStartFeature.State()
-        var home = HomeViewFeature.State()
+        @ObservationStateIgnored
+        @Shared var books: [MomentBook]
+        @ObservationStateIgnored
+        @Shared var records: [MomentRecord]
+        
+        var appStart: AppStartFeature.State
+        var home: HomeViewFeature.State
+        
+        init(books: Shared<[MomentBook]> = Shared([]),
+             records: Shared<[MomentRecord]> = Shared([])) {
+            self._books = books
+            self._records = records
+            self.appStart = AppStartFeature.State(books: books,
+                                                  records: records)
+            self.home = HomeViewFeature.State(books: books,
+                                              records: records)
+        }
     }
     
     enum Action {

@@ -65,3 +65,12 @@ extension LocationManagerService: DependencyKey {
         }
     )
 }
+
+// MARK: - TCA : DependencyValues +
+extension DependencyValues {
+    // CLLocation Service
+    var locationManagerService: LocationManagerService {
+        get { self[LocationManagerService.self] }
+        set { self[LocationManagerService.self] = newValue }
+    }
+}

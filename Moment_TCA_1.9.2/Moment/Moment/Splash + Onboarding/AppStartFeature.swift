@@ -15,17 +15,43 @@ struct AppStartFeature {
     
     @ObservableState
     struct State: Equatable {
+        @ObservationStateIgnored
+        @Shared var books: [MomentBook]
+        @ObservationStateIgnored
+        @Shared var records: [MomentRecord]
+        
         // splash
         var isAppStarting: Bool = true
         var appLogoDegreeChange: Bool = false
         // splash / onboarding
         var isOnboardingCompleted: Bool = false
+        
+        mutating func fetchBooks() {
+            @Dependency(\.swiftDataService) var swiftData
+            do {
+                self.books = try swiftData.bookListFetch()
+            } catch {
+                print("error :: fetchBooks", error.localizedDescription)
+            }
+        }
+        
+        mutating func fetchRecords() {
+            @Dependency(\.swiftDataService) var swiftData
+            do {
+                self.records = try swiftData.recordListFetch()
+            } catch {
+                print("error :: fetchRecords", error.localizedDescription)
+            }
+        }
     }
     
     enum Action {
         // splash
         case appStart
         case degreeChange
+        case fetchAllData
+        case fetchBooks
+        case fetchRecords
         case fetchOnboardingCompleted
         case quitSplash
         // onboarding
@@ -40,6 +66,7 @@ struct AppStartFeature {
     
     @Dependency(\.commons) var commons
     @Dependency(\.continuousClock) var clock
+    @Dependency(\.naverBookService) var naverBookService
     
     var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -52,7 +79,8 @@ struct AppStartFeature {
                         await send(.degreeChange)
                     },
                     .run { send in
-                        // TODO: - 추후에 API 데이터 받아서 로컬 데이터(책 정보) 업데이트 해주는 작업 진행
+                        await send(.fetchAllData)
+                        // TODO: - 표지 정보 업데이트
                         await send(.fetchOnboardingCompleted)
                     }
                 )
@@ -61,6 +89,24 @@ struct AppStartFeature {
                 withAnimation(.easeOut(duration: 1.75)) {
                     state.appLogoDegreeChange = true
                 }
+                return .none
+            // fetchBooks + fetchRecords
+            case .fetchAllData:
+                return .merge(
+                    .run { send in
+                        await send(.fetchBooks)
+                    },
+                    .run { send in
+                        await send(.fetchRecords)
+                    }
+                )
+            // 유저의 책 fetch
+            case .fetchBooks:
+                state.fetchBooks()
+                return .none
+            // 유저의 기록 fetch
+            case .fetchRecords:
+                state.fetchRecords()
                 return .none
             // 온보딩 완료 여부 fetch - appstorage
             case .fetchOnboardingCompleted:
@@ -75,6 +121,7 @@ struct AppStartFeature {
             case .quitSplash:
                 state.isAppStarting = false
                 return .cancel(id: CancelID.timer)
+                
             // MARK: - Onboarding
             // onboarding 완료
             case .completeOnboarding:

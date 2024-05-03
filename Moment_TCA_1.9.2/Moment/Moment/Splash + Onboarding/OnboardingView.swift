@@ -77,7 +77,8 @@ private struct OnboardingData: Identifiable {
 #Preview {
     OnboardingView(
         store: Store(
-            initialState: AppStartFeature.State()
+            initialState: AppStartFeature.State(books: Shared([]),
+                                                records: Shared([]))
         ) {
             AppStartFeature()
         }

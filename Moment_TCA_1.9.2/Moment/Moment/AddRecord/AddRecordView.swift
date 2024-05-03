@@ -8,6 +8,7 @@
 import SwiftUI
 
 import ComposableArchitecture
+import Kingfisher
 
 // MARK: - 기록 작성 뷰
 struct AddRecordView: View {
@@ -22,12 +23,17 @@ struct AddRecordView: View {
                     .font(.bold20)
                     .padding(.horizontal, 20)
                 // 이미지
-                AsyncImage(url: URL(string: store.book.theCoverOfBook)) { image in
-                    image.resizable()
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: 70, height: 87)
+                KFImage.url(URL(string: store.book.theCoverOfBook))
+                    .placeholder {
+                        ProgressView()
+                    }
+                    .loadDiskFileSynchronously(true) // 디스크에서 동기적으로 이미지 가져오기
+                    .cancelOnDisappear(true) // 화면 이동 시, 진행중인 다운로드 중단
+                    .cacheMemoryOnly() // 메모리 캐시만 사용 (디스크 X)
+                    .fade(duration: 0.2) // 이미지 부드럽게 띄우기
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 120)
                 // 작가
                 Text(store.book.author)
                     .font(.regular16)
