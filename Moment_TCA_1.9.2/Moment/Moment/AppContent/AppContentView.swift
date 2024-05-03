@@ -16,7 +16,8 @@ struct AppContentView: View {
     var body: some View {
         // app 시작 splash view
         if store.appStart.isAppStarting ||
-           !store.appStart.isOnboardingCompleted {
+            !store.appStart.isOnboardingCompleted ||
+            !store.appStart.isSetName {
             AppStartView(store: store.scope(state: \.appStart, action: \.appStart))
         } else {
             HomeView(store: store.scope(state: \.home, action: \.home))

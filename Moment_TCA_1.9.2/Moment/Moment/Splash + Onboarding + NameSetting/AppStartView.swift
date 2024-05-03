@@ -19,6 +19,8 @@ struct AppStartView: View {
                 SplashView(store: store)
             } else if !store.isOnboardingCompleted {
                 OnboardingView(store: store)
+            } else {
+                NameSettingView(store: store)
             }
         }
     }
