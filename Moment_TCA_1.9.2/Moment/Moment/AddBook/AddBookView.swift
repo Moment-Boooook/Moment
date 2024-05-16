@@ -81,6 +81,7 @@ struct AddBookView: View {
             ToolbarItem(placement: .principal) {
                 Text("기억하고 싶은 책 선택하기")
                     .fontWeight(.semibold)
+                    .font(.regular18)
                     .foregroundStyle(.darkBrown)
             }
         }

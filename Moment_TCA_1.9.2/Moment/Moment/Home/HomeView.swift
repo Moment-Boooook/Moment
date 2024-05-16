@@ -59,7 +59,11 @@ struct HomeView: View {
                                     if !store.focusedField {
                                         // 설정
                                         settingButton()
-                                            .transition(AnyTransition.opacity.animation(.easeInOut))
+                                            .transition(
+                                                AnyTransition
+                                                    .opacity
+                                                    .animation(.easeInOut)
+                                            )
                                     }
                                 }
                                 // 세그먼트
