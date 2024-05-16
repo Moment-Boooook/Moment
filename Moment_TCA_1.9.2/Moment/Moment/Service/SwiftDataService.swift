@@ -12,13 +12,17 @@ import ComposableArchitecture
 
 // MARK: - Swift Data 에 데이터 주고 받는 Service
 struct SwiftDataService {
+    @Query private var userName: MomentUser
     @Query private var bookList: [MomentBook]
     @Query private var recordList: [MomentRecord]
     
-    var bookListFetch: () throws -> [MomentBook]
-    var recordListFetch: () throws -> [MomentRecord]
+    //
+    var fetchBookList: () throws -> [MomentBook]
+    var fetchRecordList: () throws -> [MomentRecord]
+    //
     var addBook: (MomentBook) throws -> Void
     var addRecord: (MomentRecord) throws -> Void
+    //
     var deleteBook: (MomentBook) throws -> Void
     var deleteRecord: (MomentRecord) throws -> Void
 
@@ -32,7 +36,7 @@ struct SwiftDataService {
 extension SwiftDataService: DependencyKey {
     static let liveValue = Self(
         // Book List Fetch
-        bookListFetch: {
+        fetchBookList: {
             do {
                 @Dependency(\.databaseService.context) var context
                 let bookListContext = try context()
@@ -43,7 +47,7 @@ extension SwiftDataService: DependencyKey {
             }
         },
         // Record List Fetch
-        recordListFetch: {
+        fetchRecordList: {
             do {
                 @Dependency(\.databaseService.context) var context
                 let recordListContext = try context()

@@ -152,8 +152,8 @@ final class AddRecordTests: XCTestCase {
            AddRecordViewFeature()
         } withDependencies: {
             $0.swiftDataService = .init(
-                bookListFetch: { [] },
-                recordListFetch: { [] },
+                fetchBookList: { [] },
+                fetchRecordList: { [] },
                 addBook: { _ in },
                 addRecord: { record in
                     // 레코드 추가 로직
@@ -194,8 +194,8 @@ final class AddRecordTests: XCTestCase {
            AddRecordViewFeature()
         } withDependencies: {
             $0.swiftDataService = .init(
-                bookListFetch: { [] },
-                recordListFetch: { [] },
+                fetchBookList: { [] },
+                fetchRecordList: { [] },
                 addBook: { book in
                     // 책 추가 로직
                 },

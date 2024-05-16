@@ -35,7 +35,7 @@ struct HomeViewFeature {
         mutating func fetchBooks() {
             @Dependency(\.swiftDataService) var swiftData
             do {
-                self.books = try swiftData.bookListFetch()
+                self.books = try swiftData.fetchBookList()
             } catch {
                 print("error :: fetchBooks", error.localizedDescription)
             }
@@ -44,7 +44,7 @@ struct HomeViewFeature {
         mutating func fetchRecords() {
             @Dependency(\.swiftDataService) var swiftData
             do {
-                self.records = try swiftData.recordListFetch()
+                self.records = try swiftData.fetchRecordList()
             } catch {
                 print("error :: fetchRecords", error.localizedDescription)
             }
@@ -81,7 +81,9 @@ struct HomeViewFeature {
                 return .none
             // selectedOption 값 변경
             case let .changeSelectedOption(newOption):
-                state.selectedOption = newOption
+                withAnimation {
+                    state.selectedOption = newOption
+                }
                 return .none
             // focusedField 해제
             case .clearFocusState:

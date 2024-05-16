@@ -24,8 +24,8 @@
 //            HomeViewFeature()
 //        } withDependencies: {
 //            $0.swiftDataService = .init(
-//                bookListFetch: { [TestData.testBook01, TestData.testBook02] },
-//                recordListFetch: { [TestData.testRecord01, TestData.testRecord02] },
+//                fetchBookList: { [TestData.testBook01, TestData.testBook02] },
+//                fetchRecordList: { [TestData.testRecord01, TestData.testRecord02] },
 //                addBook: { _ in },
 //                addRecord: { _ in },
 //                deleteBook: { _ in },

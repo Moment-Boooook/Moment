@@ -68,8 +68,8 @@ final class RecordDetailTests: XCTestCase {
             RecordDetailViewFeature()
         } withDependencies: {
             $0.swiftDataService = .init(
-                bookListFetch: { [] },
-                recordListFetch: { [] },
+                fetchBookList: { [] },
+                fetchRecordList: { [] },
                 addBook: { _ in },
                 addRecord: { _ in },
                 deleteBook: { book in
@@ -115,8 +115,8 @@ final class RecordDetailTests: XCTestCase {
             RecordDetailViewFeature()
         } withDependencies: {
             $0.swiftDataService = .init(
-                bookListFetch: { [] },
-                recordListFetch: { [] },
+                fetchBookList: { [] },
+                fetchRecordList: { [] },
                 addBook: { _ in },
                 addRecord: { _ in },
                 deleteBook: { book in

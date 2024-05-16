@@ -14,6 +14,7 @@ import ComposableArchitecture
 struct Commons {
     @AppStorage("isOnboardingAndSetName")
     static var isOnboardingCompletedAndSetName: Bool = false
+    
     //
     var isCompleteOnboardingAndSetName: () -> Bool            // 완료 했는지?
     var completeOnboardingAndSetName: () -> Void              // 완료로 상태 변경
