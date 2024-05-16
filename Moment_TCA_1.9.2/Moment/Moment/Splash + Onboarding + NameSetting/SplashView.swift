@@ -53,7 +53,6 @@ struct SplashView: View {
         }
         // 앱 시작 시, 애니메이션 동작 + splash 동작
         // books / records - SwiftData 에서 받아오기
-        // 변경된 책 표지 업데이트
         .onAppear {
             store.send(.appStart)
         }

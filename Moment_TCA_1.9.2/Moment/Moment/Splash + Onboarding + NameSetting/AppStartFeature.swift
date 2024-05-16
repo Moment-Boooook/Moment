@@ -149,10 +149,12 @@ struct AppStartFeature {
             // MARK: - Onboarding
             // 다음 온보딩 페이지
             case .nextPage:
-                if state.currentOnboardingPage == .first {
-                    state.currentOnboardingPage = .second
-                } else if state.currentOnboardingPage == .second {
-                    state.currentOnboardingPage = .last
+                withAnimation {
+                    if state.currentOnboardingPage == .first {
+                        state.currentOnboardingPage = .second
+                    } else if state.currentOnboardingPage == .second {
+                        state.currentOnboardingPage = .last
+                    }
                 }
                 return .none
             // 페이지 세팅
