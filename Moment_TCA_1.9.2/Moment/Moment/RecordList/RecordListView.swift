@@ -64,7 +64,6 @@ struct RecordListView: View {
                     VStack(alignment: .leading) {
                         //
                         RecordTitleTag(title: String(year))
-                            .padding(.horizontal, 20)
                         ForEach(recordsOfBook, id: \.id) { record in
                             //
                             CustomListDivider()
@@ -87,7 +86,7 @@ struct RecordListView: View {
                             }
                         }
                     }
-                    .padding(.top, 20)
+                    .padding([.horizontal, .top], 20)
                     .padding(.bottom, 40)
                 }
             }
@@ -106,7 +105,6 @@ struct RecordListView: View {
                 VStack(alignment: .leading) {
                     //
                     RecordTitleTag(title: book.title)
-                        .padding(.horizontal, 20)
                     ForEach(recordsOfLocal, id: \.id) { record in
                         //
                         CustomListDivider()
@@ -123,7 +121,7 @@ struct RecordListView: View {
                         }
                     }
                 }
-                .padding(.top, 20)
+                .padding([.horizontal, .top], 20)
                 .padding(.bottom, 40)
             }
         }

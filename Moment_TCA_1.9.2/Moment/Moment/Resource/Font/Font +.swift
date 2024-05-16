@@ -13,6 +13,7 @@ extension Font {
     static let bold20: Font = .custom(FontType.Bold.name, size: 20)
     static let bold18: Font = .custom(FontType.Bold.name, size: 18)
     // SemiBold
+    static let semibold20: Font = .custom(FontType.SemiBold.name, size: 20)
     static let semibold18: Font = .custom(FontType.SemiBold.name, size: 18)
     static let semibold16: Font = .custom(FontType.SemiBold.name, size: 16)
     // Medium

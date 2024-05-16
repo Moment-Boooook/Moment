@@ -147,7 +147,6 @@ struct AddBookView: View {
                     }
                     //
                     CustomListDivider()
-                        .padding(.horizontal, -20)
                 }
             }
         }
