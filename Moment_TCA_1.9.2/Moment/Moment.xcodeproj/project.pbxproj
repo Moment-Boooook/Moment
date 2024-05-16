@@ -41,20 +41,11 @@
 		09B59C892BB69EA5009900E5 /* NaverBookAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */; };
 		09C31ADE2BDB605400623F5C /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31ADD2BDB605400623F5C /* Shared.swift */; };
 		09C31AE12BDBF33D00623F5C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 09C31AE02BDBF33D00623F5C /* Kingfisher */; };
-		09C31AE52BE4C3EF00623F5C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09C31AE42BE4C3EF00623F5C /* GoogleService-Info.plist */; };
-		09C31AE92BE4C56200623F5C /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 09C31AE82BE4C56200623F5C /* FirebaseDatabase */; };
-		09C31AED2BE4C56200623F5C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 09C31AEC2BE4C56200623F5C /* FirebaseFirestore */; };
-		09C31AF12BE4C56300623F5C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 09C31AF02BE4C56300623F5C /* FirebaseFirestoreSwift */; };
-		09C31AF32BE4C56300623F5C /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 09C31AF22BE4C56300623F5C /* FirebaseFunctions */; };
-		09C31AF72BE4C56300623F5C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 09C31AF62BE4C56300623F5C /* FirebaseStorage */; };
-		09C31AFB2BE4C64800623F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31AFA2BE4C64800623F5C /* AppDelegate.swift */; };
 		09C31AFD2BE4E8DD00623F5C /* NameSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31AFC2BE4E8DD00623F5C /* NameSettingView.swift */; };
 		09C31B002BE5130300623F5C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 09C31AFF2BE5130300623F5C /* Lottie */; };
 		09C31B022BE5131B00623F5C /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B012BE5131B00623F5C /* LottieView.swift */; };
 		09C31B092BE5164100623F5C /* book.json in Resources */ = {isa = PBXBuildFile; fileRef = 09C31B082BE5164100623F5C /* book.json */; };
 		09C31B0B2BE527AE00623F5C /* TextFieldStyle +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */; };
-		09C31B0D2BE5375600623F5C /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B0C2BE5375600623F5C /* FirestoreService.swift */; };
-		09C31B0F2BE53C2000623F5C /* FirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B0E2BE53C2000623F5C /* FirestoreModel.swift */; };
 		09C31B132BF5D42300623F5C /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B122BF5D42200623F5C /* FileManagerService.swift */; };
 		09C4BD5C2BB7068B00AEC83D /* AddRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */; };
 		09C4BD5E2BB7084E00AEC83D /* AddRecordViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */; };
@@ -129,14 +120,10 @@
 		09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverBookAPIService.swift; sourceTree = "<group>"; };
 		09C31ADD2BDB605400623F5C /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		09C31AE32BE0BAD600623F5C /* MomentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		09C31AE42BE4C3EF00623F5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../흐르미/모멘트/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		09C31AFA2BE4C64800623F5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09C31AFC2BE4E8DD00623F5C /* NameSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSettingView.swift; sourceTree = "<group>"; };
 		09C31B012BE5131B00623F5C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		09C31B082BE5164100623F5C /* book.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = book.json; path = "../../../../../../흐르미/모멘트/book.json"; sourceTree = "<group>"; };
 		09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextFieldStyle +.swift"; sourceTree = "<group>"; };
-		09C31B0C2BE5375600623F5C /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
-		09C31B0E2BE53C2000623F5C /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		09C31B122BF5D42200623F5C /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 		09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordView.swift; sourceTree = "<group>"; };
 		09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordViewFeature.swift; sourceTree = "<group>"; };
@@ -172,12 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09C31AE92BE4C56200623F5C /* FirebaseDatabase in Frameworks */,
-				09C31AF72BE4C56300623F5C /* FirebaseStorage in Frameworks */,
 				09C31AE12BDBF33D00623F5C /* Kingfisher in Frameworks */,
-				09C31AF32BE4C56300623F5C /* FirebaseFunctions in Frameworks */,
-				09C31AF12BE4C56300623F5C /* FirebaseFirestoreSwift in Frameworks */,
-				09C31AED2BE4C56200623F5C /* FirebaseFirestore in Frameworks */,
 				09B59C512BB31F64009900E5 /* ComposableArchitecture in Frameworks */,
 				09C31B002BE5130300623F5C /* Lottie in Frameworks */,
 			);
@@ -239,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				09AB7CE32B26A1350073EAD5 /* MomentApp.swift */,
-				09C31AFA2BE4C64800623F5C /* AppDelegate.swift */,
 				09B59C5C2BB33AD2009900E5 /* Service */,
 				09B59C522BB32077009900E5 /* AppContent */,
 				09B59C6F2BB577C2009900E5 /* Splash + Onboarding + NameSetting */,
@@ -254,7 +235,6 @@
 				09AB7CF12B26A1660073EAD5 /* Colors.xcassets */,
 				09AB7D1A2B26A82B0073EAD5 /* Info.plist */,
 				09F6C0562BC0069900C8DBC7 /* APIKEY.plist */,
-				09C31AE42BE4C3EF00623F5C /* GoogleService-Info.plist */,
 				09AB7CE92B26A1370073EAD5 /* Preview Content */,
 			);
 			path = Moment;
@@ -273,7 +253,6 @@
 			children = (
 				7B39C0C82B2ADCE000460278 /* SwiftDataModel.swift */,
 				7B39C0CA2B2AFCC700460278 /* BookAPIDataModel.swift */,
-				09C31B0E2BE53C2000623F5C /* FirestoreModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -325,7 +304,6 @@
 			children = (
 				09B59C6D2BB540D2009900E5 /* Common.swift */,
 				09B59C5D2BB33AE8009900E5 /* Database.swift */,
-				09C31B0C2BE5375600623F5C /* FirestoreService.swift */,
 				09C31B122BF5D42200623F5C /* FileManagerService.swift */,
 				09B59C612BB33F4B009900E5 /* SwiftDataService.swift */,
 				09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */,
@@ -440,11 +418,6 @@
 			packageProductDependencies = (
 				09B59C502BB31F64009900E5 /* ComposableArchitecture */,
 				09C31AE02BDBF33D00623F5C /* Kingfisher */,
-				09C31AE82BE4C56200623F5C /* FirebaseDatabase */,
-				09C31AEC2BE4C56200623F5C /* FirebaseFirestore */,
-				09C31AF02BE4C56300623F5C /* FirebaseFirestoreSwift */,
-				09C31AF22BE4C56300623F5C /* FirebaseFunctions */,
-				09C31AF62BE4C56300623F5C /* FirebaseStorage */,
 				09C31AFF2BE5130300623F5C /* Lottie */,
 			);
 			productName = Moment;
@@ -528,7 +501,6 @@
 				09AB7D132B26A73C0073EAD5 /* Pretendard-Light.otf in Resources */,
 				09AB7D142B26A73C0073EAD5 /* Pretendard-Regular.otf in Resources */,
 				09AB7CEB2B26A1370073EAD5 /* Preview Assets.xcassets in Resources */,
-				09C31AE52BE4C3EF00623F5C /* GoogleService-Info.plist in Resources */,
 				09AB7CE82B26A1370073EAD5 /* Assets.xcassets in Resources */,
 				09F6C0572BC0069900C8DBC7 /* APIKEY.plist in Resources */,
 			);
@@ -552,10 +524,8 @@
 				09C4BD6A2BBE420400AEC83D /* RecordDetailViewFeature.swift in Sources */,
 				09C31AFD2BE4E8DD00623F5C /* NameSettingView.swift in Sources */,
 				09C4BD682BBE41F200AEC83D /* RecordDetailView.swift in Sources */,
-				09C31AFB2BE4C64800623F5C /* AppDelegate.swift in Sources */,
 				09C4BD602BB7220C00AEC83D /* LocationManagerService.swift in Sources */,
 				09731F7D2B26C5980045F6B4 /* OnboardingView.swift in Sources */,
-				09C31B0F2BE53C2000623F5C /* FirestoreModel.swift in Sources */,
 				09B59C852BB69A22009900E5 /* AddBookView.swift in Sources */,
 				09B59C692BB4089A009900E5 /* HomeViewFeature.swift in Sources */,
 				09C31B0B2BE527AE00623F5C /* TextFieldStyle +.swift in Sources */,
@@ -591,7 +561,6 @@
 				09B59C892BB69EA5009900E5 /* NaverBookAPIService.swift in Sources */,
 				09B59C622BB33F4B009900E5 /* SwiftDataService.swift in Sources */,
 				7B39C0C92B2ADCE000460278 /* SwiftDataModel.swift in Sources */,
-				09C31B0D2BE5375600623F5C /* FirestoreService.swift in Sources */,
 				09B59C7B2BB5D9D0009900E5 /* RecordMap.swift in Sources */,
 				09C4BD6C2BBE79AB00AEC83D /* ImageFullView.swift in Sources */,
 				09B59C552BB32372009900E5 /* AppContentViewFeature.swift in Sources */,
@@ -764,8 +733,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -800,8 +768,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -931,31 +898,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 09C31ADF2BDBF33D00623F5C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		09C31AE82BE4C56200623F5C /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 09C31AE62BE4C52D00623F5C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
-		09C31AEC2BE4C56200623F5C /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 09C31AE62BE4C52D00623F5C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		09C31AF02BE4C56300623F5C /* FirebaseFirestoreSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 09C31AE62BE4C52D00623F5C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestoreSwift;
-		};
-		09C31AF22BE4C56300623F5C /* FirebaseFunctions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 09C31AE62BE4C52D00623F5C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFunctions;
-		};
-		09C31AF62BE4C56300623F5C /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 09C31AE62BE4C52D00623F5C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
 		};
 		09C31AFF2BE5130300623F5C /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
