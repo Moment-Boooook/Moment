@@ -104,6 +104,7 @@ struct AddBookView: View {
                 .onSubmit {
                     store.send(.searchButtonTapped)
                 }
+                .submitLabel(.search)
             // 검색어 지우기
             if !store.searchText.isEmpty {
                 Button {
