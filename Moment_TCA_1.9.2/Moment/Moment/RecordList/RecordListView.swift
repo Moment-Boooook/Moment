@@ -37,8 +37,7 @@ struct RecordListView: View {
             }
             ToolbarItem(placement: .principal) {
                 Text(store.usedTo == .usedToShelf ? store.selectedBook.title : store.localName)
-                    .fontWeight(.semibold)
-                    .font(.regular18)
+                    .font(.semibold18)
                     .foregroundStyle(.darkBrown)
                     .lineLimit(1)
             }

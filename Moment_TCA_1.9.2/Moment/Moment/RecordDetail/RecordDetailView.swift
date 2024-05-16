@@ -65,8 +65,8 @@ struct RecordDetailView: View {
                 }
                 ToolbarItem(placement: .principal) {
                     Text("\(String(store.record.year))년 \(store.record.monthAndDay)")
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color.darkBrown)
+                        .font(.semibold18)
+                        .foregroundStyle(.darkBrown)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
