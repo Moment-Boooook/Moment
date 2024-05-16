@@ -56,6 +56,7 @@
 		09C31B0B2BE527AE00623F5C /* TextFieldStyle +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */; };
 		09C31B0D2BE5375600623F5C /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B0C2BE5375600623F5C /* FirestoreService.swift */; };
 		09C31B0F2BE53C2000623F5C /* FirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B0E2BE53C2000623F5C /* FirestoreModel.swift */; };
+		09C31B132BF5D42300623F5C /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B122BF5D42200623F5C /* FileManagerService.swift */; };
 		09C4BD5C2BB7068B00AEC83D /* AddRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */; };
 		09C4BD5E2BB7084E00AEC83D /* AddRecordViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */; };
 		09C4BD602BB7220C00AEC83D /* LocationManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */; };
@@ -139,6 +140,7 @@
 		09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextFieldStyle +.swift"; sourceTree = "<group>"; };
 		09C31B0C2BE5375600623F5C /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		09C31B0E2BE53C2000623F5C /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
+		09C31B122BF5D42200623F5C /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 		09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordView.swift; sourceTree = "<group>"; };
 		09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordViewFeature.swift; sourceTree = "<group>"; };
 		09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerService.swift; sourceTree = "<group>"; };
@@ -195,6 +197,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		095DE3C52BF5D8210054E0B2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				09731F892B26D12A0045F6B4 /* CustomButtons.swift */,
+				B1C938582B27E294006EFB70 /* CustomListDivider.swift */,
+				2CA6BED82B2733E0002E3589 /* CustomTextField.swift */,
+				095131612B31216200F6BC4C /* Formatter.swift */,
+				09C31B012BE5131B00623F5C /* LottieView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		095DE3C62BF5D82B0054E0B2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				09AB7D022B26A4310073EAD5 /* Bundle +.swift */,
+				09731F8B2B26D1500045F6B4 /* ButtonStyle +.swift */,
+				09B59C7E2BB68112009900E5 /* MKCoordinateRegion +.swift */,
+				09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */,
+				7B39C0C62B2ADC7400460278 /* UIImage +.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		095DE3C72BF5D8690054E0B2 /* AppLocalized */ = {
+			isa = PBXGroup;
+			children = (
+				09B59C802BB68AA5009900E5 /* Constants.swift */,
+			);
+			path = AppLocalized;
+			sourceTree = "<group>";
+		};
 		09AB7CD72B26A1350073EAD5 = {
 			isa = PBXGroup;
 			children = (
@@ -252,18 +286,9 @@
 		09AB7D062B26A70A0073EAD5 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				09AB7D022B26A4310073EAD5 /* Bundle +.swift */,
-				09731F8B2B26D1500045F6B4 /* ButtonStyle +.swift */,
-				09B59C802BB68AA5009900E5 /* Constants.swift */,
-				09731F892B26D12A0045F6B4 /* CustomButtons.swift */,
-				B1C938582B27E294006EFB70 /* CustomListDivider.swift */,
-				2CA6BED82B2733E0002E3589 /* CustomTextField.swift */,
-				09AB7D042B26A5500073EAD5 /* Font +.swift */,
-				095131612B31216200F6BC4C /* Formatter.swift */,
-				09C31B012BE5131B00623F5C /* LottieView.swift */,
-				09B59C7E2BB68112009900E5 /* MKCoordinateRegion +.swift */,
-				09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */,
-				7B39C0C62B2ADC7400460278 /* UIImage +.swift */,
+				095DE3C72BF5D8690054E0B2 /* AppLocalized */,
+				095DE3C62BF5D82B0054E0B2 /* Extensions */,
+				095DE3C52BF5D8210054E0B2 /* Components */,
 				09B59C532BB32267009900E5 /* Font */,
 				09C31B032BE513BF00623F5C /* Lottie */,
 			);
@@ -294,6 +319,7 @@
 		09B59C532BB32267009900E5 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				09AB7D042B26A5500073EAD5 /* Font +.swift */,
 				09AB7D072B26A7170073EAD5 /* Pretendard */,
 			);
 			path = Font;
@@ -305,6 +331,7 @@
 				09B59C6D2BB540D2009900E5 /* Common.swift */,
 				09B59C5D2BB33AE8009900E5 /* Database.swift */,
 				09C31B0C2BE5375600623F5C /* FirestoreService.swift */,
+				09C31B122BF5D42200623F5C /* FileManagerService.swift */,
 				09B59C612BB33F4B009900E5 /* SwiftDataService.swift */,
 				09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */,
 				09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */,
@@ -558,6 +585,7 @@
 				09B59C672BB4088D009900E5 /* HomeView.swift in Sources */,
 				09C4BD6E2BBE79F200AEC83D /* ImageFullViewFeature.swift in Sources */,
 				09C4BD652BBDA0FB00AEC83D /* RecordListViewFeature.swift in Sources */,
+				09C31B132BF5D42300623F5C /* FileManagerService.swift in Sources */,
 				09731F8C2B26D1500045F6B4 /* ButtonStyle +.swift in Sources */,
 				09B59C712BB577EC009900E5 /* AppStartFeature.swift in Sources */,
 				095131622B31216200F6BC4C /* Formatter.swift in Sources */,
