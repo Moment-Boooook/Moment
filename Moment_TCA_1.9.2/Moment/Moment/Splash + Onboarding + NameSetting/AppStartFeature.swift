@@ -16,6 +16,8 @@ struct AppStartFeature {
     @ObservableState
     struct State: Equatable {
         @ObservationStateIgnored
+        @Shared var userName: String
+        @ObservationStateIgnored
         @Shared var books: [MomentBook]
         @ObservationStateIgnored
         @Shared var records: [MomentRecord]
@@ -29,13 +31,21 @@ struct AppStartFeature {
         let onboardingData: [OnboardingData] = [
             OnboardingData(page: .first),
             OnboardingData(page: .second),
-            OnboardingData(page: .last)
+            OnboardingData(page: .third)
         ]
         // name setting
         var isSetName: Bool = false
-        var name: String = ""
         var focusedField: Bool = true
         let maxLength = 12
+        
+        mutating func fetchUserName() {
+            @Dependency(\.swiftDataService) var swiftData
+            do {
+                self.userName = try swiftData.fetchUserName()
+            } catch {
+                print("error :: fetchUserName", error.localizedDescription)
+            }
+        }
         
         mutating func fetchBooks() {
             @Dependency(\.swiftDataService) var swiftData
@@ -62,6 +72,7 @@ struct AppStartFeature {
         case appStart
         case degreeChange
         case fetchAllData
+        case fetchUserName
         case fetchBooks
         case fetchRecords
         case fetchOnboardingCompleted
@@ -84,6 +95,7 @@ struct AppStartFeature {
     @Dependency(\.commons) var commons
     @Dependency(\.continuousClock) var clock
     @Dependency(\.naverBookService) var naverBookService
+    @Dependency(\.swiftDataService) var swiftData
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -116,12 +128,19 @@ struct AppStartFeature {
             case .fetchAllData:
                 return .merge(
                     .run { send in
+                        await send(.fetchUserName)
+                    },
+                    .run { send in
                         await send(.fetchBooks)
                     },
                     .run { send in
                         await send(.fetchRecords)
                     }
                 )
+            // 유저 Name fetch
+            case .fetchUserName:
+                state.fetchUserName()
+                return .none
             // 유저의 책 fetch
             case .fetchBooks:
                 state.fetchBooks()
@@ -153,7 +172,7 @@ struct AppStartFeature {
                     if state.currentOnboardingPage == .first {
                         state.currentOnboardingPage = .second
                     } else if state.currentOnboardingPage == .second {
-                        state.currentOnboardingPage = .last
+                        state.currentOnboardingPage = .third
                     }
                 }
                 return .none
@@ -181,8 +200,15 @@ struct AppStartFeature {
                 return .none
             // 저장 버튼 탭
             case .saveName:
-                // TODO: - 이름 저장해줘야 함
+                do {
+                    try self.swiftData.addUserName(state.userName)
+                } catch {
+                    print("error :: NameSettingView - saveName()", error.localizedDescription)
+                }
                 return .concatenate(
+                    .run { send in
+                        await send(.fetchUserName)
+                    },
                     .run { send in
                         await send(.completeOnboardingAndSetName)
                     },
@@ -192,7 +218,7 @@ struct AppStartFeature {
                 )
             // 이름 설정
             case let .setName(name):
-                state.name = name
+                state.userName = name
                 return .none
             }
         }

@@ -116,18 +116,6 @@ struct AddBookView: View {
                 }
                 .padding(.horizontal, 14)
             }
-            // 검색 버튼
-            Button {
-                store.send(.searchButtonTapped)
-                store.send(.clearFocusState)
-            } label: {
-                Text("검색")
-                    .padding(.horizontal, 20)
-                    .frame(height: 40)
-                    .background(.mainBrown)
-                    .foregroundStyle(.white)
-                    .clipShape(.rect(bottomTrailingRadius: 13, topTrailingRadius: 13))
-            }
         }
         .bind($store.focusedField, to: $focusedField)
         .onChange(of: store.searchText) { _, newValue in

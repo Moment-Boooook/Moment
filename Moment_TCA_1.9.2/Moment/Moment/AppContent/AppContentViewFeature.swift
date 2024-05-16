@@ -16,6 +16,8 @@ struct AppContentViewFeature {
     @ObservableState
     struct State: Equatable {
         @ObservationStateIgnored
+        @Shared var userName: String
+        @ObservationStateIgnored
         @Shared var books: [MomentBook]
         @ObservationStateIgnored
         @Shared var records: [MomentRecord]
@@ -23,13 +25,17 @@ struct AppContentViewFeature {
         var appStart: AppStartFeature.State
         var home: HomeViewFeature.State
         
-        init(books: Shared<[MomentBook]> = Shared([]),
+        init(userName: Shared<String> = Shared(""),
+             books: Shared<[MomentBook]> = Shared([]),
              records: Shared<[MomentRecord]> = Shared([])) {
+            self._userName = userName
             self._books = books
             self._records = records
-            self.appStart = AppStartFeature.State(books: books,
+            self.appStart = AppStartFeature.State(userName: userName,
+                                                  books: books,
                                                   records: records)
-            self.home = HomeViewFeature.State(books: books,
+            self.home = HomeViewFeature.State(userName: userName,
+                                              books: books,
                                               records: records)
         }
     }

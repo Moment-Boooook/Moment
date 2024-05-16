@@ -24,8 +24,18 @@ struct HomeView: View {
                     // 책장
                     case .bookShelf:
                         VStack(spacing: 20) {
-                            // 서치바
-                            searchBar()
+                            HStack(alignment: .center, spacing: 20) {
+                                // 서치바
+                                searchBar()
+                                    .frame(width: store.focusedField ? size.width - 40 : size.width - 100)
+                                    .animation(.easeInOut(duration: 0.3),
+                                               value: store.focusedField)
+                                if !store.focusedField {
+                                    // 설정
+                                    settingButton()
+                                        .transition(AnyTransition.opacity.animation(.easeInOut))
+                                }
+                            }
                             // 세그먼트
                             segment()
                             // 책장 뷰
@@ -40,8 +50,18 @@ struct HomeView: View {
                             // 지도 뷰
                             RecordMap(store: store)
                             VStack(spacing: 20) {
-                                // 서치바
-                                searchBar()
+                                HStack(alignment: .center, spacing: 20) {
+                                    // 서치바
+                                    searchBar()
+                                        .frame(width: store.focusedField ? size.width - 40 : size.width - 100)
+                                        .animation(.easeInOut(duration: 0.3),
+                                                   value: store.focusedField)
+                                    if !store.focusedField {
+                                        // 설정
+                                        settingButton()
+                                            .transition(AnyTransition.opacity.animation(.easeInOut))
+                                    }
+                                }
                                 // 세그먼트
                                 segment()
                             }
@@ -114,19 +134,6 @@ struct HomeView: View {
                 }
                 .padding(.horizontal, 14)
             }
-            // 검색 버튼
-            Button {
-                if !store.searchText.isEmpty {
-                    store.send(.searchButtonTapped)
-                }
-            } label: {
-                Text("검색")
-                    .padding(.horizontal, 20)
-                    .frame(height: 40)
-                    .background(.mainBrown)
-                    .foregroundStyle(.white)
-                    .clipShape(.rect(bottomTrailingRadius: 13, topTrailingRadius: 13))
-            }
         }
         .bind($store.focusedField, to: $focusedField)
         .frame(height: 40, alignment: .leading)
@@ -136,6 +143,21 @@ struct HomeView: View {
             RoundedRectangle(cornerRadius: 15)
                 .stroke(.mainBrown, lineWidth: 2)
         }
+    }
+    
+    // MARK: - 세팅
+    @ViewBuilder
+    private func settingButton() -> some View {
+        Button {
+            //
+        } label: {
+            Image(systemName: "gearshape.fill")
+                .resizable()
+                .aspectRatio(1.0, contentMode: .fit)
+                .frame(height: 28)
+                .foregroundStyle(.mainBrown)
+        }
+        .frame(width: 40, height: 40)
     }
     
     // MARK: - 책장 / 지도 Segment
@@ -175,6 +197,7 @@ struct HomeView: View {
     HomeView(
         store: Store(
             initialState: HomeViewFeature.State(
+                userName: Shared(""),
                 books: Shared([]),
                 records: Shared([]),
                 searchText: ""

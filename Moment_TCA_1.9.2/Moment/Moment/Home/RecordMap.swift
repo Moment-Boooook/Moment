@@ -175,6 +175,7 @@ private struct NotificationCount: View {
     RecordMap(
         store: Store(
             initialState: HomeViewFeature.State(
+                userName: Shared(""),
                 books: Shared([]),
                 records: Shared([]),
                 searchText: ""

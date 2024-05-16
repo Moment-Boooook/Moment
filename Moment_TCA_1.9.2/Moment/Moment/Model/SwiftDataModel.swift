@@ -8,9 +8,19 @@
 import Foundation
 import SwiftData
 
+// MARK: - 유저 이름
+@Model
+final class MomentUser {
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+
 // MARK: - 기록
 @Model
-class MomentRecord: Identifiable {
+final class MomentRecord: Identifiable {
 	@Attribute(.unique) var id = UUID()
 	var latitude: Double
 	var longitude: Double
@@ -43,7 +53,7 @@ class MomentRecord: Identifiable {
 
 // MARK: - 책
 @Model
-class MomentBook: SelectedBook, Hashable {
+final class MomentBook: SelectedBook, Hashable {
 	@Attribute(.unique) var bookISBN: String
 	var theCoverOfBook: String
 	var title: String

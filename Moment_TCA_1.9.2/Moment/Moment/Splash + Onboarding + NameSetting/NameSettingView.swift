@@ -30,20 +30,24 @@ struct NameSettingView: View {
             }
             .padding(.vertical, 20)
             // 이름 textfield
-            TextField("이름 설정",
-                      text: $store.name.sending(\.setName),
-                      prompt: Text("\(store.maxLength)자 이내").font(.regular16).foregroundStyle(.gray2))
+            TextField(
+                "이름 설정",
+                text: $store.userName.sending(\.setName),
+                prompt: Text("\(store.maxLength)자 이내")
+                    .font(.regular16)
+                    .foregroundStyle(.gray2)
+            )
             .focused($focusedField)
             .multilineTextAlignment(.center)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled(true)
-            .onChange(of: store.name) { oldValue, newValue in
+            .onChange(of: store.userName) { oldValue, newValue in
                 if newValue.count > store.maxLength {
                     store.send(.setName(oldValue))
                 }
             }
             .textFieldStyle(
-                .bordered(color: store.name.isEmpty ? .gray2 : .lightBrown)
+                .bordered(color: store.userName.isEmpty ? .gray2 : .lightBrown)
             )
             .foregroundStyle(.black)
             .frame(height: 20)
@@ -57,8 +61,8 @@ struct NameSettingView: View {
                     .font(.medium16)
                     .foregroundStyle(.white)
             }
-            .disabled(store.name.isEmpty)
-            .buttonStyle(.capsuled(color: store.name.isEmpty ? .gray3 : .mainBrown,
+            .disabled(store.userName.isEmpty)
+            .buttonStyle(.capsuled(color: store.userName.isEmpty ? .gray3 : .mainBrown,
                                    width: 100))
         }
         .bind($store.focusedField, to: $focusedField)
@@ -69,7 +73,8 @@ struct NameSettingView: View {
 #Preview {
     NameSettingView(
         store: Store(
-            initialState: AppStartFeature.State(books: Shared([]),
+            initialState: AppStartFeature.State(userName: Shared(""),
+                                                books: Shared([]),
                                                 records: Shared([]),
                                                 currentOnboardingPage: .first)
         ) {

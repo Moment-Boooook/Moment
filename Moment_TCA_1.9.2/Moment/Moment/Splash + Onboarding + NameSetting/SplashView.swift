@@ -62,7 +62,8 @@ struct SplashView: View {
 #Preview {
     SplashView(
         store: Store(
-            initialState: AppStartFeature.State(books: Shared([]),
+            initialState: AppStartFeature.State(userName: Shared(""),
+                                                books: Shared([]),
                                                 records: Shared([]))
         ) {
             AppStartFeature()

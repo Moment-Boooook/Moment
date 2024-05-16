@@ -28,13 +28,13 @@ struct OnboardingView: View {
                 .tabViewStyle(.page(indexDisplayMode: .always))
                 // 버튼
                 Button {
-                    if store.currentOnboardingPage == .last {
+                    if store.currentOnboardingPage == .third {
                         store.send(.startButtonTapped)
                     } else {
                         store.send(.nextPage)
                     }
                 } label: {
-                    if store.currentOnboardingPage == .last {
+                    if store.currentOnboardingPage == .third {
                         Text("시작하기")
                             .font(.medium16)
                             .foregroundStyle(.white)
@@ -84,7 +84,7 @@ struct OnboardingData: Identifiable, Hashable {
 enum OnboardingPage {
     case first
     case second
-    case last
+    case third
     
     var content: String {
         switch self {
@@ -92,7 +92,7 @@ enum OnboardingPage {
             "모멘트와 함께\n기억 속에 남겨두고 싶은\n책의 내용을 기록해보세요."
         case .second:
             "모멘트와 함께\n어디서 읽었는지\n기억하고 싶지 않으신가요?"
-        case .last:
+        case .third:
             "모멘트와 함께\n기록하여 여러분만의\n책장을 완성시켜 보아요!"
         }
     }
@@ -103,7 +103,7 @@ enum OnboardingPage {
             "onboarding01"
         case .second:
             "onboarding02"
-        case .last:
+        case .third:
             "onboarding03"
         }
     }
@@ -112,7 +112,8 @@ enum OnboardingPage {
 #Preview {
     OnboardingView(
         store: Store(
-            initialState: AppStartFeature.State(books: Shared([]),
+            initialState: AppStartFeature.State(userName: Shared(""),
+                                                books: Shared([]),
                                                 records: Shared([]),
                                                 currentOnboardingPage: .first)
         ) {

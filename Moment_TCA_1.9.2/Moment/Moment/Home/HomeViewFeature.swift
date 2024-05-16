@@ -17,6 +17,8 @@ struct HomeViewFeature {
     @ObservableState
     struct State: Equatable {
         @ObservationStateIgnored
+        @Shared var userName: String
+        @ObservationStateIgnored
         @Shared var books: [MomentBook]                         // 유저의 전체 책 목록
         @ObservationStateIgnored
         @Shared var records: [MomentRecord]                     // 유저의 전체 기록 목록

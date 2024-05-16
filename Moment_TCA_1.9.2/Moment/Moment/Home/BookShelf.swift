@@ -47,9 +47,14 @@ struct BookShelf: View {
     @ViewBuilder
     private func NoContent() -> some View {
         VStack {
-            Text("책장이 비어있어요.\n 기억 속에 책을 남겨보세요.")
+            Text("""
+                \(store.userName)님,
+                책장이 비어있어요.
+                기억 속에 책을 남겨보세요.
+                """)
                 .font(.regular20)
                 .foregroundStyle(.lightBrown)
+                .lineSpacing(2)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -162,6 +167,7 @@ private struct CustomShelf: View {
         BookShelf(
             store: Store(
                 initialState: HomeViewFeature.State(
+                    userName: Shared(""),
                     books: Shared([]),
                     records: Shared([]),
                     searchText: ""
