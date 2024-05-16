@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0922B48C2BF60FFC00375953 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B48B2BF60FFC00375953 /* SettingView.swift */; };
+		0922B48E2BF6100900375953 /* SettingViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B48D2BF6100900375953 /* SettingViewFeature.swift */; };
+		0922B4902BF649E900375953 /* UpdateUserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B48F2BF649E900375953 /* UpdateUserNameView.swift */; };
+		0922B4922BF6514900375953 /* UpdateUserNameFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4912BF6514900375953 /* UpdateUserNameFeature.swift */; };
+		0922B4942BF6561300375953 /* String +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4932BF6561300375953 /* String +.swift */; };
+		0922B4962BF673F100375953 /* AppLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4952BF673F100375953 /* AppLocalized.swift */; };
 		095131622B31216200F6BC4C /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095131612B31216200F6BC4C /* Formatter.swift */; };
 		09731F7D2B26C5980045F6B4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09731F7C2B26C5980045F6B4 /* OnboardingView.swift */; };
 		09731F8A2B26D12A0045F6B4 /* CustomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09731F892B26D12A0045F6B4 /* CustomButtons.swift */; };
@@ -86,6 +92,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0922B48B2BF60FFC00375953 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		0922B48D2BF6100900375953 /* SettingViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewFeature.swift; sourceTree = "<group>"; };
+		0922B48F2BF649E900375953 /* UpdateUserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserNameView.swift; sourceTree = "<group>"; };
+		0922B4912BF6514900375953 /* UpdateUserNameFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserNameFeature.swift; sourceTree = "<group>"; };
+		0922B4932BF6561300375953 /* String +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String +.swift"; sourceTree = "<group>"; };
+		0922B4952BF673F100375953 /* AppLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalized.swift; sourceTree = "<group>"; };
 		095131612B31216200F6BC4C /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		09731F7C2B26C5980045F6B4 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		09731F892B26D12A0045F6B4 /* CustomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtons.swift; sourceTree = "<group>"; };
@@ -175,6 +187,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0922B48A2BF6058700375953 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				0922B48B2BF60FFC00375953 /* SettingView.swift */,
+				0922B48D2BF6100900375953 /* SettingViewFeature.swift */,
+				0922B48F2BF649E900375953 /* UpdateUserNameView.swift */,
+				0922B4912BF6514900375953 /* UpdateUserNameFeature.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		095DE3C52BF5D8210054E0B2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +218,7 @@
 				09B59C7E2BB68112009900E5 /* MKCoordinateRegion +.swift */,
 				09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */,
 				7B39C0C62B2ADC7400460278 /* UIImage +.swift */,
+				0922B4932BF6561300375953 /* String +.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -203,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				09B59C802BB68AA5009900E5 /* Constants.swift */,
+				0922B4952BF673F100375953 /* AppLocalized.swift */,
 			);
 			path = AppLocalized;
 			sourceTree = "<group>";
@@ -229,6 +254,7 @@
 				09C4BD5A2BB705D900AEC83D /* AddRecord */,
 				09C4BD612BBDA03500AEC83D /* RecordList */,
 				09C4BD662BBE417100AEC83D /* RecordDetail */,
+				0922B48A2BF6058700375953 /* Setting */,
 				09AB7D062B26A70A0073EAD5 /* Resource */,
 				09AB7CFE2B26A2C40073EAD5 /* Model */,
 				09AB7CE72B26A1370073EAD5 /* Assets.xcassets */,
@@ -528,6 +554,8 @@
 				09731F7D2B26C5980045F6B4 /* OnboardingView.swift in Sources */,
 				09B59C852BB69A22009900E5 /* AddBookView.swift in Sources */,
 				09B59C692BB4089A009900E5 /* HomeViewFeature.swift in Sources */,
+				0922B4902BF649E900375953 /* UpdateUserNameView.swift in Sources */,
+				0922B48C2BF60FFC00375953 /* SettingView.swift in Sources */,
 				09C31B0B2BE527AE00623F5C /* TextFieldStyle +.swift in Sources */,
 				09AB7CE62B26A1350073EAD5 /* AppContentView.swift in Sources */,
 				09C31B022BE5131B00623F5C /* LottieView.swift in Sources */,
@@ -538,10 +566,12 @@
 				09B59C792BB59153009900E5 /* BookShelf.swift in Sources */,
 				09B59C812BB68AA5009900E5 /* Constants.swift in Sources */,
 				09B59C672BB4088D009900E5 /* HomeView.swift in Sources */,
+				0922B4942BF6561300375953 /* String +.swift in Sources */,
 				09C4BD6E2BBE79F200AEC83D /* ImageFullViewFeature.swift in Sources */,
 				09C4BD652BBDA0FB00AEC83D /* RecordListViewFeature.swift in Sources */,
 				09C31B132BF5D42300623F5C /* FileManagerService.swift in Sources */,
 				09731F8C2B26D1500045F6B4 /* ButtonStyle +.swift in Sources */,
+				0922B4962BF673F100375953 /* AppLocalized.swift in Sources */,
 				09B59C712BB577EC009900E5 /* AppStartFeature.swift in Sources */,
 				095131622B31216200F6BC4C /* Formatter.swift in Sources */,
 				09C31ADE2BDB605400623F5C /* Shared.swift in Sources */,
@@ -559,6 +589,8 @@
 				09B59C872BB69B99009900E5 /* AddBookViewFeature.swift in Sources */,
 				09D774F12B275DB700D45EE6 /* PhotoPicker.swift in Sources */,
 				09B59C892BB69EA5009900E5 /* NaverBookAPIService.swift in Sources */,
+				0922B4922BF6514900375953 /* UpdateUserNameFeature.swift in Sources */,
+				0922B48E2BF6100900375953 /* SettingViewFeature.swift in Sources */,
 				09B59C622BB33F4B009900E5 /* SwiftDataService.swift in Sources */,
 				7B39C0C92B2ADCE000460278 /* SwiftDataModel.swift in Sources */,
 				09B59C7B2BB5D9D0009900E5 /* RecordMap.swift in Sources */,

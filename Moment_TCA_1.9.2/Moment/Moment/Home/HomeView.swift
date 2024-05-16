@@ -97,6 +97,10 @@ struct HomeView: View {
                     if let store = store.scope(state: \.imageFull, action: \.imageFull) {
                         ImageFullView(store: store)
                     }
+                case .setting:
+                    if let store = store.scope(state: \.setting, action: \.setting) {
+                        SettingView(store: store)
+                    }
                 }
             }
             .tint(.darkBrown)
@@ -152,14 +156,13 @@ struct HomeView: View {
     // MARK: - 세팅
     @ViewBuilder
     private func settingButton() -> some View {
-        Button {
-            //
-        } label: {
-            Image(systemName: "gearshape.fill")
-                .resizable()
-                .aspectRatio(1.0, contentMode: .fit)
-                .frame(height: 28)
-                .foregroundStyle(.mainBrown)
+        NavigationLink(state: HomeViewFeature.Path.State.setting(
+            .init(userName: store.$userName)) ) {
+                Image(systemName: "gearshape.fill")
+                    .resizable()
+                    .aspectRatio(1.0, contentMode: .fit)
+                    .frame(height: 28)
+                    .foregroundStyle(.mainBrown)
         }
         .frame(width: 40, height: 40)
     }

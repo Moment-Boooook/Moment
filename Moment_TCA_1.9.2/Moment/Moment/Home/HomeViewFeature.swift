@@ -197,6 +197,7 @@ extension HomeViewFeature {
             case recordList(RecordListViewFeature.State)
             case recordDetail(RecordDetailViewFeature.State)
             case imageFull(ImageFullViewFeature.State)
+            case setting(SettingViewFeature.State)
         }
         
         enum Action {
@@ -205,6 +206,7 @@ extension HomeViewFeature {
             case recordList(RecordListViewFeature.Action)
             case recordDetail(RecordDetailViewFeature.Action)
             case imageFull(ImageFullViewFeature.Action)
+            case setting(SettingViewFeature.Action)
         }
         
         var body: some ReducerOf<Self> {
@@ -227,6 +229,10 @@ extension HomeViewFeature {
             // Image Full
             Scope(state: \.imageFull, action: \.imageFull) {
                 ImageFullViewFeature()
+            }
+            // Setting View
+            Scope(state: \.setting, action: \.setting) {
+                SettingViewFeature()
             }
         }
     }

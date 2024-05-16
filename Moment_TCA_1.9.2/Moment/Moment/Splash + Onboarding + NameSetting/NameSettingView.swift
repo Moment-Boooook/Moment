@@ -24,9 +24,8 @@ struct NameSettingView: View {
             VStack(alignment: .center, spacing: 6) {
                 Text("사용할 이름을 등록해주세요!")
                     .font(.medium24)
-                // TODO: - 프로필 및 설정 페이지 만든 뒤..
-//                Text("이름은 언제든 변경할 수 있어요")
-//                    .font(.regular16)
+                Text("이름은 언제든 변경할 수 있어요")
+                    .font(.regular16)
             }
             .padding(.vertical, 20)
             // 이름 textfield
