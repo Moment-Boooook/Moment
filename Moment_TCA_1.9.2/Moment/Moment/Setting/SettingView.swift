@@ -31,9 +31,9 @@ struct SettingView: View {
                         store.send(.openUpdateNameSheet)
                     } label: {
                         HStack(alignment: .center, spacing: 4) {
-                            Text("변경")
+                            Text(AppLocalized.change)
                                 .font(.regular16)
-                            Image(systemName: "chevron.right")
+                            Image(systemName: AppLocalized.rightImage)
                         }
                         .foregroundStyle(.gray1)
                     }
@@ -43,13 +43,10 @@ struct SettingView: View {
                     .padding(.vertical, 10)
                 //
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("데이터")
+                    Text(AppLocalized.dataTitle)
                         .font(.medium18)
                         .foregroundStyle(.darkBrown)
-                    Text("""
-                    Moment 의 기억을 파일로 백업하여
-                    새로운 기기로 옮길 수 있어요
-                    """)
+                    Text(AppLocalized.dataSubTitle)
                     .font(.light14)
                     .foregroundStyle(.mainBrown)
                 }
@@ -58,7 +55,7 @@ struct SettingView: View {
                         // 백업
                     } label: {
                         HStack {
-                            Text("데이터 백업하기")
+                            Text(AppLocalized.dataBackUpButton)
                                 .font(.regular16)
                                 .foregroundStyle(.darkBrown)
                         }
@@ -68,7 +65,7 @@ struct SettingView: View {
                         store.send(.restoreButtonTapped)
                     } label: {
                         HStack {
-                            Text("데이터 복원하기")
+                            Text(AppLocalized.dataRestoreButton)
                                 .font(.regular16)
                                 .foregroundStyle(.darkBrown)
                         }
@@ -79,19 +76,19 @@ struct SettingView: View {
                 CustomListDivider()
                     .padding(.vertical, 10)
                 //
-                Text("앱 정보")
+                Text(AppLocalized.appInfoTitle)
                     .font(.medium18)
                     .foregroundStyle(.darkBrown)
                 //
                 HStack {
                     //
-                    Text("Moment 버전")
+                    Text(AppLocalized.appVersionTitle)
                         .font(.regular16)
                         .foregroundStyle(.darkBrown)
                     //
                     Spacer()
                     //
-                    Text("버전 정보 \(store.version ?? "1.0").\(store.build ?? "1")")
+                    Text("\(AppLocalized.appVersionSubTitle) \(store.version ?? .empty).\(store.build ?? .empty)")
                         .font(.regular14)
                         .foregroundStyle(.gray1)
                 }
@@ -116,12 +113,12 @@ struct SettingView: View {
                     Button {
                         store.send(.dismiss)
                     } label: {
-                        Image(systemName: "chevron.left")
+                        Image(systemName: AppLocalized.beforeImage)
                             .aspectRatio(contentMode: .fit)
                     }
                 }
                 ToolbarItem(placement: .principal) {
-                    Text("설정")
+                    Text(AppLocalized.settingTitle)
                         .font(.semibold18)
                         .foregroundStyle(.darkBrown)
                 }

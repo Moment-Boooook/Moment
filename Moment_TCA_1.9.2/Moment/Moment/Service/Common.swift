@@ -12,7 +12,7 @@ import ComposableArchitecture
 
 // MARK: - Common
 struct Commons {
-    @AppStorage("isOnboardingAndSetName")
+    @AppStorage(AppLocalized.onboardingAndSetNameAppStorageData)
     static var isOnboardingCompletedAndSetName: Bool = false
     
     //

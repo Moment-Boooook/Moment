@@ -43,7 +43,7 @@ extension SwiftDataService: DependencyKey {
                 @Dependency(\.databaseService.context) var context
                 let userContext = try context()
                 let descriptor = FetchDescriptor<MomentUser>()
-                return try userContext.fetch(descriptor).first?.name ?? ""
+                return try userContext.fetch(descriptor).first?.name ?? .empty
             } catch {
                 throw SwiftDataError.fetchError
             }

@@ -17,22 +17,22 @@ struct NameSettingView: View {
     var body: some View {
         VStack(alignment: .center) {
             // Lottie 애니메이션 뷰
-            LottieView(jsonName: "book")
+            LottieView(jsonName: AppLocalized.bookLottie)
                 .aspectRatio(1.0, contentMode: .fit)
                 .frame(width: 140)
             // 이름 등록 안내 텍스트
             VStack(alignment: .center, spacing: 6) {
-                Text("사용할 이름을 등록해주세요!")
+                Text(AppLocalized.setNameGuideTitle)
                     .font(.medium24)
-                Text("이름은 언제든 변경할 수 있어요")
+                Text(AppLocalized.setNameGuide)
                     .font(.regular16)
             }
             .padding(.vertical, 20)
             // 이름 textfield
             TextField(
-                "이름 설정",
+                AppLocalized.setName,
                 text: $store.userName.sending(\.setName),
-                prompt: Text("\(store.maxLength)자 이내")
+                prompt: Text("\(store.maxLength)\(AppLocalized.setNameRule)")
                     .font(.regular16)
                     .foregroundStyle(.gray2)
             )
@@ -56,7 +56,7 @@ struct NameSettingView: View {
             Button {
                 store.send(.saveName)
             } label: {
-                Text("저장")
+                Text(AppLocalized.saveButton)
                     .font(.medium16)
                     .foregroundStyle(.white)
             }
@@ -72,7 +72,7 @@ struct NameSettingView: View {
 #Preview {
     NameSettingView(
         store: Store(
-            initialState: AppStartFeature.State(userName: Shared(""),
+            initialState: AppStartFeature.State(userName: Shared(.empty),
                                                 books: Shared([]),
                                                 records: Shared([]),
                                                 currentOnboardingPage: .first)

@@ -13,7 +13,7 @@ import ComposableArchitecture
 struct NaverBookAPIService {
     private static let clientID = Bundle.main.bookID
     private static let clientSecret = Bundle.main.bookSECRET
-    private static let searchURLString = "https://openapi.naver.com/v1/search/book.json?query="
+    private static let searchURLString = Endpoint.naverAPIURL
     
     var fetch: (String) async throws -> [Book]      // 책 제목 검색 결과 fetch
 }
@@ -26,7 +26,7 @@ extension NaverBookAPIService: DependencyKey {
                 let json = try JSONDecoder().decode(BookList.self, from: data)
                 return json.items
             } catch {
-                throw NetworkError.invalidData
+                throw NetworkError.errorDecoding
             }
         }
     )
@@ -36,22 +36,33 @@ extension NaverBookAPIService {
     // Data 를 반환하는 메서드
     private static func fetchData(queryString: String) async throws -> Data {
         guard let queryURL = URL(string: "\(searchURLString)\(queryString)") else {
-            throw NetworkError.invalidURL
+            throw NetworkError.errorInUrl
         }
         var request = URLRequest(url: queryURL)
         request.httpMethod = HTTPMethod.get.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(clientID, forHTTPHeaderField: "X-Naver-Client-Id")
-        request.addValue(clientSecret, forHTTPHeaderField: "X-Naver-Client-Secret")
+        request.addValue(Endpoint.naverAPIContentType,
+                         forHTTPHeaderField: Endpoint.headerFieldType)
+        request.addValue(clientID,
+                         forHTTPHeaderField: Endpoint.headerFieldID)
+        request.addValue(clientSecret,
+                         forHTTPHeaderField: Endpoint.headerFieldSecret)
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
-                throw NetworkError.invalidResponse
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw NetworkError.unknownError
             }
-            return data
+            switch httpResponse.statusCode {
+            case HttpResponseStatus.ok:
+                return data
+            case HttpResponseStatus.clientError:
+                throw NetworkError.clientError
+            case HttpResponseStatus.serverError:
+                throw NetworkError.serverError
+            default:
+                throw NetworkError.unknownError
+            }
         } catch {
-            throw NetworkError.invalidResponse
+            throw NetworkError.unknownError
         }
     }
 }

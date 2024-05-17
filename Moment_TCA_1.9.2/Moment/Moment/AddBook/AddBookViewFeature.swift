@@ -16,7 +16,7 @@ struct AddBookViewFeature {
     @ObservableState
     struct State: Equatable {
         let books: [MomentBook]                     // 책 목록
-        var searchText: String = ""                 // 서치바 - 텍스트
+        var searchText: String = .empty             // 서치바 - 텍스트
         var searchedBooks: [Book] = []              // 검색 된 책 목록
         var focusedField: Bool = false              // 서치바 - focusstate
         var isSearching: Bool = false               // 검색 중 ...
@@ -73,7 +73,7 @@ struct AddBookViewFeature {
                 return .none
             // 서치바 - 텍스트 지우기
             case .removeSearchText:
-                state.searchText = ""
+                state.searchText = .empty
                 return .run { send in
                     await send(.endSearch)
                 }

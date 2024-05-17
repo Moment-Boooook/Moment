@@ -19,23 +19,23 @@ struct SplashView: View {
             Spacer()
             // 앱 로고 (with animation)
             HStack {
-                Image("pieces")
+                Image(AppLocalized.logoBooks)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 150)
                     .padding(.trailing, 5)
-                Image("lastPiece")
+                Image(AppLocalized.logoBook)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 150)
                     .rotationEffect(.degrees(store.appLogoDegreeChange ? -9 : 0))
             }
             // 앱 title + 앱 sub title
-            Text("Moment")
+            Text(AppLocalized.appName)
                 .foregroundStyle(.darkBrown)
                 .font(.medium36)
                 .padding(5)
-            Text("그 날, 그 곳, 그 구절")
+            Text(AppLocalized.appSubTitle)
                 .foregroundStyle(.mainBrown)
                 .font(.regular20)
                 .opacity(0.5)
@@ -43,12 +43,10 @@ struct SplashView: View {
             Spacer()
             // 앱 제작 정보
             VStack(alignment: .center) {
-                Text("2023, Moment all rights reserved.")
+                Text(AppLocalized.productionInfo)
                     .font(.light14)
                     .foregroundStyle(.gray2)
-                Text("Powered by PJ2T3_BOOOOOK")
-                    .font(.light14)
-                    .foregroundStyle(.gray2)
+                    .lineSpacing(4)
             }
         }
         // 앱 시작 시, 애니메이션 동작 + splash 동작
@@ -62,7 +60,7 @@ struct SplashView: View {
 #Preview {
     SplashView(
         store: Store(
-            initialState: AppStartFeature.State(userName: Shared(""),
+            initialState: AppStartFeature.State(userName: Shared(.empty),
                                                 books: Shared([]),
                                                 records: Shared([]))
         ) {

@@ -17,14 +17,14 @@ struct UpdateUserNameView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             //
-            Text("수정할 닉네임을 작성해주세요")
+            Text(AppLocalized.updateNameTitle)
                 .font(.medium18)
                 .foregroundStyle(.darkBrown)
                 .frame(maxWidth: .infinity, alignment: .leading)
             // 유저 닉네임 수정 텍스트 필드
             HStack {
                 TextField(
-                    "User Name",
+                    AppLocalized.nameTitle,
                     text: $store.changedName.sending(\.setName),
                     prompt: Text(store.userName)
                         .font(.medium16)
@@ -43,7 +43,7 @@ struct UpdateUserNameView: View {
                         focusedField = true
                         store.send(.clearName)
                     } label: {
-                        Image(systemName: "xmark")
+                        Image(systemName: AppLocalized.xImage)
                     }
                 }
             }
@@ -67,7 +67,7 @@ struct UpdateUserNameView: View {
                     store.send(.updateUserName(store.changedName))
                 }
             } label: {
-                Text("변경 완료")
+                Text(AppLocalized.changeButton)
                     .font(.medium18)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)

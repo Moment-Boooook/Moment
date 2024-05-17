@@ -37,7 +37,7 @@ struct AddBookView: View {
                             
                         // 결과 있을 때,
                         } else if !store.searchedBooks.isEmpty {
-                            Text("책 검색 결과")
+                            Text(AppLocalized.bookSearchResult)
                                 .font(.semibold18)
                                 .opacity(store.completedSearch ? 1.0 : 0.0)
                                 .padding(.vertical, 10)
@@ -46,7 +46,7 @@ struct AddBookView: View {
                         // 결과 없을 떄,
                         } else {
                             VStack {
-                                Text("책 검색 결과가 없어요.")
+                                Text(AppLocalized.bookSearchEmptyResult)
                                     .font(.semibold18)
                                     .foregroundStyle(.lightBrown)
                                     .opacity(store.completedSearch ? 1.0 : 0.0)
@@ -55,7 +55,7 @@ struct AddBookView: View {
                         }
                     // 검색 안했을 경우,
                     } else {
-                        Text(store.books.isEmpty ? "" : "기억에 남겨진 책")
+                        Text(store.books.isEmpty ? .empty : AppLocalized.bookLeftInMemory)
                             .font(.semibold18)
                             .padding(.vertical, 10)
                         // 기존 보유 책 목록
@@ -74,12 +74,12 @@ struct AddBookView: View {
                 Button {
                     store.send(.dismiss)
                 } label: {
-                    Image(systemName: "chevron.left")
+                    Image(systemName: AppLocalized.beforeImage)
                         .aspectRatio(contentMode: .fit)
                 }
             }
             ToolbarItem(placement: .principal) {
-                Text("기억하고 싶은 책 선택하기")
+                Text(AppLocalized.addBookTitle)
                     .font(.semibold18)
                     .foregroundStyle(.darkBrown)
             }
@@ -91,13 +91,14 @@ struct AddBookView: View {
     private func searchBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             // 검색 심볼
-            Image(systemName: "magnifyingglass")
+            Image(systemName: AppLocalized.searchImage)
                 .foregroundStyle(.secondary)
                 .padding(.leading, 14)
             //
             Spacer()
             // 검색 창
-            TextField("책 제목 검색", text: $store.searchText.sending(\.setSearchText))
+            TextField(AppLocalized.searchBookTitle,
+                      text: $store.searchText.sending(\.setSearchText))
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled(true)
                 .focused($focusedField)
@@ -111,7 +112,7 @@ struct AddBookView: View {
                     store.send(.removeSearchText)
                     store.send(.clearFocusState)
                 } label: {
-                    Image(systemName: "xmark")
+                    Image(systemName: AppLocalized.xImage)
                         .foregroundStyle(.mainBrown)
                 }
                 .padding(.horizontal, 14)
@@ -119,7 +120,7 @@ struct AddBookView: View {
         }
         .bind($store.focusedField, to: $focusedField)
         .onChange(of: store.searchText) { _, newValue in
-            if newValue == "" {
+            if newValue == .empty {
                 store.send(.endSearch)
             }
         }

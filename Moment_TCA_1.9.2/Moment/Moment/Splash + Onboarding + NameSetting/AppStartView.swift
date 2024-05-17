@@ -29,7 +29,7 @@ struct AppStartView: View {
 #Preview {
     AppStartView(
         store: Store(
-            initialState: AppStartFeature.State(userName: Shared(""),
+            initialState: AppStartFeature.State(userName: Shared(.empty),
                                                 books: Shared([]),
                                                 records: Shared([]))
         ) {

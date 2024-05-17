@@ -14,7 +14,7 @@ struct LottieView: UIViewRepresentable {
     var loopMode: LottieLoopMode
     
     // JSON 파일 이름으로 애니메이션을 실행
-    init(jsonName: String = "", loopMode : LottieLoopMode = .loop){
+    init(jsonName: String = .empty, loopMode : LottieLoopMode = .loop){
         self.name = jsonName
         self.loopMode = loopMode
     }
@@ -47,8 +47,4 @@ struct LottieView: UIViewRepresentable {
     func updateUIView(_ uiView: UIViewType, context: Context) {
         //
     }
-}
-
-#Preview {
-    LottieView(jsonName: "book")
 }

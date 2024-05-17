@@ -18,7 +18,7 @@ struct UpdateUserNameFeature {
         @ObservationStateIgnored
         @Shared var userName: String
         
-        var changedName: String = ""
+        var changedName: String = .empty
         var isCompleted: Bool {
             !changedName.isEmpty
         }
@@ -50,7 +50,7 @@ struct UpdateUserNameFeature {
                 return .none
             // clear Name TextField
             case .clearName:
-                state.changedName = ""
+                state.changedName = .empty
                 return .none
             // sheet cancel
             case .closeSheet:

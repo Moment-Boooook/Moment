@@ -35,11 +35,11 @@ struct OnboardingView: View {
                     }
                 } label: {
                     if store.currentOnboardingPage == .third {
-                        Text("시작하기")
+                        Text(AppLocalized.startButton)
                             .font(.medium16)
                             .foregroundStyle(.white)
                     } else {
-                        Text("다음")
+                        Text(AppLocalized.nextButton)
                             .font(.medium16)
                             .foregroundStyle(.white)
                     }
@@ -89,22 +89,22 @@ enum OnboardingPage {
     var content: String {
         switch self {
         case .first:
-            "모멘트와 함께\n기억 속에 남겨두고 싶은\n책의 내용을 기록해보세요."
+            AppLocalized.onboardingContent01
         case .second:
-            "모멘트와 함께\n어디서 읽었는지\n기억하고 싶지 않으신가요?"
+            AppLocalized.onboardingContent02
         case .third:
-            "모멘트와 함께\n기록하여 여러분만의\n책장을 완성시켜 보아요!"
+            AppLocalized.onboardingContent03
         }
     }
     
     var image: String {
         switch self {
         case .first:
-            "onboarding01"
+            AppLocalized.onboardingImage01
         case .second:
-            "onboarding02"
+            AppLocalized.onboardingImage02
         case .third:
-            "onboarding03"
+            AppLocalized.onboardingImage03
         }
     }
 }
@@ -112,7 +112,7 @@ enum OnboardingPage {
 #Preview {
     OnboardingView(
         store: Store(
-            initialState: AppStartFeature.State(userName: Shared(""),
+            initialState: AppStartFeature.State(userName: Shared(.empty),
                                                 books: Shared([]),
                                                 records: Shared([]),
                                                 currentOnboardingPage: .first)

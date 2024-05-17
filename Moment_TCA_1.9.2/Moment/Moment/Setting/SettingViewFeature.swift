@@ -22,13 +22,13 @@ struct SettingViewFeature {
         
         var version: String? {
             guard let dictionary = Bundle.main.infoDictionary,
-                  let version = dictionary["CFBundleShortVersionString"] as? String else { return nil }
+                  let version = dictionary[AppLocalized.versionKey] as? String else { return nil }
             return version  // ex) 1.0
         }
         
         var build: String? {
             guard let dictionary = Bundle.main.infoDictionary,
-                  let build = dictionary["CFBundleVersion"] as? String else { return nil }
+                  let build = dictionary[AppLocalized.buildKey] as? String else { return nil }
             return build    // ex) 1
         }
     }
@@ -92,13 +92,10 @@ extension AlertState where Action == SettingViewFeature.Action.Alert {
     // 복원 전, 백업 알림
     static func dataRestoreConfirm() -> Self {
         Self {
-            TextState("""
-                    복원 시엔 기존 데이터가 사라지니
-                    백업을 먼저 추천드려요!
-                    """)
+            TextState(AppLocalized.dataRestoreAlertText)
         } actions: {
             ButtonState(role: .none, action: .dataRestoreConfirm) {
-                TextState("확인")
+                TextState(AppLocalized.okButton)
             }
         }
     }

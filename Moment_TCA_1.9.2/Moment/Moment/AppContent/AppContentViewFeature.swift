@@ -25,7 +25,7 @@ struct AppContentViewFeature {
         var appStart: AppStartFeature.State
         var home: HomeViewFeature.State
         
-        init(userName: Shared<String> = Shared(""),
+        init(userName: Shared<String> = Shared(.empty),
              books: Shared<[MomentBook]> = Shared([]),
              records: Shared<[MomentRecord]> = Shared([])) {
             self._userName = userName

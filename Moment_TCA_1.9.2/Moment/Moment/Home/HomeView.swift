@@ -115,13 +115,14 @@ struct HomeView: View {
     private func searchBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             // 검색 심볼
-            Image(systemName: "magnifyingglass")
+            Image(systemName: AppLocalized.searchImage)
                 .foregroundStyle(.secondary)
                 .padding(.leading, 14)
             //
             Spacer()
             // 검색 창
-            TextField("책 제목 검색", text: $store.searchText.sending(\.setSearchText))
+            TextField(AppLocalized.searchBookTitle,
+                      text: $store.searchText.sending(\.setSearchText))
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled(true)
                 .focused($focusedField)
@@ -137,7 +138,7 @@ struct HomeView: View {
                     store.send(.removeSearchText)
                     store.send(.endSearch)
                 } label: {
-                    Image(systemName: "xmark")
+                    Image(systemName: AppLocalized.xImage)
                         .foregroundStyle(.mainBrown)
                 }
                 .padding(.horizontal, 14)
@@ -158,7 +159,7 @@ struct HomeView: View {
     private func settingButton() -> some View {
         NavigationLink(state: HomeViewFeature.Path.State.setting(
             .init(userName: store.$userName)) ) {
-                Image(systemName: "gearshape.fill")
+                Image(systemName: AppLocalized.settingImage)
                     .resizable()
                     .aspectRatio(1.0, contentMode: .fit)
                     .frame(height: 28)
@@ -204,10 +205,10 @@ struct HomeView: View {
     HomeView(
         store: Store(
             initialState: HomeViewFeature.State(
-                userName: Shared(""),
+                userName: Shared(.empty),
                 books: Shared([]),
                 records: Shared([]),
-                searchText: ""
+                searchText: .empty
             )
         ) {
             HomeViewFeature()

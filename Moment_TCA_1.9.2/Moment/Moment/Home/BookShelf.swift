@@ -32,8 +32,9 @@ struct BookShelf: View {
             }
             NavigationLink(
                 state: HomeViewFeature.Path.State.addBook(
-                    .init(books: store.books))) {
-                Image(systemName: "plus")
+                    .init(books: store.books))
+            ) {
+                Image(systemName: AppLocalized.plusImage)
                     .font(.medium30)
             }
             .buttonStyle(.circled(color: .lightBrown, size: 30))
@@ -47,11 +48,7 @@ struct BookShelf: View {
     @ViewBuilder
     private func NoContent() -> some View {
         VStack {
-            Text("""
-                \(store.userName)님,
-                책장이 비어있어요.
-                기억 속에 책을 남겨보세요.
-                """)
+            Text("\(store.userName)\(AppLocalized.emptyBookShelfMessage)")
                 .font(.regular20)
                 .foregroundStyle(.lightBrown)
                 .lineSpacing(2)
@@ -76,7 +73,7 @@ struct BookShelf: View {
                                       records: store.$records,
                                       usedTo: .usedToShelf,
                                       selectedBook: book,
-                                      localName: "",
+                                      localName: .empty,
                                       recordsOfLocal: []))) {
                             BookImage(urlString: book.theCoverOfBook,
                                       maxWidth: maxWidth - 100)
@@ -167,10 +164,10 @@ private struct CustomShelf: View {
         BookShelf(
             store: Store(
                 initialState: HomeViewFeature.State(
-                    userName: Shared(""),
+                    userName: Shared(.empty),
                     books: Shared([]),
                     records: Shared([]),
-                    searchText: ""
+                    searchText: .empty
                 )
             ) {
                 HomeViewFeature()
