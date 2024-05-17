@@ -17,10 +17,15 @@ struct UpdateUserNameView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             //
-            Text(AppLocalized.updateNameTitle)
-                .font(.medium18)
-                .foregroundStyle(.darkBrown)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack(alignment: .lastTextBaseline, spacing: 10) {
+                Text(AppLocalized.updateNameTitle)
+                    .font(.medium18)
+                    .foregroundStyle(.darkBrown)
+                Text("(\(store.maxLength)\(AppLocalized.setNameRule))")
+                    .font(.regular16)
+                    .foregroundStyle(.mainBrown)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
             // 유저 닉네임 수정 텍스트 필드
             HStack {
                 TextField(
@@ -32,8 +37,15 @@ struct UpdateUserNameView: View {
                 .font(.medium16)
                 .foregroundStyle(.darkBrown)
                 .focused($focusedField)
+                .submitLabel(.done)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled(true)
+                .onChange(of: store.changedName) { oldValue, newValue in
+                    if newValue.count > store.maxLength {
+                        store.send(.setName(oldValue))
+                    }
+                    store.send(.removeWhiteSpace(store.changedName))
+                }
                 .bind($store.focusedField, to: $focusedField)
                 //
                 Spacer()

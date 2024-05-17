@@ -23,6 +23,7 @@ struct UpdateUserNameFeature {
             !changedName.isEmpty
         }
         var focusedField: Bool = true
+        let maxLength = 12
     }
     
     enum Action: BindableAction {
@@ -30,6 +31,7 @@ struct UpdateUserNameFeature {
         case clearFocusState
         case clearName
         case closeSheet
+        case removeWhiteSpace(String)
         case setName(String)
         case updateUserName(String)
     }
@@ -57,10 +59,15 @@ struct UpdateUserNameFeature {
                 return .run { _ in
                     await self.dismiss()
                 }
-            // setName + trimWhiteSpace
-            case let .setName(newName):
-                state.changedName = newName.trimWhiteSpace()
+            // removeWhiteSpace
+            case let .removeWhiteSpace(name):
+                state.changedName = name.removeWhiteSpace()
                 return .none
+            // setName
+            case let .setName(name):
+                state.changedName = name
+                return .none
+            // userName 수정
             case let .updateUserName(newName):
                 state.userName = newName
                 return .run { send in

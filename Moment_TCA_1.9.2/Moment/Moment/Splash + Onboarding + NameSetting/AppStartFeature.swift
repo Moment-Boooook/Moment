@@ -85,6 +85,7 @@ struct AppStartFeature {
         // name setting
         case completeOnboardingAndSetName
         case refetchCompleteOnboardingAndSetName
+        case removeWhiteSpace(String)
         case saveName
         case setName(String)
     }
@@ -197,6 +198,10 @@ struct AppStartFeature {
             // 온보딩 완료 여부 refetch - appstorage
             case .refetchCompleteOnboardingAndSetName:
                 state.isSetName = commons.isCompleteOnboardingAndSetName()
+                return .none
+            // removeWhiteSpace
+            case let .removeWhiteSpace(name):
+                state.userName = name.removeWhiteSpace()
                 return .none
             // 저장 버튼 탭
             case .saveName:

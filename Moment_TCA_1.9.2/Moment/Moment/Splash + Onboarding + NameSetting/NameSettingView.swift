@@ -39,11 +39,13 @@ struct NameSettingView: View {
             .focused($focusedField)
             .multilineTextAlignment(.center)
             .textInputAutocapitalization(.never)
+            .submitLabel(.done)
             .autocorrectionDisabled(true)
             .onChange(of: store.userName) { oldValue, newValue in
                 if newValue.count > store.maxLength {
                     store.send(.setName(oldValue))
                 }
+                store.send(.removeWhiteSpace(store.userName))
             }
             .textFieldStyle(
                 .bordered(color: store.userName.isEmpty ? .gray2 : .lightBrown)
