@@ -15,14 +15,26 @@ struct NaverBookAPIService {
     private static let clientSecret = Bundle.main.bookSECRET
     private static let searchURLString = Endpoint.naverAPIURL
     
-    var fetch: (String) async throws -> [Book]      // 책 제목 검색 결과 fetch
+    var fetch: (String) async throws -> (books: [Book],
+                                         total: Int)            // 책 제목 검색 결과 fetch
+    var nextPageFetch: (String, Int) async throws -> [Book]     // 페이징 fetch
 }
 
 extension NaverBookAPIService: DependencyKey {
     static let liveValue = Self(
         fetch: { queryString in
             do {
-                let data = try await fetchData(queryString: queryString)
+                let data = try await fetchData(searchText: queryString)
+                let json = try JSONDecoder().decode(BookList.self, from: data)
+                return (books: json.items, total: json.total)
+            } catch {
+                throw NetworkError.errorDecoding
+            }
+        },
+        nextPageFetch: { (queryString, startPoint) in
+            do {
+                let data = try await fetchData(searchText: queryString,
+                                               startPoint: startPoint)
                 let json = try JSONDecoder().decode(BookList.self, from: data)
                 return json.items
             } catch {
@@ -34,10 +46,13 @@ extension NaverBookAPIService: DependencyKey {
 
 extension NaverBookAPIService {
     // Data 를 반환하는 메서드
-    private static func fetchData(queryString: String) async throws -> Data {
-        guard let queryURL = URL(string: "\(searchURLString)\(queryString)") else {
-            throw NetworkError.errorInUrl
-        }
+    private static func fetchData(
+        searchText: String,
+        startPoint: Int = 1
+    ) async throws -> Data {
+        let queryURL = try convertQueryURL(searchText: searchText,
+                                           startPoint: startPoint)
+        //
         var request = URLRequest(url: queryURL)
         request.httpMethod = HTTPMethod.get.rawValue
         request.addValue(Endpoint.naverAPIContentType,
@@ -46,11 +61,13 @@ extension NaverBookAPIService {
                          forHTTPHeaderField: Endpoint.headerFieldID)
         request.addValue(clientSecret,
                          forHTTPHeaderField: Endpoint.headerFieldSecret)
+        //
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw NetworkError.unknownError
             }
+            //
             switch httpResponse.statusCode {
             case HttpResponseStatus.ok:
                 return data
@@ -64,6 +81,18 @@ extension NaverBookAPIService {
         } catch {
             throw NetworkError.unknownError
         }
+    }
+    
+    // query URL 변환 메서드
+    private static func convertQueryURL(
+        searchText: String,
+        startPoint: Int
+    ) throws -> URL {
+        let queryString = "\(searchURLString)\(searchText)\(Endpoint.displayCount)\(Endpoint.startPoint)\(startPoint)\(Endpoint.sortType)"
+        guard let queryURL = URL(string: queryString) else {
+            throw NetworkError.errorInUrl
+        }
+        return queryURL
     }
 }
 

@@ -129,6 +129,9 @@ enum HttpResponseStatus {
 // MARK: - Naver API
 enum Endpoint {
     static let naverAPIURL = "https://openapi.naver.com/v1/search/book.json?query="
+    static let displayCount = "&display=20"
+    static let startPoint = "&start="
+    static let sortType = "&sort=sim"
     static let naverAPIContentType = "application/json"
     static let headerFieldType = "Content-Type"
     static let headerFieldID = "X-Naver-Client-Id"

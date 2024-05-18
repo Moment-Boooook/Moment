@@ -42,7 +42,8 @@ struct AddBookView: View {
                                 .opacity(store.completedSearch ? 1.0 : 0.0)
                                 .padding(.vertical, 10)
                             // 검색 된 책 목록
-                            BookCellList(searchedBooks: store.searchedBooks)
+                            BookCellList(searchedBooks: store.searchedBooks,
+                                         usedToSearch: true)
                         // 결과 없을 떄,
                         } else {
                             VStack {
@@ -59,7 +60,8 @@ struct AddBookView: View {
                             .font(.semibold18)
                             .padding(.vertical, 10)
                         // 기존 보유 책 목록
-                        BookCellList(searchedBooks: store.books)
+                        BookCellList(searchedBooks: store.books,
+                                     usedToSearch: false)
                     }
                 }
             }
@@ -135,24 +137,40 @@ struct AddBookView: View {
     
     // MARK: - 검색 결과 ( 책 목록 )
     @ViewBuilder
-    private func BookCellList(searchedBooks: [SelectedBook]) -> some View {
+    private func BookCellList(
+        searchedBooks: [SelectedBook],
+        usedToSearch: Bool
+    ) -> some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                ForEach(0..<searchedBooks.count, id: \.self) { index in
-                    let book = searchedBooks[index]
+            LazyVStack(alignment: .leading) {
+                ForEach(searchedBooks, id: \.bookISBN) { book in
                     NavigationLink(
                         state: HomeViewFeature.Path.State.addRecord(
                             .init(book: book,
-                                  myBooks: store.books))) {
-                            BookCell(book: book)
+                                  myBooks: store.books)
+                        )
+                    ) {
+                        BookCell(book: book)
+                    }
+                    .onAppear {
+                        if book as? Book == store.searchedBooks.last,
+                           usedToSearch {
+                            store.send(.nextPage)
+                        }
                     }
                     //
                     CustomListDivider()
                 }
             }
+            .padding(.horizontal, 20)
+            // 추가 데이터 받을 때, 로딩 표시
+            if store.isFetchNextPage {
+                ProgressView()
+                    .frame(height: 20)
+            }
         }
-        .scrollIndicators(.hidden)
         .scrollDismissesKeyboard(.immediately)
+        .padding(.horizontal, -20)
     }
 }
 
