@@ -91,7 +91,7 @@ struct AddBookViewFeature {
                 if state.nextResultPage < state.totalResultCount ?? 0 {
                     return .concatenate(
                         .run { send in
-                            await send(.toggledIsSearching)
+                            await send(.toggledIsFetchNextPage)
                         },
                         .run { @MainActor [nextPage = state.nextResultPage,
                                 searchText = state.searchText] send in
@@ -103,7 +103,7 @@ struct AddBookViewFeature {
                             }
                         },
                         .run { send in
-                            await send(.toggledIsSearching)
+                            await send(.toggledIsFetchNextPage)
                         }
                     )
                 } else {

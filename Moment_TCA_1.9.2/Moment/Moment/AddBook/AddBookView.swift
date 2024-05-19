@@ -172,13 +172,10 @@ struct AddBookView: View {
         .scrollDismissesKeyboard(.immediately)
         .padding(.horizontal, -20)
     }
-}
-
-// MARK: - 책 목록에 보여줄 셀
-private struct BookCell: View {
-    let book: SelectedBook
     
-    fileprivate var body: some View {
+    // MARK: - 책 목록에 보여줄 셀
+    @ViewBuilder
+    private func BookCell(book: SelectedBook) -> some View {
         VStack(spacing: 20) {
             HStack(alignment: .top, spacing: 20) {
                 // 이미지
