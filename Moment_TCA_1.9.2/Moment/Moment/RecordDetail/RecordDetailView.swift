@@ -64,7 +64,7 @@ struct RecordDetailView: View {
                     }
                 }
                 ToolbarItem(placement: .principal) {
-                    Text("\(store.record.year)\(AppLocalized.year) \(store.record.monthAndDay)")
+                    Text("\(String(store.record.year))\(AppLocalized.year) \(store.record.monthAndDay)")
                         .font(.semibold18)
                         .foregroundStyle(.darkBrown)
                 }
