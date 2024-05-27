@@ -187,7 +187,8 @@ struct AddRecordView: View {
         }
         .confirmationDialog(LocalizedStringKey(.empty),
                             isPresented: $store.showPhotoConfimationDialog,
-                            titleVisibility: .hidden) {
+                            titleVisibility: .hidden
+        ) {
             Button {
                 store.send(.openCamera)
             } label: {
@@ -203,9 +204,11 @@ struct AddRecordView: View {
         }
         .sheet(isPresented: $store.isCameraSnapSheet) {
             CameraSnap(store: store)
+                .ignoresSafeArea(edges: .all)
         }
         .sheet(isPresented: $store.isPhotoPickerSheet) {
             PhotoPicker(store: store)
+                .ignoresSafeArea(edges: .all)
         }
     }
     
