@@ -32,12 +32,16 @@ enum AppLocalized {
     static let locationSaveButton = "이 위치로 설정하기"
     static let dataBackUpButton = "데이터 백업하기"
     static let dataRestoreButton = "데이터 복원하기"
+    static let aboutMomentButton = "Moment 알아보기"
+    static let openSourceButton = "오픈라이선스"
     
     static let onboardingContent01 = "모멘트와 함께\n기억 속에 남겨두고 싶은\n책의 내용을 기록해보세요."
     static let onboardingContent02 = "모멘트와 함께\n어디서 읽었는지\n기억하고 싶지 않으신가요?"
     static let onboardingContent03 = "모멘트와 함께\n기록하여 여러분만의\n책장을 완성시켜 보아요!"
     
     static let bookLottie = "book"
+    static let loadingLottie = "loading"
+    
     static let localID = "ko-KR"
     static let moreThanHundred = "99+"
 
@@ -86,6 +90,10 @@ enum AppLocalized {
                                     복원 시엔 기존 데이터가 사라지니
                                     백업을 먼저 추천드려요!
                                     """
+    static let compressFailAlertText = """
+                                    백업을 위한 파일 생성에 실패했어요
+                                    다시 한번 시도해주세요!
+                                    """
     static let updateNameTitle = "수정할 닉네임을 작성해주세요"
     static let nameTitle = "수정할 닉네임을 작성해주세요"
     
@@ -96,14 +104,21 @@ enum AppLocalized {
     // AppStorage
     static let onboardingAndSetNameAppStorageData = "isOnboardingAndSetName"
     
-    // FileManager
-    static let directotyName = "MomentApp"
-    static let fileName = "moment_app_user_data.json"
+    // FileManager & Compressed File
+    static let fileType = ".moment"
+    static let fileDescription = "Moment backup file"
+    static let customActivityType = "com.hrmi.Moment.customActivity"
+    
+    // SwiftData
+    static let storeFile = "default.store"
+    static let shmFile = "default.store-shm"
+    static let walFile = "default.store-wal"
     
     // time
     static let nanosecondPointOne: UInt64 = 100_000_000
     
     // image
+    static let appIcon = "AppIcon"
     static let logoBooks = "pieces"
     static let logoBook = "lastPiece"
     static let onboardingImage01 = "onboarding01"

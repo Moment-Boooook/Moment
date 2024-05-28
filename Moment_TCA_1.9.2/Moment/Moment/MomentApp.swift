@@ -28,4 +28,9 @@ struct MomentApp: App {
                 ])
 		}
 	}
+    
+    // MARK: - SwiftData 생성 위치 check
+//    init() {
+//        print(URL.applicationSupportDirectory.path(percentEncoded: false))
+//    }
 }

@@ -13,6 +13,10 @@
 		0922B4922BF6514900375953 /* UpdateUserNameFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4912BF6514900375953 /* UpdateUserNameFeature.swift */; };
 		0922B4942BF6561300375953 /* String +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4932BF6561300375953 /* String +.swift */; };
 		0922B4962BF673F100375953 /* AppLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4952BF673F100375953 /* AppLocalized.swift */; };
+		0922B4982BFAF02E00375953 /* Date +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4972BFAF02E00375953 /* Date +.swift */; };
+		0922B49B2BFC83F400375953 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 0922B49A2BFC83F400375953 /* ZIPFoundation */; };
+		0922B49D2BFC931F00375953 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 0922B49C2BFC931F00375953 /* loading.json */; };
+		0922B49F2BFD166400375953 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B49E2BFD166400375953 /* ActivityView.swift */; };
 		095131622B31216200F6BC4C /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095131612B31216200F6BC4C /* Formatter.swift */; };
 		09731F7D2B26C5980045F6B4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09731F7C2B26C5980045F6B4 /* OnboardingView.swift */; };
 		09731F8A2B26D12A0045F6B4 /* CustomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09731F892B26D12A0045F6B4 /* CustomButtons.swift */; };
@@ -73,6 +77,7 @@
 		09E3B6E12BC3DA3B001BC529 /* RecordDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3B6E02BC3DA3B001BC529 /* RecordDetailTests.swift */; };
 		09E3B6E52BC418D0001BC529 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3B6E42BC418D0001BC529 /* TestData.swift */; };
 		09F6C0572BC0069900C8DBC7 /* APIKEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09F6C0562BC0069900C8DBC7 /* APIKEY.plist */; };
+		09F9EFEC2C057D5C009DE3A0 /* URL +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9EFEB2C057D5C009DE3A0 /* URL +.swift */; };
 		2CA6BED92B2733E0002E3589 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6BED82B2733E0002E3589 /* CustomTextField.swift */; };
 		2CBA62CE2B2A282500D075B7 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBA62CD2B2A282500D075B7 /* SplashView.swift */; };
 		7B39C0C72B2ADC7400460278 /* UIImage +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39C0C62B2ADC7400460278 /* UIImage +.swift */; };
@@ -98,6 +103,9 @@
 		0922B4912BF6514900375953 /* UpdateUserNameFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserNameFeature.swift; sourceTree = "<group>"; };
 		0922B4932BF6561300375953 /* String +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String +.swift"; sourceTree = "<group>"; };
 		0922B4952BF673F100375953 /* AppLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalized.swift; sourceTree = "<group>"; };
+		0922B4972BFAF02E00375953 /* Date +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date +.swift"; sourceTree = "<group>"; };
+		0922B49C2BFC931F00375953 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = loading.json; path = "../../../../../../흐르미/모멘트/loading.json"; sourceTree = "<group>"; };
+		0922B49E2BFD166400375953 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		095131612B31216200F6BC4C /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		09731F7C2B26C5980045F6B4 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		09731F892B26D12A0045F6B4 /* CustomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtons.swift; sourceTree = "<group>"; };
@@ -158,6 +166,7 @@
 		09E3B6E22BC3E8D4001BC529 /* Moment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E3B6E42BC418D0001BC529 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		09F6C0562BC0069900C8DBC7 /* APIKEY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = APIKEY.plist; path = "../../../../흐르미/모멘트/APIKEY.plist"; sourceTree = "<group>"; };
+		09F9EFEB2C057D5C009DE3A0 /* URL +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL +.swift"; sourceTree = "<group>"; };
 		2CA6BED82B2733E0002E3589 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2CBA62CD2B2A282500D075B7 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		7B39C0C62B2ADC7400460278 /* UIImage +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage +.swift"; sourceTree = "<group>"; };
@@ -174,6 +183,7 @@
 				09C31AE12BDBF33D00623F5C /* Kingfisher in Frameworks */,
 				09B59C512BB31F64009900E5 /* ComposableArchitecture in Frameworks */,
 				09C31B002BE5130300623F5C /* Lottie in Frameworks */,
+				0922B49B2BFC83F400375953 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +204,7 @@
 				0922B48D2BF6100900375953 /* SettingViewFeature.swift */,
 				0922B48F2BF649E900375953 /* UpdateUserNameView.swift */,
 				0922B4912BF6514900375953 /* UpdateUserNameFeature.swift */,
+				0922B49E2BFD166400375953 /* ActivityView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -219,6 +230,8 @@
 				09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */,
 				7B39C0C62B2ADC7400460278 /* UIImage +.swift */,
 				0922B4932BF6561300375953 /* String +.swift */,
+				0922B4972BFAF02E00375953 /* Date +.swift */,
+				09F9EFEB2C057D5C009DE3A0 /* URL +.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -375,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				09C31B082BE5164100623F5C /* book.json */,
+				0922B49C2BFC931F00375953 /* loading.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -445,6 +459,7 @@
 				09B59C502BB31F64009900E5 /* ComposableArchitecture */,
 				09C31AE02BDBF33D00623F5C /* Kingfisher */,
 				09C31AFF2BE5130300623F5C /* Lottie */,
+				0922B49A2BFC83F400375953 /* ZIPFoundation */,
 			);
 			productName = Moment;
 			productReference = 09E3B6E22BC3E8D4001BC529 /* Moment.app */;
@@ -503,6 +518,7 @@
 				09C31ADF2BDBF33D00623F5C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				09C31AE62BE4C52D00623F5C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				09C31AFE2BE5130300623F5C /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				0922B4992BFC83F400375953 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 09AB7CD72B26A1350073EAD5;
 			projectDirPath = "";
@@ -523,6 +539,7 @@
 				09AB7D162B26A73C0073EAD5 /* Pretendard-Bold.otf in Resources */,
 				09AB7D192B26A73C0073EAD5 /* Pretendard-Medium.otf in Resources */,
 				09AB7D122B26A73C0073EAD5 /* Pretendard-SemiBold.otf in Resources */,
+				0922B49D2BFC931F00375953 /* loading.json in Resources */,
 				09C31B092BE5164100623F5C /* book.json in Resources */,
 				09AB7D132B26A73C0073EAD5 /* Pretendard-Light.otf in Resources */,
 				09AB7D142B26A73C0073EAD5 /* Pretendard-Regular.otf in Resources */,
@@ -552,12 +569,14 @@
 				09C4BD682BBE41F200AEC83D /* RecordDetailView.swift in Sources */,
 				09C4BD602BB7220C00AEC83D /* LocationManagerService.swift in Sources */,
 				09731F7D2B26C5980045F6B4 /* OnboardingView.swift in Sources */,
+				0922B49F2BFD166400375953 /* ActivityView.swift in Sources */,
 				09B59C852BB69A22009900E5 /* AddBookView.swift in Sources */,
 				09B59C692BB4089A009900E5 /* HomeViewFeature.swift in Sources */,
 				0922B4902BF649E900375953 /* UpdateUserNameView.swift in Sources */,
 				0922B48C2BF60FFC00375953 /* SettingView.swift in Sources */,
 				09C31B0B2BE527AE00623F5C /* TextFieldStyle +.swift in Sources */,
 				09AB7CE62B26A1350073EAD5 /* AppContentView.swift in Sources */,
+				09F9EFEC2C057D5C009DE3A0 /* URL +.swift in Sources */,
 				09C31B022BE5131B00623F5C /* LottieView.swift in Sources */,
 				09C4BD5E2BB7084E00AEC83D /* AddRecordViewFeature.swift in Sources */,
 				B1C938592B27E294006EFB70 /* CustomListDivider.swift in Sources */,
@@ -590,6 +609,7 @@
 				09D774F12B275DB700D45EE6 /* PhotoPicker.swift in Sources */,
 				09B59C892BB69EA5009900E5 /* NaverBookAPIService.swift in Sources */,
 				0922B4922BF6514900375953 /* UpdateUserNameFeature.swift in Sources */,
+				0922B4982BFAF02E00375953 /* Date +.swift in Sources */,
 				0922B48E2BF6100900375953 /* SettingViewFeature.swift in Sources */,
 				09B59C622BB33F4B009900E5 /* SwiftDataService.swift in Sources */,
 				7B39C0C92B2ADCE000460278 /* SwiftDataModel.swift in Sources */,
@@ -765,6 +785,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -800,6 +821,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -886,6 +908,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0922B4992BFC83F400375953 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.19;
+			};
+		};
 		09B59C4F2BB31F64009900E5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
@@ -921,6 +951,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0922B49A2BFC83F400375953 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0922B4992BFC83F400375953 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
 		09B59C502BB31F64009900E5 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 09B59C4F2BB31F64009900E5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;

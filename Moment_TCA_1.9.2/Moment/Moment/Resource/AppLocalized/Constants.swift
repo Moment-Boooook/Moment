@@ -137,3 +137,16 @@ enum Endpoint {
     static let headerFieldID = "X-Naver-Client-Id"
     static let headerFieldSecret = "X-Naver-Client-Secret"
 }
+
+// MARK: - 압축 / 해제 관련 에러
+enum CompressionError: Error {
+    case compress
+    case decompress
+}
+
+// MARK: - 백업 / 복원 관련 에러
+enum BackupAndRestoreError: Error {
+    case backup
+    case restore
+    case fileManager
+}

@@ -5,7 +5,7 @@
 //  Created by phang on 5/16/24.
 //
 
-import Foundation
+import SwiftUI
 
 import ComposableArchitecture
 
@@ -20,12 +20,20 @@ struct SettingViewFeature {
         
         @Presents var destination: Destination.State?
         
+        // share sheet
+        var isActivityViewPresented: Bool = false
+        var activityItem: ActivityItem?
+        
+        // backup & restore
+        var isCompressing: Bool = false
+        
+        // 앱 버전
         var version: String? {
             guard let dictionary = Bundle.main.infoDictionary,
                   let version = dictionary[AppLocalized.versionKey] as? String else { return nil }
             return version  // ex) 1.0
         }
-        
+        // 앱 빌드 카운트
         var build: String? {
             guard let dictionary = Bundle.main.infoDictionary,
                   let build = dictionary[AppLocalized.buildKey] as? String else { return nil }
@@ -34,29 +42,71 @@ struct SettingViewFeature {
     }
     
     enum Action {
+        case alertCompressFail
+        case backupButtonTapped
+        case closeActivityView
         case dismiss
         case destination(PresentationAction<Destination.Action>)
+        case openActivityView
         case openUpdateNameSheet
         case restoreButtonTapped
+        case setActivityItem(URL)
+        case toggleIsCompressing
         
         enum Alert: Equatable {
+            case compressFail
             case dataRestoreConfirm
         }
     }
     
     @Dependency(\.dismiss) var dismiss
-    
+    @Dependency(\.fileManagerService) var fileManagerService
+
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
+            // alert CompressFail
+            case .alertCompressFail:
+                state.destination = .alert(.compressFail())
+                return .none
+            // 백업 버튼 탭
+            case .backupButtonTapped:
+                return .concatenate(
+                    .run { send in
+                        await send(.toggleIsCompressing)
+                        try await Task.sleep(for: .seconds(0.5))
+                    },
+                    .run { send in
+                        let stream = self.fileManagerService.compressData()
+                        do {
+                            for try await item in stream {
+                                await send(.setActivityItem(item))
+                            }
+                        } catch {
+                            await send(.toggleIsCompressing)
+                            await send(.alertCompressFail)
+                        }
+                    }
+                )
+            // ActivityView 닫기
+            case .closeActivityView:
+                state.isActivityViewPresented = false
+                return .none
             // 뒤로가기
             case .dismiss:
                 return .run { send in
                     await self.dismiss()
                 }
+            // alert - 압축 실패
+            case .destination(.presented(.alert(.compressFail))):
+                return .none
             // alert - 복원 전에 백업해주세요
             case .destination(.presented(.alert(.dataRestoreConfirm))):
-                // 복원
+                // TODO: - 복원
+                return .none
+            // ActivityView 열기
+            case .openActivityView:
+                state.isActivityViewPresented = true
                 return .none
             //
             case .destination:
@@ -70,6 +120,22 @@ struct SettingViewFeature {
             // 복원 버튼 탭
             case .restoreButtonTapped:
                 state.destination = .alert(.dataRestoreConfirm())
+                return .none
+            // 'activityItem' 값 채우기 ( 압축 파일 )
+            case let .setActivityItem(result):
+                let item = ActivityItemSource(url: result)
+                state.activityItem = ActivityItem(items: [item])
+                return .concatenate(
+                    .run { send in
+                        await send(.toggleIsCompressing)
+                    },
+                    .run { send in
+                        await send(.openActivityView)
+                    }
+                )
+            // 'isCompressing' 토글
+            case .toggleIsCompressing:
+                state.isCompressing.toggle()
                 return .none
             }
         }
@@ -95,6 +161,17 @@ extension AlertState where Action == SettingViewFeature.Action.Alert {
             TextState(AppLocalized.dataRestoreAlertText)
         } actions: {
             ButtonState(role: .none, action: .dataRestoreConfirm) {
+                TextState(AppLocalized.okButton)
+            }
+        }
+    }
+    
+    // 압축 실패 알림
+    static func compressFail() -> Self {
+        Self {
+            TextState(AppLocalized.compressFailAlertText)
+        } actions: {
+            ButtonState(role: .none, action: .compressFail) {
                 TextState(AppLocalized.okButton)
             }
         }
