@@ -41,7 +41,7 @@ enum Formatter {
         var imageDatas: [Data] = []
         for image in images {
             let image = image.resize(newWidth: 300)
-            if let jpegData = image.jpegData(compressionQuality: 1.0) {
+            if let jpegData = image.jpegData(compressionQuality: 0.2) {
                 imageDatas.append(jpegData)
             } else if let pngData = image.pngData() {
                 imageDatas.append(pngData)
