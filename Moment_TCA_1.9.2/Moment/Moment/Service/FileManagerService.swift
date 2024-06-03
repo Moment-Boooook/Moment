@@ -16,11 +16,12 @@ struct FileManagerService {
     private static let fileManager = FileManager.default
     
     var compressData: () -> AsyncThrowingStream<URL, Error>
-    var restoreData: () -> Void
+    var restoreData: (URL) throws -> Void
 }
 
 extension FileManagerService: DependencyKey {
     static let liveValue = Self(
+        // 백업을 위한, 압축
         compressData: {
             AsyncThrowingStream<URL, Error> { continuation in
                 // 기존 SwiftData 파일들
@@ -50,8 +51,33 @@ extension FileManagerService: DependencyKey {
                 continuation.yield(temporaryDirectoryURL)
             }
         },
-        restoreData: {
-            //
+        // 복원 + 복원을 위한 압축 해제
+        restoreData: { url in
+            // 기존 SwiftData 파일들
+            guard let swiftDataFiles = getSwiftDataFiles() else {
+                throw BackupAndRestoreError.backup
+            }
+            // 이미 존재하는지 확인 / 삭제
+            do {
+                for swiftDataFileURL in swiftDataFiles {
+                    if fileManager.fileExists(atPath: swiftDataFileURL.path) {
+                        try fileManager.removeItem(at: swiftDataFileURL)
+                    }
+                }
+            } catch {
+                throw BackupAndRestoreError.fileManager
+            }
+            // 파일 압축 해제
+            guard let documentsDir = fileManager.urls(for: .applicationSupportDirectory,
+                                                      in: .userDomainMask).first
+            else {                 
+                throw BackupAndRestoreError.fileManager
+            }
+            do {
+                try decompressFiles(from: url, to: documentsDir)
+            } catch {
+                throw CompressionError.decompress
+            }
         }
     )
 }
@@ -102,16 +128,13 @@ extension FileManagerService {
     // 해제
     private static func decompressFiles(
         from sourceURL: URL,
-        to destinationDirectory: URL
+        to destinationURL: URL
     ) throws {
         do {
-            let archive = try Archive(url: sourceURL,
-                                      accessMode: .read)
-            for entry in archive {
-                let destinationURL = destinationDirectory.appendingPathComponent(entry.path)
-                let _ = try archive.extract(entry, to: destinationURL)
-            }
-            return
+            try fileManager.createDirectory(at: destinationURL,
+                                            withIntermediateDirectories: true,
+                                            attributes: nil)
+            try fileManager.unzipItem(at: sourceURL, to: destinationURL)
         } catch {
             throw CompressionError.decompress
         }

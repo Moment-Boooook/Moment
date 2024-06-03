@@ -93,6 +93,10 @@ enum AppLocalized {
     static let compressFailAlertText = """
                                     백업을 위한 파일 생성에 실패했어요
                                     다시 한번 시도해주세요!
+                                    """    
+    static let decompressFailAlertText = """
+                                    데이터 복원에 실패했어요
+                                    다시 한번 시도해주세요!
                                     """
     static let updateNameTitle = "수정할 닉네임을 작성해주세요"
     static let nameTitle = "수정할 닉네임을 작성해주세요"

@@ -53,12 +53,6 @@ struct SettingView: View {
                     }
                     VStack(alignment: .leading, spacing: 6) {
                         // 백업
-//                        ShareLink(item: "??",
-//                                  subject: Text("???"),
-//                                  message: Text("???")
-//                        ) {
-//                            Image(systemName: "square.and.arrow.up")
-//                        }
                         Button {
                             store.send(.backupButtonTapped)
                         } label: {
@@ -83,6 +77,9 @@ struct SettingView: View {
                             }
                             .modifier(SettingListCell(width: geoWidth - 40))
                         }
+                        .background(
+                            DocumentPickerView(store: store)
+                        )
                     }
                     //
                     CustomListDivider()
@@ -162,7 +159,7 @@ struct SettingView: View {
                 }
             }
             // 백업 / 복원 시, 로딩 로티 뷰
-            if store.isCompressing {
+            if store.isCompressing || store.isDecompressing {
                 LottieLoadingView()
                     .zIndex(1)
             }

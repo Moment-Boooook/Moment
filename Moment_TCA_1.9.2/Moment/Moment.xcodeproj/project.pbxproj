@@ -79,6 +79,7 @@
 		09F6C0572BC0069900C8DBC7 /* APIKEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09F6C0562BC0069900C8DBC7 /* APIKEY.plist */; };
 		09F9EFEC2C057D5C009DE3A0 /* URL +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9EFEB2C057D5C009DE3A0 /* URL +.swift */; };
 		09F9EFEE2C059CC5009DE3A0 /* TextWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9EFED2C059CC5009DE3A0 /* TextWrapper.swift */; };
+		09F9EFF82C097E33009DE3A0 /* DocumentPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9EFF72C097E33009DE3A0 /* DocumentPickerView.swift */; };
 		2CA6BED92B2733E0002E3589 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6BED82B2733E0002E3589 /* CustomTextField.swift */; };
 		2CBA62CE2B2A282500D075B7 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBA62CD2B2A282500D075B7 /* SplashView.swift */; };
 		7B39C0C72B2ADC7400460278 /* UIImage +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39C0C62B2ADC7400460278 /* UIImage +.swift */; };
@@ -169,6 +170,7 @@
 		09F6C0562BC0069900C8DBC7 /* APIKEY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = APIKEY.plist; path = "../../../../흐르미/모멘트/APIKEY.plist"; sourceTree = "<group>"; };
 		09F9EFEB2C057D5C009DE3A0 /* URL +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL +.swift"; sourceTree = "<group>"; };
 		09F9EFED2C059CC5009DE3A0 /* TextWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWrapper.swift; sourceTree = "<group>"; };
+		09F9EFF72C097E33009DE3A0 /* DocumentPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerView.swift; sourceTree = "<group>"; };
 		2CA6BED82B2733E0002E3589 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2CBA62CD2B2A282500D075B7 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		7B39C0C62B2ADC7400460278 /* UIImage +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage +.swift"; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				0922B48F2BF649E900375953 /* UpdateUserNameView.swift */,
 				0922B4912BF6514900375953 /* UpdateUserNameFeature.swift */,
 				0922B49E2BFD166400375953 /* ActivityView.swift */,
+				09F9EFF72C097E33009DE3A0 /* DocumentPickerView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 				B1C938592B27E294006EFB70 /* CustomListDivider.swift in Sources */,
 				7B39C0C72B2ADC7400460278 /* UIImage +.swift in Sources */,
 				2CBA62CE2B2A282500D075B7 /* SplashView.swift in Sources */,
+				09F9EFF82C097E33009DE3A0 /* DocumentPickerView.swift in Sources */,
 				09B59C792BB59153009900E5 /* BookShelf.swift in Sources */,
 				09B59C812BB68AA5009900E5 /* Constants.swift in Sources */,
 				09B59C672BB4088D009900E5 /* HomeView.swift in Sources */,

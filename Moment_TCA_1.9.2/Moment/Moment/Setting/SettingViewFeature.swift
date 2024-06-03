@@ -24,8 +24,13 @@ struct SettingViewFeature {
         var isActivityViewPresented: Bool = false
         var activityItem: ActivityItem?
         
+        // document picker
+        var isDocumentPickerViewPresented: Bool = false
+        var selectedFileURL: URL?
+        
         // backup & restore
         var isCompressing: Bool = false
+        var isDecompressing: Bool = false
         
         // 앱 버전
         var version: String? {
@@ -43,18 +48,23 @@ struct SettingViewFeature {
     
     enum Action {
         case alertCompressFail
+        case alertDecompressFail
         case backupButtonTapped
         case closeActivityView
+        case closeDocumentPickerView
         case dismiss
         case destination(PresentationAction<Destination.Action>)
         case openActivityView
         case openUpdateNameSheet
         case restoreButtonTapped
         case setActivityItem(URL)
+        case setSelectedFileURL(URL?)
         case toggleIsCompressing
+        case toggleIsDecompressing
         
         enum Alert: Equatable {
             case compressFail
+            case decompressFail
             case dataRestoreConfirm
         }
     }
@@ -68,6 +78,10 @@ struct SettingViewFeature {
             // alert CompressFail
             case .alertCompressFail:
                 state.destination = .alert(.compressFail())
+                return .none
+            // alert DecompressFail
+            case .alertDecompressFail:
+                state.destination = .alert(.decompressFail())
                 return .none
             // 백업 버튼 탭
             case .backupButtonTapped:
@@ -92,6 +106,10 @@ struct SettingViewFeature {
             case .closeActivityView:
                 state.isActivityViewPresented = false
                 return .none
+            // DocumentPickerView 닫기
+            case .closeDocumentPickerView:
+                state.isDocumentPickerViewPresented = false
+                return .none
             // 뒤로가기
             case .dismiss:
                 return .run { send in
@@ -102,7 +120,7 @@ struct SettingViewFeature {
                 return .none
             // alert - 복원 전에 백업해주세요
             case .destination(.presented(.alert(.dataRestoreConfirm))):
-                // TODO: - 복원
+                state.isDocumentPickerViewPresented = true
                 return .none
             // ActivityView 열기
             case .openActivityView:
@@ -137,6 +155,32 @@ struct SettingViewFeature {
             case .toggleIsCompressing:
                 state.isCompressing.toggle()
                 return .none
+            // 'isDecompressing' 토글
+            case .toggleIsDecompressing:
+                state.isDecompressing.toggle()
+                return .none
+            // 'selectedFileURL' 값 채우기 ( '파일' 에서 압축파일 가져오기 )
+            case let .setSelectedFileURL(url):
+                state.selectedFileURL = url
+                return .concatenate(
+                    .run { send in
+                        await send(.toggleIsDecompressing)
+                        try await Task.sleep(for: .seconds(0.5))
+                    },
+                    .run { [url = state.selectedFileURL] send in
+                        guard let url = url else { return }
+                        do {
+                            try self.fileManagerService.restoreData(url)
+                        } catch {
+                            await send(.toggleIsDecompressing)
+                            await send(.alertDecompressFail)
+                        }
+                    },
+                    .run { send in
+                        await send(.toggleIsDecompressing)
+                    }
+                    // TODO: - 화면 처음으로 돌아가서, SwiftData 다시 불러오기
+                )
             }
         }
         .ifLet(\.$destination, action: \.destination)
@@ -172,6 +216,17 @@ extension AlertState where Action == SettingViewFeature.Action.Alert {
             TextState(AppLocalized.compressFailAlertText)
         } actions: {
             ButtonState(role: .none, action: .compressFail) {
+                TextState(AppLocalized.okButton)
+            }
+        }
+    }
+    
+    // 압축 해제 실패 알림
+    static func decompressFail() -> Self {
+        Self {
+            TextState(AppLocalized.decompressFailAlertText)
+        } actions: {
+            ButtonState(role: .none, action: .decompressFail) {
                 TextState(AppLocalized.okButton)
             }
         }
