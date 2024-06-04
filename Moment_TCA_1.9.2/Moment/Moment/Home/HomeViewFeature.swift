@@ -34,6 +34,15 @@ struct HomeViewFeature {
         let options = HomeSegment.allCases                      // 세그먼트 - 옵션 목록
         let localNames = LocalName.allCases                     // 지역 명 리스트
         
+        mutating func fetchUserName() {
+            @Dependency(\.swiftDataService) var swiftData
+            do {
+                self.userName = try swiftData.fetchUserName()
+            } catch {
+                print("error :: fetchUserName", error.localizedDescription)
+            }
+        }
+        
         mutating func fetchBooks() {
             @Dependency(\.swiftDataService) var swiftData
             do {
@@ -61,6 +70,7 @@ struct HomeViewFeature {
         case fetchBooks
         case fetchRecords
         case fetchRecordDictionary
+        case fetchUserName
         case removeSearchText
         case path(StackAction<Path.State, Path.Action>)
         case searchButtonTapped
@@ -119,6 +129,10 @@ struct HomeViewFeature {
                     }
                 }
                 return .none
+            // 유저 fetch
+            case .fetchUserName:
+                state.fetchUserName()
+                return .none
             // 서치바 - 텍스트 삭제
             case .removeSearchText:
                 state.searchText = .empty
@@ -139,6 +153,15 @@ struct HomeViewFeature {
                     return .none
                 case .element(id: _, action: .recordDetail(.refetchBooksAndRecords)):
                     return .run { @MainActor send in
+                        send(.fetchBooks)
+                        send(.fetchRecords)
+                    }
+                case .element(id: _, action: .setting(.initialNavigationStack)):
+                    state.path.removeAll()
+                    return .none
+                case .element(id: _, action: .setting(.refetchBooksAndRecords)):
+                    return .run { @MainActor send in
+                        send(.fetchUserName)
                         send(.fetchBooks)
                         send(.fetchRecords)
                     }

@@ -54,8 +54,10 @@ struct SettingViewFeature {
         case closeDocumentPickerView
         case dismiss
         case destination(PresentationAction<Destination.Action>)
+        case initialNavigationStack
         case openActivityView
         case openUpdateNameSheet
+        case refetchBooksAndRecords
         case restoreButtonTapped
         case setActivityItem(URL)
         case setSelectedFileURL(URL?)
@@ -122,6 +124,9 @@ struct SettingViewFeature {
             case .destination(.presented(.alert(.dataRestoreConfirm))):
                 state.isDocumentPickerViewPresented = true
                 return .none
+            // 첫 화면으로 돌아가기
+            case .initialNavigationStack:
+                return .none
             // ActivityView 열기
             case .openActivityView:
                 state.isActivityViewPresented = true
@@ -134,6 +139,9 @@ struct SettingViewFeature {
                 state.destination = .updateUserName(
                     UpdateUserNameFeature.State(
                         userName: state.$userName))
+                return .none
+            // 복원 이후, 최초 홈화면에서 refetch 받기 위함
+            case .refetchBooksAndRecords:
                 return .none
             // 복원 버튼 탭
             case .restoreButtonTapped:
@@ -176,10 +184,13 @@ struct SettingViewFeature {
                             await send(.alertDecompressFail)
                         }
                     },
+                    .run { @MainActor send in
+                        send(.refetchBooksAndRecords)
+                        send(.toggleIsDecompressing)
+                    },
                     .run { send in
-                        await send(.toggleIsDecompressing)
+                        await send(.initialNavigationStack)
                     }
-                    // TODO: - 화면 처음으로 돌아가서, SwiftData 다시 불러오기
                 )
             }
         }
