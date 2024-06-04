@@ -172,6 +172,8 @@ private struct CustomShelf: View {
                     books: Shared([]),
                     records: Shared([]),
                     recordDictionary: Shared([:]),
+                    searchedBooks: Shared([]),
+                    searchedRecords: Shared([]),
                     searchText: .empty
                 )
             ) {

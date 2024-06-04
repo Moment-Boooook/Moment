@@ -24,13 +24,15 @@ struct HomeViewFeature {
         @Shared var records: [MomentRecord]                         // 유저의 전체 기록 목록
         @ObservationStateIgnored
         @Shared var recordDictionary: [LocalName: [MomentRecord]]   // 지역 별 기록 딕셔너리
+        @ObservationStateIgnored
+        @Shared var searchedBooks: [MomentBook]                     // 검색 된 책 목록
+        @ObservationStateIgnored
+        @Shared var searchedRecords: [MomentRecord]                 // 검색 된 기록 목록
         
         var path = StackState<Path.State>()                         // 네비게이션 스택 Path
         var selectedOption: HomeSegment = .bookShelf                // 세그먼트 옵션
         var searchText: String = .empty                             // 서치바 - 검색어
         var focusedField: Bool = false                              // 서치바 - focus state
-        var searchedBooks: [MomentBook] = []                        // 검색 된 책 목록
-        var searchedRecords: [MomentRecord] = []                    // 검색 된 기록 목록
         var isSearching = false                                     // 검색 중
         let options = HomeSegment.allCases                          // 세그먼트 - 옵션 목록
         let localNames = LocalName.allCases                         // 지역 명 리스트
@@ -80,6 +82,7 @@ struct HomeViewFeature {
         case setSearchText(String)
         case startSearch
         case toggleSelectedOption(HomeSegment)
+        case updateSearchedBooksAndRecords
     }
     
     @Dependency(\.swiftDataService) var swiftData
@@ -158,6 +161,7 @@ struct HomeViewFeature {
                         send(.fetchBooks)
                         send(.fetchRecords)
                         send(.fetchRecordDictionary)
+                        send(.updateSearchedBooksAndRecords)
                     }
                 case .element(id: _, action: .setting(.initialNavigationStack)):
                     state.path.removeAll()
@@ -204,6 +208,11 @@ struct HomeViewFeature {
             // 세그먼트 - 값 토글
             case let .toggleSelectedOption(newOption):
                 return .send(.changeSelectedOption(newOption), animation: .interactiveSpring)
+            // 삭제 이후, 검색 결과 최신화
+            case .updateSearchedBooksAndRecords:
+                return .run { [searchText = state.searchText] send in
+                    await send(.searchBooksAndRecords(searchText))
+                }
             }
         }
         .forEach(\.path, action: \.path) {
