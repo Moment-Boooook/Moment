@@ -169,29 +169,33 @@ struct SettingViewFeature {
                 return .none
             // 'selectedFileURL' 값 채우기 ( '파일' 에서 압축파일 가져오기 )
             case let .setSelectedFileURL(url):
-                state.selectedFileURL = url
-                return .concatenate(
-                    .run { send in
-                        await send(.toggleIsDecompressing)
-                        try await Task.sleep(for: .seconds(0.5))
-                    },
-                    .run { [url = state.selectedFileURL] send in
-                        guard let url = url else { return }
-                        do {
-                            try self.fileManagerService.restoreData(url)
-                        } catch {
+                if url != nil {
+                    state.selectedFileURL = url
+                    return .concatenate(
+                        .run { send in
                             await send(.toggleIsDecompressing)
-                            await send(.alertDecompressFail)
+                            try await Task.sleep(for: .seconds(0.5))
+                        },
+                        .run { [url = state.selectedFileURL] send in
+                            guard let url = url else { return }
+                            do {
+                                try self.fileManagerService.restoreData(url)
+                            } catch {
+                                await send(.toggleIsDecompressing)
+                                await send(.alertDecompressFail)
+                            }
+                        },
+                        .run { @MainActor send in
+                            send(.refetchBooksAndRecords)
+                            send(.toggleIsDecompressing)
+                        },
+                        .run { send in
+                            await send(.initialNavigationStack)
                         }
-                    },
-                    .run { @MainActor send in
-                        send(.refetchBooksAndRecords)
-                        send(.toggleIsDecompressing)
-                    },
-                    .run { send in
-                        await send(.initialNavigationStack)
-                    }
-                )
+                    )
+                } else {
+                    return .none
+                }
             }
         }
         .ifLet(\.$destination, action: \.destination)
