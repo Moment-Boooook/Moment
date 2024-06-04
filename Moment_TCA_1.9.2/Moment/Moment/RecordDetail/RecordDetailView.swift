@@ -26,14 +26,27 @@ struct RecordDetailView: View {
                     Group {
                         Text("\(store.record.page)\(AppLocalized.page)")
                             .font(.light14)
+//                        TextWrapper(
+//                            text: store.record.paragraph,
+//                            fontSize: 18,
+//                            fontWeight: .Medium
+//                        )
+//                        .padding(.bottom, 20)
                         Text(store.record.paragraph)
                             .font(.medium18)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 20)
+//                        TextWrapper(
+//                            text: store.record.commentary,
+//                            fontSize: 16,
+//                            fontWeight: .Regular
+//                        )
+//                        .padding(.bottom, 20)
                         Text(store.record.commentary)
                             .font(.regular16)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 20)
+                        
                         Text(Formatter.timeToString(timeString: store.record.time))
                             .font(.light14)
                         HStack(spacing: 0) {

@@ -141,7 +141,7 @@
 		09B59C862BB69B99009900E5 /* AddBookViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewFeature.swift; sourceTree = "<group>"; };
 		09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverBookAPIService.swift; sourceTree = "<group>"; };
 		09C31ADD2BDB605400623F5C /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
-		09C31AE32BE0BAD600623F5C /* MomentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		09C31AE32BE0BAD600623F5C /* MomentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MomentTests.xctest; path = "/Users/phang/Desktop/Moment/Moment_TCA_1.9.2/Moment/build/Debug-iphoneos/MomentTests.xctest"; sourceTree = "<absolute>"; };
 		09C31AFC2BE4E8DD00623F5C /* NameSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSettingView.swift; sourceTree = "<group>"; };
 		09C31B012BE5131B00623F5C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		09C31B082BE5164100623F5C /* book.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = book.json; path = "../../../../../../흐르미/모멘트/book.json"; sourceTree = "<group>"; };
@@ -257,7 +257,6 @@
 				09AB7CE22B26A1350073EAD5 /* Moment */,
 				09E3B6CB2BC3D866001BC529 /* MomentTests */,
 				09E3B6E22BC3E8D4001BC529 /* Moment.app */,
-				09C31AE32BE0BAD600623F5C /* MomentTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
