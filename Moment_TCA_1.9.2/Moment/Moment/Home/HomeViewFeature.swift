@@ -29,7 +29,6 @@ struct HomeViewFeature {
         var selectedOption: HomeSegment = .bookShelf                // 세그먼트 옵션
         var searchText: String = .empty                             // 서치바 - 검색어
         var focusedField: Bool = false                              // 서치바 - focus state
-//        var recordDictionary = [LocalName: [MomentRecord]]()        // 지역 별 기록 딕셔너리
         var searchedBooks: [MomentBook] = []                        // 검색 된 책 목록
         var searchedRecords: [MomentRecord] = []                    // 검색 된 기록 목록
         var isSearching = false                                     // 검색 중

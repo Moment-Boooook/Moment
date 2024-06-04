@@ -76,6 +76,7 @@ struct AddRecordView: View {
                         .padding(.bottom, 20)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled(true)
+                        .submitLabel(.next)
                         .onSubmit {
                             store.send(.changeFocusedField)
                         }
@@ -88,6 +89,7 @@ struct AddRecordView: View {
                         .focused($focusedField, equals: .paragraph)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled(true)
+                        .submitLabel(.next)
                         .onSubmit {
                             store.send(.changeFocusedField)
                         }
