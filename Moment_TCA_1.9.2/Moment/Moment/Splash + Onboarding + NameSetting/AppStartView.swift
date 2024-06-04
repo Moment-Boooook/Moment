@@ -19,6 +19,8 @@ struct AppStartView: View {
                 SplashView(store: store)
             } else if !store.isOnboardingCompleted {
                 OnboardingView(store: store)
+            } else {
+                NameSettingView(store: store)
             }
         }
     }
@@ -27,7 +29,8 @@ struct AppStartView: View {
 #Preview {
     AppStartView(
         store: Store(
-            initialState: AppStartFeature.State(books: Shared([]),
+            initialState: AppStartFeature.State(userName: Shared(.empty),
+                                                books: Shared([]),
                                                 records: Shared([]))
         ) {
             AppStartFeature()

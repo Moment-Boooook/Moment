@@ -25,22 +25,21 @@ struct RecordMap: View {
                 ForEach(store.recordDictionary.map { $0.key }, id: \.self) { local in
                     //
                     if let data = store.recordDictionary[local]?.first,
-                       let count = store.recordDictionary[local]?.count,
-                       let records = store.recordDictionary[local] {
-                        Annotation("", coordinate: local.coordinate, anchor: .bottom) {
+                       let count = store.recordDictionary[local]?.count {
+                        Annotation(LocalizedStringKey(.empty), coordinate: local.coordinate, anchor: .bottom) {
                             NavigationLink(
                                 state: HomeViewFeature.Path.State.recordList(
                                     .init(books: store.$books,
                                           records: store.$records,
+                                          recordDictionary: store.$recordDictionary,
                                           usedTo: .usedToMap,
-                                          selectedBook: MomentBook(bookISBN: "",
-                                                                   theCoverOfBook: "",
-                                                                   title: "",
-                                                                   author: "",
-                                                                   publisher: "",
-                                                                   plot: ""),
-                                          localName: local.rawValue,
-                                          recordsOfLocal: records))) {
+                                          selectedBook: MomentBook(bookISBN: .empty,
+                                                                   theCoverOfBook: .empty,
+                                                                   title: .empty,
+                                                                   author: .empty,
+                                                                   publisher: .empty,
+                                                                   plot: .empty),
+                                          localName: local))) {
                                 MarkerButton(size: 65,
                                              innerSize: 60,
                                              data: data)
@@ -82,7 +81,7 @@ private struct MarkerButton: View {
                         .frame(width: 60, height: 60)
                         .clipShape(.rect(cornerRadius: 8))
                 } else {
-                    Image("defaultImage")
+                    Image(AppLocalized.defaultImage)
                         .resizable()
                         .frame(width: innerSize, height: innerSize)
                         .clipShape(.rect(cornerRadius: 8))
@@ -162,7 +161,7 @@ private struct NotificationCount: View {
                     .position(x: x, y: y)
                     .font(.light20)
             } else {
-                Text("99+")
+                Text(AppLocalized.moreThanHundred)
                     .foregroundStyle(.white)
                     .position(x: x, y: y)
                     .font(.light20)
@@ -175,9 +174,13 @@ private struct NotificationCount: View {
     RecordMap(
         store: Store(
             initialState: HomeViewFeature.State(
+                userName: Shared(.empty),
                 books: Shared([]),
                 records: Shared([]),
-                searchText: ""
+                recordDictionary: Shared([:]),
+                searchedBooks: Shared([]),
+                searchedRecords: Shared([]),
+                searchText: .empty
             )
         ) {
             HomeViewFeature()

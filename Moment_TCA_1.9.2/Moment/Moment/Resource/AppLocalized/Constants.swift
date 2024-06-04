@@ -85,21 +85,24 @@ enum LocalName: String, CaseIterable {
 
 // MARK: - 네트워크 에러
 enum NetworkError: Error {
-    case invalidURL
-    case badConnection
-    case invalidResponse
-    case invalidData
+    case clientError
+    case serverError
+    case unknownError
+    case errorInUrl
+    case errorDecoding
     
     var errorMessage: String {
         switch self {
-        case .invalidURL:
-            return "This is not correct url"
-        case .badConnection:
-            return "We got some error. check the internet."
-        case .invalidResponse:
-            return "Invaild response"
-        case .invalidData:
-            return "해당하는 책이 없습니다."
+        case .clientError:
+            return "클라이언트 오류"
+        case .serverError:
+            return "서버 오류"
+        case .unknownError:
+            return "알 수 없는 오류"
+        case .errorInUrl:
+            return "잘못된 URL"
+        case .errorDecoding:
+            return "디코딩 실패"
         }
     }
 }
@@ -114,4 +117,36 @@ enum LocationManagerError: Error {
 // MARK: - HTTP Method
 enum HTTPMethod: String {
     case get = "GET"
+}
+
+// MARK: - HTTP Response Status
+enum HttpResponseStatus {
+    static let ok = 200...299
+    static let clientError = 400...499
+    static let serverError = 500...599
+}
+
+// MARK: - Naver API
+enum Endpoint {
+    static let naverAPIURL = "https://openapi.naver.com/v1/search/book.json?query="
+    static let displayCount = "&display=20"
+    static let startPoint = "&start="
+    static let sortType = "&sort=sim"
+    static let naverAPIContentType = "application/json"
+    static let headerFieldType = "Content-Type"
+    static let headerFieldID = "X-Naver-Client-Id"
+    static let headerFieldSecret = "X-Naver-Client-Secret"
+}
+
+// MARK: - 압축 / 해제 관련 에러
+enum CompressionError: Error {
+    case compress
+    case decompress
+}
+
+// MARK: - 백업 / 복원 관련 에러
+enum BackupAndRestoreError: Error {
+    case backup
+    case restore
+    case fileManager
 }

@@ -31,13 +31,13 @@ struct RecordListView: View {
                 Button {
                     store.send(.dismiss)
                 } label: {
-                     Image(systemName: "chevron.left")
+                    Image(systemName: AppLocalized.beforeImage)
                         .aspectRatio(contentMode: .fit)
                 }
             }
             ToolbarItem(placement: .principal) {
-                Text(store.usedTo == .usedToShelf ? store.selectedBook.title : store.localName)
-                    .fontWeight(.semibold)
+                Text(store.usedTo == .usedToShelf ? store.selectedBook.title : store.localName.rawValue)
+                    .font(.semibold18)
                     .foregroundStyle(.darkBrown)
                     .lineLimit(1)
             }
@@ -46,7 +46,7 @@ struct RecordListView: View {
                     Button {
                         store.send(.toggledBookDataDialog)
                     } label: {
-                        Image(systemName: "info.circle")
+                        Image(systemName: AppLocalized.infoImage)
                             .aspectRatio(contentMode: .fit)
                     }
                 }
@@ -64,7 +64,6 @@ struct RecordListView: View {
                     VStack(alignment: .leading) {
                         //
                         RecordTitleTag(title: String(year))
-                            .padding(.horizontal, 20)
                         ForEach(recordsOfBook, id: \.id) { record in
                             //
                             CustomListDivider()
@@ -87,7 +86,7 @@ struct RecordListView: View {
                             }
                         }
                     }
-                    .padding(.top, 20)
+                    .padding([.horizontal, .top], 20)
                     .padding(.bottom, 40)
                 }
             }
@@ -106,7 +105,6 @@ struct RecordListView: View {
                 VStack(alignment: .leading) {
                     //
                     RecordTitleTag(title: book.title)
-                        .padding(.horizontal, 20)
                     ForEach(recordsOfLocal, id: \.id) { record in
                         //
                         CustomListDivider()
@@ -123,7 +121,7 @@ struct RecordListView: View {
                         }
                     }
                 }
-                .padding(.top, 20)
+                .padding([.horizontal, .top], 20)
                 .padding(.bottom, 40)
             }
         }
@@ -145,7 +143,7 @@ struct RecordListView: View {
                                   bottomTrailingRadius: 10.0, topTrailingRadius: 10.0)
                         )
                 } else {
-                    Image("defaultImage") // 임시 이미지
+                    Image(AppLocalized.defaultImage) // 임시 이미지
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 90, height: 90)
@@ -172,7 +170,6 @@ struct RecordListView: View {
                 }
             }
         }
-        .padding(.horizontal, 20)
     }
     
     // MARK: - 책 간단 상세 정보 보여주는 다이얼로그
@@ -194,7 +191,7 @@ struct RecordListView: View {
                     Button {
                         store.send(.toggledBookDataDialog)
                     } label: {
-                        Image(systemName: "xmark")
+                        Image(systemName: AppLocalized.xImage)
                             .frame(width: 24, height: 24)
                     }
                     .tint(.darkBrown)
@@ -205,21 +202,21 @@ struct RecordListView: View {
                     .frame(height: 1)
                 // 책 - 작가, 출판사, 줄거리
                 HStack(alignment: .top, spacing: 10) {
-                    Text("지은이")
+                    Text(AppLocalized.author)
                         .font(.medium16)
                     Text(store.selectedBook.author)
                         .font(.light16)
                         .lineLimit(2)
                 }
                 HStack(alignment: .top, spacing: 10) {
-                    Text("출판사")
+                    Text(AppLocalized.publisher)
                         .font(.medium16)
                     Text(store.selectedBook.publisher)
                         .font(.light16)
                         .lineLimit(2)
                 }
                 HStack(alignment: .top, spacing: 10) {
-                    Text("줄거리")
+                    Text(AppLocalized.plot)
                         .font(.medium16)
                     ScrollView {
                         VStack {

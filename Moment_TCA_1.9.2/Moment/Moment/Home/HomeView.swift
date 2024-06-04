@@ -24,8 +24,18 @@ struct HomeView: View {
                     // 책장
                     case .bookShelf:
                         VStack(spacing: 20) {
-                            // 서치바
-                            searchBar()
+                            HStack(alignment: .center, spacing: 20) {
+                                // 서치바
+                                searchBar()
+                                    .frame(width: store.focusedField ? size.width - 40 : size.width - 100)
+                                    .animation(.easeInOut(duration: 0.3),
+                                               value: store.focusedField)
+                                if !store.focusedField {
+                                    // 설정
+                                    settingButton()
+                                        .transition(AnyTransition.opacity.animation(.easeInOut))
+                                }
+                            }
                             // 세그먼트
                             segment()
                             // 책장 뷰
@@ -40,8 +50,22 @@ struct HomeView: View {
                             // 지도 뷰
                             RecordMap(store: store)
                             VStack(spacing: 20) {
-                                // 서치바
-                                searchBar()
+                                HStack(alignment: .center, spacing: 20) {
+                                    // 서치바
+                                    searchBar()
+                                        .frame(width: store.focusedField ? size.width - 40 : size.width - 100)
+                                        .animation(.easeInOut(duration: 0.3),
+                                                   value: store.focusedField)
+                                    if !store.focusedField {
+                                        // 설정
+                                        settingButton()
+                                            .transition(
+                                                AnyTransition
+                                                    .opacity
+                                                    .animation(.easeInOut)
+                                            )
+                                    }
+                                }
                                 // 세그먼트
                                 segment()
                             }
@@ -73,6 +97,10 @@ struct HomeView: View {
                     if let store = store.scope(state: \.imageFull, action: \.imageFull) {
                         ImageFullView(store: store)
                     }
+                case .setting:
+                    if let store = store.scope(state: \.setting, action: \.setting) {
+                        SettingView(store: store)
+                    }
                 }
             }
             .tint(.darkBrown)
@@ -87,13 +115,14 @@ struct HomeView: View {
     private func searchBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             // 검색 심볼
-            Image(systemName: "magnifyingglass")
+            Image(systemName: AppLocalized.searchImage)
                 .foregroundStyle(.secondary)
                 .padding(.leading, 14)
             //
             Spacer()
             // 검색 창
-            TextField("책 제목 검색", text: $store.searchText.sending(\.setSearchText))
+            TextField(AppLocalized.searchBookTitle,
+                      text: $store.searchText.sending(\.setSearchText))
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled(true)
                 .focused($focusedField)
@@ -102,29 +131,21 @@ struct HomeView: View {
                         store.send(.searchButtonTapped)
                     }
                 }
+                .onChange(of: store.searchText) {
+                    if store.searchText.isEmpty {
+                        store.send(.endSearch)
+                    }
+                }
+                .submitLabel(.search)
             // 검색어 지우기
             if !store.searchText.isEmpty {
                 Button {
                     store.send(.removeSearchText)
-                    store.send(.endSearch)
                 } label: {
-                    Image(systemName: "xmark")
+                    Image(systemName: AppLocalized.xImage)
                         .foregroundStyle(.mainBrown)
                 }
                 .padding(.horizontal, 14)
-            }
-            // 검색 버튼
-            Button {
-                if !store.searchText.isEmpty {
-                    store.send(.searchButtonTapped)
-                }
-            } label: {
-                Text("검색")
-                    .padding(.horizontal, 20)
-                    .frame(height: 40)
-                    .background(.mainBrown)
-                    .foregroundStyle(.white)
-                    .clipShape(.rect(bottomTrailingRadius: 13, topTrailingRadius: 13))
             }
         }
         .bind($store.focusedField, to: $focusedField)
@@ -135,6 +156,20 @@ struct HomeView: View {
             RoundedRectangle(cornerRadius: 15)
                 .stroke(.mainBrown, lineWidth: 2)
         }
+    }
+    
+    // MARK: - 세팅
+    @ViewBuilder
+    private func settingButton() -> some View {
+        NavigationLink(state: HomeViewFeature.Path.State.setting(
+            .init(userName: store.$userName)) ) {
+                Image(systemName: AppLocalized.settingImage)
+                    .resizable()
+                    .aspectRatio(1.0, contentMode: .fit)
+                    .frame(height: 28)
+                    .foregroundStyle(.mainBrown)
+        }
+        .frame(width: 40, height: 40)
     }
     
     // MARK: - 책장 / 지도 Segment
@@ -174,9 +209,13 @@ struct HomeView: View {
     HomeView(
         store: Store(
             initialState: HomeViewFeature.State(
+                userName: Shared(.empty),
                 books: Shared([]),
                 records: Shared([]),
-                searchText: ""
+                recordDictionary: Shared([:]),
+                searchedBooks: Shared([]),
+                searchedRecords: Shared([]),
+                searchText: .empty
             )
         ) {
             HomeViewFeature()

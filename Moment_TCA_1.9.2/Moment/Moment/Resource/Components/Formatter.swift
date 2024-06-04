@@ -11,7 +11,9 @@ import MapKit
 // MARK: - Formatter
 enum Formatter {
     // 시간 받아서 YYYY / MM월 dd일 / HHmm 로 반환
-    static func formattedDateToString(date: Date) -> (year: Int, monthAndDay: String, time: String) {
+    static func formattedDateToString(
+        date: Date
+    ) -> (year: Int, monthAndDay: String, time: String) {
         var year = Int()
         var monthAndDay = String()
         var time = String()
@@ -41,7 +43,7 @@ enum Formatter {
         var imageDatas: [Data] = []
         for image in images {
             let image = image.resize(newWidth: 300)
-            if let jpegData = image.jpegData(compressionQuality: 1.0) {
+            if let jpegData = image.jpegData(compressionQuality: 0.2) {
                 imageDatas.append(jpegData)
             } else if let pngData = image.pngData() {
                 imageDatas.append(pngData)
@@ -86,7 +88,10 @@ enum Formatter {
     }
     
     // 카메라 포지션 반환 : 기록 디테일 미니 맵에서 사용 (리스트에서 디테일 갈 때 전달)
-    static func getMapCameraPosition(latitude: Double, longitude: Double) -> MapCameraPosition {
+    static func getMapCameraPosition(
+        latitude: Double,
+        longitude: Double
+    ) -> MapCameraPosition {
         return MapCameraPosition.region(
             MKCoordinateRegion(
                 center: CLLocationCoordinate2D(
@@ -95,5 +100,43 @@ enum Formatter {
                 span: MKCoordinateSpan(
                     latitudeDelta: 0.01,
                     longitudeDelta: 0.01)))
+    }
+    
+    // TextView 의 높이를 구하는 메서드 - TextWrapper
+    static func getTextViewHeight(
+        text: String,
+        fontSize: CGFloat,
+        fontWeight: FontType
+    ) -> CGFloat {
+        let font = convertCustomFontToUIFont(
+            fontSize: fontSize,
+            fontWeight: fontWeight)
+        
+        return (text as NSString)
+            .size(withAttributes: [
+                    NSAttributedString.Key.font: font])
+            .height
+    }
+    
+    // custom 폰트를 UIFont 로 바꾸는 메서드 - TextWrapper
+    static func convertCustomFontToUIFont(
+        fontSize: CGFloat,
+        fontWeight: FontType
+    ) -> UIFont {
+        let customFontName = fontWeight.name
+        
+        let weight: UIFont.Weight = if fontWeight == .Bold {
+            UIFont.Weight.bold
+        } else if fontWeight == .SemiBold {
+            UIFont.Weight.semibold
+        } else if fontWeight == .Medium {
+            UIFont.Weight.medium
+        } else if fontWeight == .Regular {
+            UIFont.Weight.regular
+        } else {
+            UIFont.Weight.light
+        }
+        
+        return UIFont(name: customFontName, size: fontSize) ?? UIFont.systemFont(ofSize: fontSize, weight: weight)
     }
 }

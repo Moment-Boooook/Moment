@@ -12,13 +12,19 @@ import ComposableArchitecture
 
 // MARK: - Swift Data 에 데이터 주고 받는 Service
 struct SwiftDataService {
+    @Query private var userName: [MomentUser]
     @Query private var bookList: [MomentBook]
     @Query private var recordList: [MomentRecord]
     
-    var bookListFetch: () throws -> [MomentBook]
-    var recordListFetch: () throws -> [MomentRecord]
+    //
+    var fetchUserName: () throws -> String
+    var fetchBookList: () throws -> [MomentBook]
+    var fetchRecordList: () throws -> [MomentRecord]
+    //
+    var addUserName: (String) throws -> Void
     var addBook: (MomentBook) throws -> Void
     var addRecord: (MomentRecord) throws -> Void
+    //
     var deleteBook: (MomentBook) throws -> Void
     var deleteRecord: (MomentRecord) throws -> Void
 
@@ -31,8 +37,19 @@ struct SwiftDataService {
 
 extension SwiftDataService: DependencyKey {
     static let liveValue = Self(
+        // User Name Fetch
+        fetchUserName: {
+            do {
+                @Dependency(\.databaseService.context) var context
+                let userContext = try context()
+                let descriptor = FetchDescriptor<MomentUser>()
+                return try userContext.fetch(descriptor).first?.name ?? .empty
+            } catch {
+                throw SwiftDataError.fetchError
+            }
+        },
         // Book List Fetch
-        bookListFetch: {
+        fetchBookList: {
             do {
                 @Dependency(\.databaseService.context) var context
                 let bookListContext = try context()
@@ -43,7 +60,7 @@ extension SwiftDataService: DependencyKey {
             }
         },
         // Record List Fetch
-        recordListFetch: {
+        fetchRecordList: {
             do {
                 @Dependency(\.databaseService.context) var context
                 let recordListContext = try context()
@@ -51,6 +68,16 @@ extension SwiftDataService: DependencyKey {
                 return try recordListContext.fetch(descriptor)
             } catch {
                 throw SwiftDataError.fetchError
+            }
+        },
+        // Add User Name
+        addUserName: { userName in
+            do {
+                @Dependency(\.databaseService.context) var context
+                let userContext = try context()
+                userContext.insert(MomentUser(name: userName))
+            } catch {
+                throw SwiftDataError.addError
             }
         },
         // Add Book

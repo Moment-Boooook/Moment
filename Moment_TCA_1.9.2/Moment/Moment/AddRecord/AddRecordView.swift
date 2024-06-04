@@ -41,7 +41,7 @@ struct AddRecordView: View {
                 //
                 VStack(alignment: .leading) {
                     // 현재 위치
-                    Text("현재 위치")
+                    Text(AppLocalized.setCurrentLocation)
                         .font(.regular16)
                     //
                     ZStack {
@@ -59,7 +59,7 @@ struct AddRecordView: View {
                                 // 지도 피커 열기
                                 store.send(.openPickerMap)
                             } label: {
-                                Image(systemName: "map")
+                                Image(systemName: AppLocalized.mapImage)
                                     .foregroundStyle(.lightBrown)
                             }
                             .sheet(isPresented: $store.isPickerMapSheet) {
@@ -69,32 +69,34 @@ struct AddRecordView: View {
                         .padding(10)
                     }
                     //
-                    TextField("위치를 기억할 이름을 지어주세요.",
+                    TextField(AppLocalized.locationAliasSetGuide,
                               text: $store.myLocationAlias.sending(\.setMyLocationAlias))
-                        .textFieldStyle(BorderedTextFieldStyle())
+                        .textFieldStyle(.bordered())
                         .focused($focusedField, equals: .myLocationAlias)
                         .padding(.bottom, 20)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled(true)
+                        .submitLabel(.next)
                         .onSubmit {
                             store.send(.changeFocusedField)
                         }
                     //
-                    Text("기억할 내용")
+                    Text(AppLocalized.setParagraph)
                         .font(.regular16)
-                    TextField("책에서 기억하고자 하는 문장을 적어주세요.",
+                    TextField(AppLocalized.paragraphSetGuide,
                               text: $store.paragraph.sending(\.setParagraph))
-                        .textFieldStyle(BorderedTextFieldStyle())
+                        .textFieldStyle(.bordered())
                         .focused($focusedField, equals: .paragraph)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled(true)
+                        .submitLabel(.next)
                         .onSubmit {
                             store.send(.changeFocusedField)
                         }
                     //
-                    TextField("해당 문장이 있는 페이지를 적어주세요.",
+                    TextField(AppLocalized.pageSetGuide,
                               text: $store.page.sending(\.setPage))
-                        .textFieldStyle(BorderedTextFieldStyle())
+                        .textFieldStyle(.bordered())
                         .focused($focusedField, equals: .page)
                         .keyboardType(.asciiCapableNumberPad)
                         .onSubmit {
@@ -123,7 +125,7 @@ struct AddRecordView: View {
                     Button {
                         store.send(.saveRecord)
                     } label: {
-                        Text(store.isSaveable ? "아직 다 작성되지 않았어요" : "기억 저장하기")
+                        Text(store.isSaveable ? AppLocalized.disableRecordSaveButton : AppLocalized.recordSaveButton)
                             .font(.medium16)
                     }
                     .disabled(store.isSaveable)
@@ -149,7 +151,7 @@ struct AddRecordView: View {
                 Button {
                     store.send(.dismiss)
                 } label: {
-                    Image(systemName: "chevron.left")
+                    Image(systemName: AppLocalized.beforeImage)
                         .aspectRatio(contentMode: .fit)
                 }
             }
@@ -161,9 +163,9 @@ struct AddRecordView: View {
         VStack(alignment: .leading) {
             //
             HStack(alignment: .lastTextBaseline) {
-                Text("사진 등록")
+                Text(AppLocalized.photoSet)
                     .font(.regular16)
-                Text("(최대 3장)")
+                Text(AppLocalized.photoSetLimitGuide)
                     .font(.regular14)
                     .foregroundStyle(.gray1)
             }
@@ -185,27 +187,30 @@ struct AddRecordView: View {
             }
             .scrollIndicators(.hidden)
         }
-        .confirmationDialog("",
+        .confirmationDialog(LocalizedStringKey(.empty),
                             isPresented: $store.showPhotoConfimationDialog,
-                            titleVisibility: .hidden) {
+                            titleVisibility: .hidden
+        ) {
             Button {
                 store.send(.openCamera)
             } label: {
-                Text("카메라")
+                Text(AppLocalized.cameraButton)
             }
             Button {
                 store.send(.openPhotoLibrary)
             } label: {
-                Text("라이브러리")
+                Text(AppLocalized.libraryButton)
             }
         } message: {
-            Text("불러올 사진 위치를 선택해주세요")
+            Text(AppLocalized.photosPickGuide)
         }
         .sheet(isPresented: $store.isCameraSnapSheet) {
             CameraSnap(store: store)
+                .ignoresSafeArea(edges: .all)
         }
         .sheet(isPresented: $store.isPhotoPickerSheet) {
             PhotoPicker(store: store)
+                .ignoresSafeArea(edges: .all)
         }
     }
     
@@ -237,7 +242,7 @@ private struct XmarkOnGrayCircle: View {
                 .fill(.gray2)
                 .opacity(0.6)
                 .frame(width: 28)
-            Image(systemName: "xmark")
+            Image(systemName: AppLocalized.xImage)
                 .foregroundStyle(.white)
                 .fontWeight(.semibold)
         }
@@ -253,12 +258,12 @@ private struct EmptyImageView: View {
             .frame(width: 160, height: 160)
             .overlay {
                 VStack(spacing: 10) {
-                    Image(systemName: "photo")
+                    Image(systemName: AppLocalized.photoImage)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40)
                         .foregroundStyle(.gray2)
-                    Text("사진을 등록하세요!")
+                    Text(AppLocalized.photoSetGuide)
                         .font(.regular14)
                         .foregroundStyle(.gray1)
                 }

@@ -25,7 +25,7 @@ extension LocationManagerService: DependencyKey {
                 Task {
                     // 위치 정보 동의가 이루어질 때까지 대기
                     while manager.authorizationStatus == .notDetermined {
-                        try await Task.sleep(nanoseconds: 100_000_000)  // 0.1초
+                        try await Task.sleep(nanoseconds: AppLocalized.nanosecondPointOne)  // 0.1초
                     }
                     if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
                         manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -54,11 +54,11 @@ extension LocationManagerService: DependencyKey {
                 let clLocation = CLLocation(latitude: latitude,
                                             longitude: longitude)
                 let geoCoder = CLGeocoder()
-                let locale = Locale(identifier: "ko-KR")
+                let locale = Locale(identifier: AppLocalized.localID)
                 let placemarks = try await geoCoder.reverseGeocodeLocation(clLocation, preferredLocale: locale)
                 if let address = placemarks.last {
-                    place = "\(address.country ?? "") \(address.locality ?? "") \(address.name ?? "")"
-                    localName = address.administrativeArea ?? ""
+                    place = "\(address.country ?? .empty) \(address.locality ?? .empty) \(address.name ?? .empty)"
+                    localName = address.administrativeArea ?? .empty
                 }
                 return (latitude, longitude, place, localName)
             }            

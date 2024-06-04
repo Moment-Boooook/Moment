@@ -36,7 +36,7 @@ struct ImageFullView: View {
                         Button {
                             store.send(.dismiss)
                         } label: {
-                            Image(systemName: "chevron.left")
+                            Image(systemName: AppLocalized.beforeImage)
                                 .aspectRatio(contentMode: .fit)
                                 .foregroundStyle(.offBrown)
                         }

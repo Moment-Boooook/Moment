@@ -1,5 +1,5 @@
 //
-//  APIDataModel.swift
+//  BookAPIDataModel.swift
 //  Moment
 //
 //  Created by Minjae Kim on 12/14/23.

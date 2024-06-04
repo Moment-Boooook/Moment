@@ -24,22 +24,35 @@ struct RecordDetailView: View {
                     ImageHorizontalScroll(size: size, images: store.record.photos)
                     // 텍스트
                     Group {
-                        Text("\(store.record.page)페이지")
+                        Text("\(store.record.page)\(AppLocalized.page)")
                             .font(.light14)
+//                        TextWrapper(
+//                            text: store.record.paragraph,
+//                            fontSize: 18,
+//                            fontWeight: .Medium
+//                        )
+//                        .padding(.bottom, 20)
                         Text(store.record.paragraph)
                             .font(.medium18)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 20)
+//                        TextWrapper(
+//                            text: store.record.commentary,
+//                            fontSize: 16,
+//                            fontWeight: .Regular
+//                        )
+//                        .padding(.bottom, 20)
                         Text(store.record.commentary)
                             .font(.regular16)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 20)
+                        
                         Text(Formatter.timeToString(timeString: store.record.time))
                             .font(.light14)
                         HStack(spacing: 0) {
                             Text(store.record.myLocation)
                                 .font(.semibold16)
-                            Text(" 에서의 기억이에요")
+                            Text(AppLocalized.recordMemory) // 에서의 기억이에요
                                 .font(.regular16)
                         }
                     }
@@ -59,20 +72,20 @@ struct RecordDetailView: View {
                     Button {
                         store.send(.dismiss)
                     } label: {
-                         Image(systemName: "chevron.left")
+                        Image(systemName: AppLocalized.beforeImage)
                             .aspectRatio(contentMode: .fit)
                     }
                 }
                 ToolbarItem(placement: .principal) {
-                    Text("\(String(store.record.year))년 \(store.record.monthAndDay)")
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color.darkBrown)
+                    Text("\(String(store.record.year))\(AppLocalized.year) \(store.record.monthAndDay)")
+                        .font(.semibold18)
+                        .foregroundStyle(.darkBrown)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         store.send(.deleteRecordButtonTapped)
                     } label: {
-                         Image(systemName: "trash")
+                        Image(systemName: AppLocalized.trashImage)
                             .aspectRatio(contentMode: .fit)
                     }
                 }
@@ -102,7 +115,7 @@ struct RecordDetailView: View {
                                 .shadow(radius: 3, x: 0, y: 5)
                         }
                     } else {
-                        Image("defaultImage")
+                        Image(AppLocalized.defaultImage)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: max(size.width - 40, 0),
@@ -142,7 +155,7 @@ struct RecordDetailView: View {
                     Circle()
                         .fill(.gray4.opacity(0.8))
                         .frame(width: 40)
-                    Image(systemName: "location")
+                    Image(systemName: AppLocalized.locationImage)
                         .fontWeight(.semibold)
                         .foregroundStyle(.darkBrown)
                 }

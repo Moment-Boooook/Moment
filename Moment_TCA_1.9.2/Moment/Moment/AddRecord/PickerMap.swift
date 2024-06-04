@@ -37,7 +37,7 @@ struct LocationPickerMap: View {
                         Circle()
                             .fill(.white.opacity(0.9))
                             .frame(width: 40)
-                        Image(systemName: "location")
+                        Image(systemName: AppLocalized.locationImage)
                             .foregroundStyle(.darkBrown)
                             .fontWeight(.bold)
                     }
@@ -56,7 +56,7 @@ struct LocationPickerMap: View {
                     }
                     store.isPickerMapSheet = false
                 } label: {
-                    Text("이 위치로 설정하기")
+                    Text(AppLocalized.locationSaveButton)
                         .font(.bold18)
                         .foregroundStyle(.white)
                 }
@@ -103,8 +103,8 @@ final class LocationManager: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     @Published var isChanging: Bool = false
     @Published var latitude: Double = 0
     @Published var longitude: Double = 0
-    @Published var localName: String = ""
-    @Published var place: String = ""
+    @Published var localName: String = .empty
+    @Published var place: String = .empty
     private var manager: CLLocationManager = .init()
     private var currentGeoPoint: CLLocationCoordinate2D?
     
@@ -189,8 +189,8 @@ final class LocationManager: NSObject, ObservableObject, MKMapViewDelegate, CLLo
                 return
             }
             guard let placemark = placemarks?.first else { return }
-            self.place = "\(placemark.country ?? "") \(placemark.locality ?? "") \(placemark.name ?? "")"
-            self.localName = placemark.administrativeArea ?? ""
+            self.place = "\(placemark.country ?? .empty) \(placemark.locality ?? .empty) \(placemark.name ?? .empty)"
+            self.localName = placemark.administrativeArea ?? .empty
         }
     }
 }

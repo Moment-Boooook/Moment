@@ -21,16 +21,16 @@ struct AddRecordViewFeature {
         let myBooks: [MomentBook]                       // 현재 내가 읽은 책 목록
         var latitude: Double = 0                        // 위치 정보 - 위도
         var longitude: Double = 0                       // 위치 정보 - 경도
-        var place: String = ""                          // 위치 정보 - 지역
-        var localName: String = ""                      // 위치 정보 - 국가
-        var myLocationAlias: String = ""                // 내가 장소를 기억할 이름
-        var paragraph: String = ""                      // 기록할 문장
-        var page: String = ""                           // 기록할 페이지
-        var content: String = ""                        // 기록할 내용
+        var place: String = .empty                      // 위치 정보 - 지역
+        var localName: String = .empty                  // 위치 정보 - 국가
+        var myLocationAlias: String = .empty            // 내가 장소를 기억할 이름
+        var paragraph: String = .empty                  // 기록할 문장
+        var page: String = .empty                       // 기록할 페이지
+        var content: String = .empty                    // 기록할 내용
         var selectedImages: [UIImage] = []              // 라이브러리에서 선택된 사진
         var focusedField: Field? = nil                  // focusstate
         var isSaveable: Bool {                          // 기록 저장이 가능한지
-            [myLocationAlias, paragraph, content].contains("") ||
+            [myLocationAlias, paragraph, content].contains(.empty) ||
             page.isEmpty ||
             selectedImages.isEmpty
         }
@@ -254,13 +254,13 @@ extension AlertState where Action == AddRecordViewFeature.Action.Alert {
     // 저장 알림
     static func saveConfirm() -> Self {
         Self {
-            TextState("저장된 기억은 수정할 수 없어요...🥲")
+            TextState(AppLocalized.saveRecordAlertText)
         } actions: {
             ButtonState(role: .cancel, action: .nothing) {
-                TextState("돌아가기")
+                TextState(AppLocalized.backTextButton)
             }
             ButtonState(role: .none, action: .saveRecordConfirm) {
-                TextState("저장하기")
+                TextState(AppLocalized.saveButton)
                     .foregroundColor(.mainBrown)
             }
         }

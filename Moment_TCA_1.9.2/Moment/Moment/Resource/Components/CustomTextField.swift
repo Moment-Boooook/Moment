@@ -9,14 +9,16 @@ import SwiftUI
 
 // MARK: - 텍스트필드 커스텀
 struct BorderedTextFieldStyle: TextFieldStyle {
+    var color: Color = .lightBrown
+    
     func _body(configuration: TextField<Self._Label>) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .stroke(.lightBrown)
+                .stroke(color)
                 .foregroundStyle(.clear)
             // TextField
             configuration
-                .font(.regular14)
+                .font(.regular16)
                 .padding(10)
         }
     }
@@ -27,7 +29,7 @@ struct CustomTextField: View {
     var body: some View {
         VStack {
             TextField("TextField Placeholder", text: .constant("example"))
-                .textFieldStyle(BorderedTextFieldStyle())
+                .textFieldStyle(.bordered())
         }
         .frame(height: 10)
         .padding()

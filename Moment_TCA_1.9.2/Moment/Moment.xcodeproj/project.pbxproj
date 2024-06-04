@@ -7,8 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0922B48C2BF60FFC00375953 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B48B2BF60FFC00375953 /* SettingView.swift */; };
+		0922B48E2BF6100900375953 /* SettingViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B48D2BF6100900375953 /* SettingViewFeature.swift */; };
+		0922B4902BF649E900375953 /* UpdateUserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B48F2BF649E900375953 /* UpdateUserNameView.swift */; };
+		0922B4922BF6514900375953 /* UpdateUserNameFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4912BF6514900375953 /* UpdateUserNameFeature.swift */; };
+		0922B4942BF6561300375953 /* String +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4932BF6561300375953 /* String +.swift */; };
+		0922B4962BF673F100375953 /* AppLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4952BF673F100375953 /* AppLocalized.swift */; };
+		0922B4982BFAF02E00375953 /* Date +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B4972BFAF02E00375953 /* Date +.swift */; };
+		0922B49B2BFC83F400375953 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 0922B49A2BFC83F400375953 /* ZIPFoundation */; };
+		0922B49D2BFC931F00375953 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 0922B49C2BFC931F00375953 /* loading.json */; };
+		0922B49F2BFD166400375953 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922B49E2BFD166400375953 /* ActivityView.swift */; };
 		095131622B31216200F6BC4C /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095131612B31216200F6BC4C /* Formatter.swift */; };
-		09731F772B26C5780045F6B4 /* DataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09731F762B26C5780045F6B4 /* DataTest.swift */; };
 		09731F7D2B26C5980045F6B4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09731F7C2B26C5980045F6B4 /* OnboardingView.swift */; };
 		09731F8A2B26D12A0045F6B4 /* CustomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09731F892B26D12A0045F6B4 /* CustomButtons.swift */; };
 		09731F8C2B26D1500045F6B4 /* ButtonStyle +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09731F8B2B26D1500045F6B4 /* ButtonStyle +.swift */; };
@@ -42,6 +51,12 @@
 		09B59C892BB69EA5009900E5 /* NaverBookAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */; };
 		09C31ADE2BDB605400623F5C /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31ADD2BDB605400623F5C /* Shared.swift */; };
 		09C31AE12BDBF33D00623F5C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 09C31AE02BDBF33D00623F5C /* Kingfisher */; };
+		09C31AFD2BE4E8DD00623F5C /* NameSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31AFC2BE4E8DD00623F5C /* NameSettingView.swift */; };
+		09C31B002BE5130300623F5C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 09C31AFF2BE5130300623F5C /* Lottie */; };
+		09C31B022BE5131B00623F5C /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B012BE5131B00623F5C /* LottieView.swift */; };
+		09C31B092BE5164100623F5C /* book.json in Resources */ = {isa = PBXBuildFile; fileRef = 09C31B082BE5164100623F5C /* book.json */; };
+		09C31B0B2BE527AE00623F5C /* TextFieldStyle +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */; };
+		09C31B132BF5D42300623F5C /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C31B122BF5D42200623F5C /* FileManagerService.swift */; };
 		09C4BD5C2BB7068B00AEC83D /* AddRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */; };
 		09C4BD5E2BB7084E00AEC83D /* AddRecordViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */; };
 		09C4BD602BB7220C00AEC83D /* LocationManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */; };
@@ -62,12 +77,14 @@
 		09E3B6E12BC3DA3B001BC529 /* RecordDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3B6E02BC3DA3B001BC529 /* RecordDetailTests.swift */; };
 		09E3B6E52BC418D0001BC529 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3B6E42BC418D0001BC529 /* TestData.swift */; };
 		09F6C0572BC0069900C8DBC7 /* APIKEY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09F6C0562BC0069900C8DBC7 /* APIKEY.plist */; };
+		09F9EFEC2C057D5C009DE3A0 /* URL +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9EFEB2C057D5C009DE3A0 /* URL +.swift */; };
+		09F9EFEE2C059CC5009DE3A0 /* TextWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9EFED2C059CC5009DE3A0 /* TextWrapper.swift */; };
+		09F9EFF82C097E33009DE3A0 /* DocumentPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9EFF72C097E33009DE3A0 /* DocumentPickerView.swift */; };
 		2CA6BED92B2733E0002E3589 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6BED82B2733E0002E3589 /* CustomTextField.swift */; };
 		2CBA62CE2B2A282500D075B7 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBA62CD2B2A282500D075B7 /* SplashView.swift */; };
 		7B39C0C72B2ADC7400460278 /* UIImage +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39C0C62B2ADC7400460278 /* UIImage +.swift */; };
 		7B39C0C92B2ADCE000460278 /* SwiftDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39C0C82B2ADCE000460278 /* SwiftDataModel.swift */; };
-		7B39C0CB2B2AFCC700460278 /* APIDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39C0CA2B2AFCC700460278 /* APIDataModel.swift */; };
-		7BE6E0B72B2820FC00D8842D /* RecordLocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE6E0B62B2820FC00D8842D /* RecordLocalData.swift */; };
+		7B39C0CB2B2AFCC700460278 /* BookAPIDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39C0CA2B2AFCC700460278 /* BookAPIDataModel.swift */; };
 		B1C938592B27E294006EFB70 /* CustomListDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C938582B27E294006EFB70 /* CustomListDivider.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,8 +99,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0922B48B2BF60FFC00375953 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		0922B48D2BF6100900375953 /* SettingViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewFeature.swift; sourceTree = "<group>"; };
+		0922B48F2BF649E900375953 /* UpdateUserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserNameView.swift; sourceTree = "<group>"; };
+		0922B4912BF6514900375953 /* UpdateUserNameFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserNameFeature.swift; sourceTree = "<group>"; };
+		0922B4932BF6561300375953 /* String +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String +.swift"; sourceTree = "<group>"; };
+		0922B4952BF673F100375953 /* AppLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalized.swift; sourceTree = "<group>"; };
+		0922B4972BFAF02E00375953 /* Date +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date +.swift"; sourceTree = "<group>"; };
+		0922B49C2BFC931F00375953 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = loading.json; path = "../../../../../../흐르미/모멘트/loading.json"; sourceTree = "<group>"; };
+		0922B49E2BFD166400375953 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		095131612B31216200F6BC4C /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
-		09731F762B26C5780045F6B4 /* DataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTest.swift; sourceTree = "<group>"; };
 		09731F7C2B26C5980045F6B4 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		09731F892B26D12A0045F6B4 /* CustomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtons.swift; sourceTree = "<group>"; };
 		09731F8B2B26D1500045F6B4 /* ButtonStyle +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle +.swift"; sourceTree = "<group>"; };
@@ -116,7 +141,12 @@
 		09B59C862BB69B99009900E5 /* AddBookViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewFeature.swift; sourceTree = "<group>"; };
 		09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverBookAPIService.swift; sourceTree = "<group>"; };
 		09C31ADD2BDB605400623F5C /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
-		09C31AE32BE0BAD600623F5C /* MomentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		09C31AE32BE0BAD600623F5C /* MomentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MomentTests.xctest; path = "/Users/phang/Desktop/Moment/Moment_TCA_1.9.2/Moment/build/Debug-iphoneos/MomentTests.xctest"; sourceTree = "<absolute>"; };
+		09C31AFC2BE4E8DD00623F5C /* NameSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSettingView.swift; sourceTree = "<group>"; };
+		09C31B012BE5131B00623F5C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		09C31B082BE5164100623F5C /* book.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = book.json; path = "../../../../../../흐르미/모멘트/book.json"; sourceTree = "<group>"; };
+		09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextFieldStyle +.swift"; sourceTree = "<group>"; };
+		09C31B122BF5D42200623F5C /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 		09C4BD5B2BB7068B00AEC83D /* AddRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordView.swift; sourceTree = "<group>"; };
 		09C4BD5D2BB7084E00AEC83D /* AddRecordViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordViewFeature.swift; sourceTree = "<group>"; };
 		09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerService.swift; sourceTree = "<group>"; };
@@ -138,12 +168,14 @@
 		09E3B6E22BC3E8D4001BC529 /* Moment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E3B6E42BC418D0001BC529 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		09F6C0562BC0069900C8DBC7 /* APIKEY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = APIKEY.plist; path = "../../../../흐르미/모멘트/APIKEY.plist"; sourceTree = "<group>"; };
+		09F9EFEB2C057D5C009DE3A0 /* URL +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL +.swift"; sourceTree = "<group>"; };
+		09F9EFED2C059CC5009DE3A0 /* TextWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWrapper.swift; sourceTree = "<group>"; };
+		09F9EFF72C097E33009DE3A0 /* DocumentPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerView.swift; sourceTree = "<group>"; };
 		2CA6BED82B2733E0002E3589 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2CBA62CD2B2A282500D075B7 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		7B39C0C62B2ADC7400460278 /* UIImage +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage +.swift"; sourceTree = "<group>"; };
 		7B39C0C82B2ADCE000460278 /* SwiftDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataModel.swift; sourceTree = "<group>"; };
-		7B39C0CA2B2AFCC700460278 /* APIDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataModel.swift; sourceTree = "<group>"; };
-		7BE6E0B62B2820FC00D8842D /* RecordLocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLocalData.swift; sourceTree = "<group>"; };
+		7B39C0CA2B2AFCC700460278 /* BookAPIDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAPIDataModel.swift; sourceTree = "<group>"; };
 		B1C938582B27E294006EFB70 /* CustomListDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListDivider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +186,8 @@
 			files = (
 				09C31AE12BDBF33D00623F5C /* Kingfisher in Frameworks */,
 				09B59C512BB31F64009900E5 /* ComposableArchitecture in Frameworks */,
+				09C31B002BE5130300623F5C /* Lottie in Frameworks */,
+				0922B49B2BFC83F400375953 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,13 +201,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0922B48A2BF6058700375953 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				0922B48B2BF60FFC00375953 /* SettingView.swift */,
+				0922B48D2BF6100900375953 /* SettingViewFeature.swift */,
+				0922B48F2BF649E900375953 /* UpdateUserNameView.swift */,
+				0922B4912BF6514900375953 /* UpdateUserNameFeature.swift */,
+				0922B49E2BFD166400375953 /* ActivityView.swift */,
+				09F9EFF72C097E33009DE3A0 /* DocumentPickerView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		095DE3C52BF5D8210054E0B2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				09731F892B26D12A0045F6B4 /* CustomButtons.swift */,
+				B1C938582B27E294006EFB70 /* CustomListDivider.swift */,
+				2CA6BED82B2733E0002E3589 /* CustomTextField.swift */,
+				095131612B31216200F6BC4C /* Formatter.swift */,
+				09C31B012BE5131B00623F5C /* LottieView.swift */,
+				09F9EFED2C059CC5009DE3A0 /* TextWrapper.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		095DE3C62BF5D82B0054E0B2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				09AB7D022B26A4310073EAD5 /* Bundle +.swift */,
+				09731F8B2B26D1500045F6B4 /* ButtonStyle +.swift */,
+				09B59C7E2BB68112009900E5 /* MKCoordinateRegion +.swift */,
+				09C31B0A2BE527AE00623F5C /* TextFieldStyle +.swift */,
+				7B39C0C62B2ADC7400460278 /* UIImage +.swift */,
+				0922B4932BF6561300375953 /* String +.swift */,
+				0922B4972BFAF02E00375953 /* Date +.swift */,
+				09F9EFEB2C057D5C009DE3A0 /* URL +.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		095DE3C72BF5D8690054E0B2 /* AppLocalized */ = {
+			isa = PBXGroup;
+			children = (
+				09B59C802BB68AA5009900E5 /* Constants.swift */,
+				0922B4952BF673F100375953 /* AppLocalized.swift */,
+			);
+			path = AppLocalized;
+			sourceTree = "<group>";
+		};
 		09AB7CD72B26A1350073EAD5 = {
 			isa = PBXGroup;
 			children = (
 				09AB7CE22B26A1350073EAD5 /* Moment */,
 				09E3B6CB2BC3D866001BC529 /* MomentTests */,
 				09E3B6E22BC3E8D4001BC529 /* Moment.app */,
-				09C31AE32BE0BAD600623F5C /* MomentTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -183,12 +266,13 @@
 				09AB7CE32B26A1350073EAD5 /* MomentApp.swift */,
 				09B59C5C2BB33AD2009900E5 /* Service */,
 				09B59C522BB32077009900E5 /* AppContent */,
-				09B59C6F2BB577C2009900E5 /* Splash + Onboarding */,
+				09B59C6F2BB577C2009900E5 /* Splash + Onboarding + NameSetting */,
 				09B59C652BB4087A009900E5 /* Home */,
 				09B59C832BB699FE009900E5 /* AddBook */,
 				09C4BD5A2BB705D900AEC83D /* AddRecord */,
 				09C4BD612BBDA03500AEC83D /* RecordList */,
 				09C4BD662BBE417100AEC83D /* RecordDetail */,
+				0922B48A2BF6058700375953 /* Setting */,
 				09AB7D062B26A70A0073EAD5 /* Resource */,
 				09AB7CFE2B26A2C40073EAD5 /* Model */,
 				09AB7CE72B26A1370073EAD5 /* Assets.xcassets */,
@@ -211,9 +295,8 @@
 		09AB7CFE2B26A2C40073EAD5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				09B59C822BB68B3F009900E5 /* DummyData */,
 				7B39C0C82B2ADCE000460278 /* SwiftDataModel.swift */,
-				7B39C0CA2B2AFCC700460278 /* APIDataModel.swift */,
+				7B39C0CA2B2AFCC700460278 /* BookAPIDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -221,17 +304,11 @@
 		09AB7D062B26A70A0073EAD5 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				09AB7D022B26A4310073EAD5 /* Bundle +.swift */,
-				09731F8B2B26D1500045F6B4 /* ButtonStyle +.swift */,
-				09B59C802BB68AA5009900E5 /* Constants.swift */,
-				09731F892B26D12A0045F6B4 /* CustomButtons.swift */,
-				B1C938582B27E294006EFB70 /* CustomListDivider.swift */,
-				2CA6BED82B2733E0002E3589 /* CustomTextField.swift */,
-				09AB7D042B26A5500073EAD5 /* Font +.swift */,
-				095131612B31216200F6BC4C /* Formatter.swift */,
-				09B59C7E2BB68112009900E5 /* MKCoordinateRegion +.swift */,
-				7B39C0C62B2ADC7400460278 /* UIImage +.swift */,
+				095DE3C72BF5D8690054E0B2 /* AppLocalized */,
+				095DE3C62BF5D82B0054E0B2 /* Extensions */,
+				095DE3C52BF5D8210054E0B2 /* Components */,
 				09B59C532BB32267009900E5 /* Font */,
+				09C31B032BE513BF00623F5C /* Lottie */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -260,6 +337,7 @@
 		09B59C532BB32267009900E5 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				09AB7D042B26A5500073EAD5 /* Font +.swift */,
 				09AB7D072B26A7170073EAD5 /* Pretendard */,
 			);
 			path = Font;
@@ -270,6 +348,7 @@
 			children = (
 				09B59C6D2BB540D2009900E5 /* Common.swift */,
 				09B59C5D2BB33AE8009900E5 /* Database.swift */,
+				09C31B122BF5D42200623F5C /* FileManagerService.swift */,
 				09B59C612BB33F4B009900E5 /* SwiftDataService.swift */,
 				09B59C882BB69EA5009900E5 /* NaverBookAPIService.swift */,
 				09C4BD5F2BB7220C00AEC83D /* LocationManagerService.swift */,
@@ -289,24 +368,16 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		09B59C6F2BB577C2009900E5 /* Splash + Onboarding */ = {
+		09B59C6F2BB577C2009900E5 /* Splash + Onboarding + NameSetting */ = {
 			isa = PBXGroup;
 			children = (
 				09B59C722BB577F8009900E5 /* AppStartView.swift */,
 				2CBA62CD2B2A282500D075B7 /* SplashView.swift */,
 				09731F7C2B26C5980045F6B4 /* OnboardingView.swift */,
+				09C31AFC2BE4E8DD00623F5C /* NameSettingView.swift */,
 				09B59C702BB577EC009900E5 /* AppStartFeature.swift */,
 			);
-			path = "Splash + Onboarding";
-			sourceTree = "<group>";
-		};
-		09B59C822BB68B3F009900E5 /* DummyData */ = {
-			isa = PBXGroup;
-			children = (
-				09731F762B26C5780045F6B4 /* DataTest.swift */,
-				7BE6E0B62B2820FC00D8842D /* RecordLocalData.swift */,
-			);
-			path = DummyData;
+			path = "Splash + Onboarding + NameSetting";
 			sourceTree = "<group>";
 		};
 		09B59C832BB699FE009900E5 /* AddBook */ = {
@@ -316,6 +387,15 @@
 				09B59C862BB69B99009900E5 /* AddBookViewFeature.swift */,
 			);
 			path = AddBook;
+			sourceTree = "<group>";
+		};
+		09C31B032BE513BF00623F5C /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				09C31B082BE5164100623F5C /* book.json */,
+				0922B49C2BFC931F00375953 /* loading.json */,
+			);
+			path = Lottie;
 			sourceTree = "<group>";
 		};
 		09C4BD5A2BB705D900AEC83D /* AddRecord */ = {
@@ -383,6 +463,8 @@
 			packageProductDependencies = (
 				09B59C502BB31F64009900E5 /* ComposableArchitecture */,
 				09C31AE02BDBF33D00623F5C /* Kingfisher */,
+				09C31AFF2BE5130300623F5C /* Lottie */,
+				0922B49A2BFC83F400375953 /* ZIPFoundation */,
 			);
 			productName = Moment;
 			productReference = 09E3B6E22BC3E8D4001BC529 /* Moment.app */;
@@ -439,6 +521,9 @@
 			packageReferences = (
 				09B59C4F2BB31F64009900E5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				09C31ADF2BDBF33D00623F5C /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				09C31AE62BE4C52D00623F5C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				09C31AFE2BE5130300623F5C /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				0922B4992BFC83F400375953 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 09AB7CD72B26A1350073EAD5;
 			projectDirPath = "";
@@ -459,6 +544,8 @@
 				09AB7D162B26A73C0073EAD5 /* Pretendard-Bold.otf in Resources */,
 				09AB7D192B26A73C0073EAD5 /* Pretendard-Medium.otf in Resources */,
 				09AB7D122B26A73C0073EAD5 /* Pretendard-SemiBold.otf in Resources */,
+				0922B49D2BFC931F00375953 /* loading.json in Resources */,
+				09C31B092BE5164100623F5C /* book.json in Resources */,
 				09AB7D132B26A73C0073EAD5 /* Pretendard-Light.otf in Resources */,
 				09AB7D142B26A73C0073EAD5 /* Pretendard-Regular.otf in Resources */,
 				09AB7CEB2B26A1370073EAD5 /* Preview Assets.xcassets in Resources */,
@@ -483,23 +570,33 @@
 			files = (
 				09B59C7F2BB68112009900E5 /* MKCoordinateRegion +.swift in Sources */,
 				09C4BD6A2BBE420400AEC83D /* RecordDetailViewFeature.swift in Sources */,
+				09C31AFD2BE4E8DD00623F5C /* NameSettingView.swift in Sources */,
 				09C4BD682BBE41F200AEC83D /* RecordDetailView.swift in Sources */,
 				09C4BD602BB7220C00AEC83D /* LocationManagerService.swift in Sources */,
 				09731F7D2B26C5980045F6B4 /* OnboardingView.swift in Sources */,
+				0922B49F2BFD166400375953 /* ActivityView.swift in Sources */,
 				09B59C852BB69A22009900E5 /* AddBookView.swift in Sources */,
 				09B59C692BB4089A009900E5 /* HomeViewFeature.swift in Sources */,
+				0922B4902BF649E900375953 /* UpdateUserNameView.swift in Sources */,
+				0922B48C2BF60FFC00375953 /* SettingView.swift in Sources */,
+				09C31B0B2BE527AE00623F5C /* TextFieldStyle +.swift in Sources */,
 				09AB7CE62B26A1350073EAD5 /* AppContentView.swift in Sources */,
+				09F9EFEC2C057D5C009DE3A0 /* URL +.swift in Sources */,
+				09C31B022BE5131B00623F5C /* LottieView.swift in Sources */,
 				09C4BD5E2BB7084E00AEC83D /* AddRecordViewFeature.swift in Sources */,
-				09731F772B26C5780045F6B4 /* DataTest.swift in Sources */,
 				B1C938592B27E294006EFB70 /* CustomListDivider.swift in Sources */,
 				7B39C0C72B2ADC7400460278 /* UIImage +.swift in Sources */,
 				2CBA62CE2B2A282500D075B7 /* SplashView.swift in Sources */,
+				09F9EFF82C097E33009DE3A0 /* DocumentPickerView.swift in Sources */,
 				09B59C792BB59153009900E5 /* BookShelf.swift in Sources */,
 				09B59C812BB68AA5009900E5 /* Constants.swift in Sources */,
 				09B59C672BB4088D009900E5 /* HomeView.swift in Sources */,
+				0922B4942BF6561300375953 /* String +.swift in Sources */,
 				09C4BD6E2BBE79F200AEC83D /* ImageFullViewFeature.swift in Sources */,
 				09C4BD652BBDA0FB00AEC83D /* RecordListViewFeature.swift in Sources */,
+				09C31B132BF5D42300623F5C /* FileManagerService.swift in Sources */,
 				09731F8C2B26D1500045F6B4 /* ButtonStyle +.swift in Sources */,
+				0922B4962BF673F100375953 /* AppLocalized.swift in Sources */,
 				09B59C712BB577EC009900E5 /* AppStartFeature.swift in Sources */,
 				095131622B31216200F6BC4C /* Formatter.swift in Sources */,
 				09C31ADE2BDB605400623F5C /* Shared.swift in Sources */,
@@ -509,20 +606,23 @@
 				2CA6BED92B2733E0002E3589 /* CustomTextField.swift in Sources */,
 				09AB7D052B26A5500073EAD5 /* Font +.swift in Sources */,
 				09C4BD632BBDA05000AEC83D /* RecordListView.swift in Sources */,
-				7B39C0CB2B2AFCC700460278 /* APIDataModel.swift in Sources */,
+				7B39C0CB2B2AFCC700460278 /* BookAPIDataModel.swift in Sources */,
 				09B59C732BB577F8009900E5 /* AppStartView.swift in Sources */,
 				09D774FB2B283C2100D45EE6 /* PickerMap.swift in Sources */,
 				09AB7CE42B26A1350073EAD5 /* MomentApp.swift in Sources */,
 				09731F8A2B26D12A0045F6B4 /* CustomButtons.swift in Sources */,
+				09F9EFEE2C059CC5009DE3A0 /* TextWrapper.swift in Sources */,
 				09B59C872BB69B99009900E5 /* AddBookViewFeature.swift in Sources */,
 				09D774F12B275DB700D45EE6 /* PhotoPicker.swift in Sources */,
 				09B59C892BB69EA5009900E5 /* NaverBookAPIService.swift in Sources */,
+				0922B4922BF6514900375953 /* UpdateUserNameFeature.swift in Sources */,
+				0922B4982BFAF02E00375953 /* Date +.swift in Sources */,
+				0922B48E2BF6100900375953 /* SettingViewFeature.swift in Sources */,
 				09B59C622BB33F4B009900E5 /* SwiftDataService.swift in Sources */,
 				7B39C0C92B2ADCE000460278 /* SwiftDataModel.swift in Sources */,
 				09B59C7B2BB5D9D0009900E5 /* RecordMap.swift in Sources */,
 				09C4BD6C2BBE79AB00AEC83D /* ImageFullView.swift in Sources */,
 				09B59C552BB32372009900E5 /* AppContentViewFeature.swift in Sources */,
-				7BE6E0B72B2820FC00D8842D /* RecordLocalData.swift in Sources */,
 				09D774EF2B275D9C00D45EE6 /* CameraSnap.swift in Sources */,
 				09AB7D032B26A4310073EAD5 /* Bundle +.swift in Sources */,
 			);
@@ -692,8 +792,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -728,8 +828,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -815,6 +915,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0922B4992BFC83F400375953 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.19;
+			};
+		};
 		09B59C4F2BB31F64009900E5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
@@ -831,9 +939,30 @@
 				minimumVersion = 7.11.0;
 			};
 		};
+		09C31AE62BE4C52D00623F5C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.25.0;
+			};
+		};
+		09C31AFE2BE5130300623F5C /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0922B49A2BFC83F400375953 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0922B4992BFC83F400375953 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
 		09B59C502BB31F64009900E5 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 09B59C4F2BB31F64009900E5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
@@ -843,6 +972,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 09C31ADF2BDBF33D00623F5C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		09C31AFF2BE5130300623F5C /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09C31AFE2BE5130300623F5C /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

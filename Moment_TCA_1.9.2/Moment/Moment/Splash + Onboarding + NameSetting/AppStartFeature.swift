@@ -16,6 +16,8 @@ struct AppStartFeature {
     @ObservableState
     struct State: Equatable {
         @ObservationStateIgnored
+        @Shared var userName: String
+        @ObservationStateIgnored
         @Shared var books: [MomentBook]
         @ObservationStateIgnored
         @Shared var records: [MomentRecord]
@@ -23,13 +25,32 @@ struct AppStartFeature {
         // splash
         var isAppStarting: Bool = true
         var appLogoDegreeChange: Bool = false
-        // splash / onboarding
+        // onboarding
         var isOnboardingCompleted: Bool = false
+        var currentOnboardingPage: OnboardingPage = .first
+        let onboardingData: [OnboardingData] = [
+            OnboardingData(page: .first),
+            OnboardingData(page: .second),
+            OnboardingData(page: .third)
+        ]
+        // name setting
+        var isSetName: Bool = false
+        var focusedField: Bool = true
+        let maxLength = 12
+        
+        mutating func fetchUserName() {
+            @Dependency(\.swiftDataService) var swiftData
+            do {
+                self.userName = try swiftData.fetchUserName()
+            } catch {
+                print("error :: fetchUserName", error.localizedDescription)
+            }
+        }
         
         mutating func fetchBooks() {
             @Dependency(\.swiftDataService) var swiftData
             do {
-                self.books = try swiftData.bookListFetch()
+                self.books = try swiftData.fetchBookList()
             } catch {
                 print("error :: fetchBooks", error.localizedDescription)
             }
@@ -38,27 +59,35 @@ struct AppStartFeature {
         mutating func fetchRecords() {
             @Dependency(\.swiftDataService) var swiftData
             do {
-                self.records = try swiftData.recordListFetch()
+                self.records = try swiftData.fetchRecordList()
             } catch {
                 print("error :: fetchRecords", error.localizedDescription)
             }
         }
     }
     
-    enum Action {
+    enum Action: BindableAction {
+        case binding(BindingAction<State>)
         // splash
         case appStart
         case degreeChange
         case fetchAllData
+        case fetchUserName
         case fetchBooks
         case fetchRecords
         case fetchOnboardingCompleted
         case quitSplash
         // onboarding
-        case completeOnboarding
-        case refetchCompleteOnboarding
+        case nextPage
+        case setPage(OnboardingPage)
         case setPageIndicator(Color)
         case startButtonTapped
+        // name setting
+        case completeOnboardingAndSetName
+        case refetchCompleteOnboardingAndSetName
+        case removeWhiteSpace(String)
+        case saveName
+        case setName(String)
     }
     
     // Cancellable 에서 사용할 enum
@@ -67,10 +96,16 @@ struct AppStartFeature {
     @Dependency(\.commons) var commons
     @Dependency(\.continuousClock) var clock
     @Dependency(\.naverBookService) var naverBookService
+    @Dependency(\.swiftDataService) var swiftData
     
     var body: some ReducerOf<Self> {
+        BindingReducer()
+
         Reduce { state, action in
             switch action {
+            //
+            case .binding:
+                return .none
             // MARK: - Splah
             // App 시작 시,
             case .appStart:
@@ -94,12 +129,19 @@ struct AppStartFeature {
             case .fetchAllData:
                 return .merge(
                     .run { send in
+                        await send(.fetchUserName)
+                    },
+                    .run { send in
                         await send(.fetchBooks)
                     },
                     .run { send in
                         await send(.fetchRecords)
                     }
                 )
+            // 유저 Name fetch
+            case .fetchUserName:
+                state.fetchUserName()
+                return .none
             // 유저의 책 fetch
             case .fetchBooks:
                 state.fetchBooks()
@@ -110,7 +152,9 @@ struct AppStartFeature {
                 return .none
             // 온보딩 완료 여부 fetch - appstorage
             case .fetchOnboardingCompleted:
-                state.isOnboardingCompleted = commons.isCompleteOnboarding()
+                let isCompleted = commons.isCompleteOnboardingAndSetName()
+                state.isOnboardingCompleted = isCompleted
+                state.isSetName = isCompleted
                 return .run { send in
                     for await _ in self.clock.timer(interval: .seconds(1.75)) {
                         await send(.quitSplash)
@@ -123,13 +167,19 @@ struct AppStartFeature {
                 return .cancel(id: CancelID.timer)
                 
             // MARK: - Onboarding
-            // onboarding 완료
-            case .completeOnboarding:
-                commons.completeOnboarding()
+            // 다음 온보딩 페이지
+            case .nextPage:
+                withAnimation {
+                    if state.currentOnboardingPage == .first {
+                        state.currentOnboardingPage = .second
+                    } else if state.currentOnboardingPage == .second {
+                        state.currentOnboardingPage = .third
+                    }
+                }
                 return .none
-            // 온보딩 완료 여부 refetch - appstorage
-            case .refetchCompleteOnboarding:
-                state.isOnboardingCompleted = commons.isCompleteOnboarding()
+            // 페이지 세팅
+            case let .setPage(page):
+                state.currentOnboardingPage = page
                 return .none
             // onboarding 페이지 스타일 탭뷰 인디케이터 색상 변경
             case let .setPageIndicator(color):
@@ -138,14 +188,43 @@ struct AppStartFeature {
                 return .none
             // 시작하기 버튼 탭
             case .startButtonTapped:
+                state.isOnboardingCompleted = true
+                return .none
+            // MARK: - Name Setting
+            // onboarding 완료
+            case .completeOnboardingAndSetName:
+                commons.completeOnboardingAndSetName()
+                return .none
+            // 온보딩 완료 여부 refetch - appstorage
+            case .refetchCompleteOnboardingAndSetName:
+                state.isSetName = commons.isCompleteOnboardingAndSetName()
+                return .none
+            // removeWhiteSpace
+            case let .removeWhiteSpace(name):
+                state.userName = name.removeWhiteSpace()
+                return .none
+            // 저장 버튼 탭
+            case .saveName:
+                do {
+                    try self.swiftData.addUserName(state.userName)
+                } catch {
+                    print("error :: NameSettingView - saveName()", error.localizedDescription)
+                }
                 return .concatenate(
                     .run { send in
-                        await send(.completeOnboarding)
+                        await send(.fetchUserName)
                     },
                     .run { send in
-                        await send(.refetchCompleteOnboarding)
+                        await send(.completeOnboardingAndSetName)
+                    },
+                    .run { send in
+                        await send(.refetchCompleteOnboardingAndSetName)
                     }
                 )
+            // 이름 설정
+            case let .setName(name):
+                state.userName = name
+                return .none
             }
         }
     }

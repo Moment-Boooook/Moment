@@ -119,10 +119,10 @@ extension AlertState where Action == RecordDetailViewFeature.Action.Alert {
     // 삭제 알림
     static func deleteConfirm() -> Self {
         Self {
-            TextState("기억을 삭제할까요?")
+            TextState(AppLocalized.deleteRecordAlertText)
         } actions: {
             ButtonState(role: .destructive, action: .deleteRecordConfirm) {
-                TextState("삭제하기")
+                TextState(AppLocalized.deleteButton)
             }
         }
     }

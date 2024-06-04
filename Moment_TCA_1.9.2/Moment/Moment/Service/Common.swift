@@ -12,20 +12,21 @@ import ComposableArchitecture
 
 // MARK: - Common
 struct Commons {
-    @AppStorage("isOnboarding")
-    static var isOnboardingCompleted: Bool = false
+    @AppStorage(AppLocalized.onboardingAndSetNameAppStorageData)
+    static var isOnboardingCompletedAndSetName: Bool = false
+    
     //
-    var isCompleteOnboarding: () -> Bool            // 완료 했는지?
-    var completeOnboarding: () -> Void              // 완료로 상태 변경
+    var isCompleteOnboardingAndSetName: () -> Bool            // 완료 했는지?
+    var completeOnboardingAndSetName: () -> Void              // 완료로 상태 변경
 }
 
 extension Commons: DependencyKey {
     public static let liveValue = Self(
-        isCompleteOnboarding: {
-            return isOnboardingCompleted
+        isCompleteOnboardingAndSetName: {
+            return isOnboardingCompletedAndSetName
         },
-        completeOnboarding: {
-            isOnboardingCompleted = true
+        completeOnboardingAndSetName: {
+            isOnboardingCompletedAndSetName = true
         }
     )
 }

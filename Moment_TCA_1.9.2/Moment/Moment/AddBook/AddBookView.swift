@@ -37,16 +37,17 @@ struct AddBookView: View {
                             
                         // 결과 있을 때,
                         } else if !store.searchedBooks.isEmpty {
-                            Text("책 검색 결과")
+                            Text(AppLocalized.bookSearchResult)
                                 .font(.semibold18)
                                 .opacity(store.completedSearch ? 1.0 : 0.0)
                                 .padding(.vertical, 10)
                             // 검색 된 책 목록
-                            BookCellList(searchedBooks: store.searchedBooks)
+                            BookCellList(searchedBooks: store.searchedBooks,
+                                         usedToSearch: true)
                         // 결과 없을 떄,
                         } else {
                             VStack {
-                                Text("책 검색 결과가 없어요.")
+                                Text(AppLocalized.bookSearchEmptyResult)
                                     .font(.semibold18)
                                     .foregroundStyle(.lightBrown)
                                     .opacity(store.completedSearch ? 1.0 : 0.0)
@@ -55,11 +56,12 @@ struct AddBookView: View {
                         }
                     // 검색 안했을 경우,
                     } else {
-                        Text(store.books.isEmpty ? "" : "기억에 남겨진 책")
+                        Text(store.books.isEmpty ? .empty : AppLocalized.bookLeftInMemory)
                             .font(.semibold18)
                             .padding(.vertical, 10)
                         // 기존 보유 책 목록
-                        BookCellList(searchedBooks: store.books)
+                        BookCellList(searchedBooks: store.books,
+                                     usedToSearch: false)
                     }
                 }
             }
@@ -74,13 +76,13 @@ struct AddBookView: View {
                 Button {
                     store.send(.dismiss)
                 } label: {
-                    Image(systemName: "chevron.left")
+                    Image(systemName: AppLocalized.beforeImage)
                         .aspectRatio(contentMode: .fit)
                 }
             }
             ToolbarItem(placement: .principal) {
-                Text("기억하고 싶은 책 선택하기")
-                    .fontWeight(.semibold)
+                Text(AppLocalized.addBookTitle)
+                    .font(.semibold18)
                     .foregroundStyle(.darkBrown)
             }
         }
@@ -91,46 +93,36 @@ struct AddBookView: View {
     private func searchBar() -> some View {
         HStack(alignment: .center, spacing: 0) {
             // 검색 심볼
-            Image(systemName: "magnifyingglass")
+            Image(systemName: AppLocalized.searchImage)
                 .foregroundStyle(.secondary)
                 .padding(.leading, 14)
             //
             Spacer()
             // 검색 창
-            TextField("책 제목 검색", text: $store.searchText.sending(\.setSearchText))
+            TextField(AppLocalized.searchBookTitle,
+                      text: $store.searchText.sending(\.setSearchText))
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled(true)
                 .focused($focusedField)
                 .onSubmit {
                     store.send(.searchButtonTapped)
                 }
+                .submitLabel(.search)
             // 검색어 지우기
             if !store.searchText.isEmpty {
                 Button {
                     store.send(.removeSearchText)
                     store.send(.clearFocusState)
                 } label: {
-                    Image(systemName: "xmark")
+                    Image(systemName: AppLocalized.xImage)
                         .foregroundStyle(.mainBrown)
                 }
                 .padding(.horizontal, 14)
             }
-            // 검색 버튼
-            Button {
-                store.send(.searchButtonTapped)
-                store.send(.clearFocusState)
-            } label: {
-                Text("검색")
-                    .padding(.horizontal, 20)
-                    .frame(height: 40)
-                    .background(.mainBrown)
-                    .foregroundStyle(.white)
-                    .clipShape(.rect(bottomTrailingRadius: 13, topTrailingRadius: 13))
-            }
         }
         .bind($store.focusedField, to: $focusedField)
         .onChange(of: store.searchText) { _, newValue in
-            if newValue == "" {
+            if newValue == .empty {
                 store.send(.endSearch)
             }
         }
@@ -145,33 +137,45 @@ struct AddBookView: View {
     
     // MARK: - 검색 결과 ( 책 목록 )
     @ViewBuilder
-    private func BookCellList(searchedBooks: [SelectedBook]) -> some View {
+    private func BookCellList(
+        searchedBooks: [SelectedBook],
+        usedToSearch: Bool
+    ) -> some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                ForEach(0..<searchedBooks.count, id: \.self) { index in
-                    let book = searchedBooks[index]
+            LazyVStack(alignment: .leading) {
+                ForEach(searchedBooks, id: \.bookISBN) { book in
                     NavigationLink(
                         state: HomeViewFeature.Path.State.addRecord(
                             .init(book: book,
-                                  myBooks: store.books))) {
-                            BookCell(book: book)
+                                  myBooks: store.books)
+                        )
+                    ) {
+                        BookCell(book: book)
+                    }
+                    .onAppear {
+                        if book as? Book == store.searchedBooks.last,
+                           usedToSearch {
+                            store.send(.nextPage)
+                        }
                     }
                     //
                     CustomListDivider()
-                        .padding(.horizontal, -20)
                 }
             }
+            .padding(.horizontal, 20)
+            // 추가 데이터 받을 때, 로딩 표시
+            if store.isFetchNextPage {
+                ProgressView()
+                    .frame(height: 20)
+            }
         }
-        .scrollIndicators(.hidden)
         .scrollDismissesKeyboard(.immediately)
+        .padding(.horizontal, -20)
     }
-}
-
-// MARK: - 책 목록에 보여줄 셀
-private struct BookCell: View {
-    let book: SelectedBook
     
-    fileprivate var body: some View {
+    // MARK: - 책 목록에 보여줄 셀
+    @ViewBuilder
+    private func BookCell(book: SelectedBook) -> some View {
         VStack(spacing: 20) {
             HStack(alignment: .top, spacing: 20) {
                 // 이미지

@@ -21,7 +21,11 @@ struct BookShelf: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             if store.books.isEmpty {
-                NoContent()
+                NoContent(text: "\(store.userName)\(AppLocalized.emptyBookShelfMessage)")
+                    .padding(.bottom, 60)
+                    .padding(.horizontal, 20)
+            } else if !store.searchText.isEmpty, store.searchedBooks.isEmpty, store.isSearching {
+                NoContent(text: AppLocalized.bookSearchEmptyResult)
                     .padding(.bottom, 60)
                     .padding(.horizontal, 20)
             } else {
@@ -32,8 +36,9 @@ struct BookShelf: View {
             }
             NavigationLink(
                 state: HomeViewFeature.Path.State.addBook(
-                    .init(books: store.books))) {
-                Image(systemName: "plus")
+                    .init(books: store.books))
+            ) {
+                Image(systemName: AppLocalized.plusImage)
                     .font(.medium30)
             }
             .buttonStyle(.circled(color: .lightBrown, size: 30))
@@ -45,11 +50,12 @@ struct BookShelf: View {
     
     // MARK: - 책이 책장에 없을 때 : No Content
     @ViewBuilder
-    private func NoContent() -> some View {
+    private func NoContent(text: String) -> some View {
         VStack {
-            Text("책장이 비어있어요.\n 기억 속에 책을 남겨보세요.")
+            Text(text)
                 .font(.regular20)
                 .foregroundStyle(.lightBrown)
+                .lineSpacing(2)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -69,10 +75,10 @@ struct BookShelf: View {
                             state: HomeViewFeature.Path.State.recordList(
                                 .init(books: store.$books,
                                       records: store.$records,
+                                      recordDictionary: store.$recordDictionary,
                                       usedTo: .usedToShelf,
                                       selectedBook: book,
-                                      localName: "",
-                                      recordsOfLocal: []))) {
+                                      localName: .defaultCase))) {
                             BookImage(urlString: book.theCoverOfBook,
                                       maxWidth: maxWidth - 100)
                                 .padding(.bottom, 10)
@@ -162,9 +168,13 @@ private struct CustomShelf: View {
         BookShelf(
             store: Store(
                 initialState: HomeViewFeature.State(
+                    userName: Shared(.empty),
                     books: Shared([]),
                     records: Shared([]),
-                    searchText: ""
+                    recordDictionary: Shared([:]),
+                    searchedBooks: Shared([]),
+                    searchedRecords: Shared([]),
+                    searchText: .empty
                 )
             ) {
                 HomeViewFeature()

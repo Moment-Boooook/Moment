@@ -12,6 +12,7 @@ import ComposableArchitecture
 
 @main
 struct MomentApp: App {
+    // TCA
     static let store = Store(initialState: AppContentViewFeature.State()) {
         AppContentViewFeature()
             ._printChanges()
@@ -21,8 +22,15 @@ struct MomentApp: App {
 		WindowGroup {
             AppContentView(store: MomentApp.store)
                 .modelContainer(for: [
-                    MomentRecord.self, MomentBook.self
+                    MomentUser.self,
+                    MomentRecord.self,
+                    MomentBook.self
                 ])
 		}
 	}
+    
+    // MARK: - SwiftData 생성 위치 check
+//    init() {
+//        print(URL.applicationSupportDirectory.path(percentEncoded: false))
+//    }
 }

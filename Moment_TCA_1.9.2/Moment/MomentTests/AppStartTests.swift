@@ -33,8 +33,8 @@ final class AppStartTests: XCTestCase {
                     $0.commons = commons
                     $0.continuousClock = clock
                     $0.swiftDataService = .init(
-                        bookListFetch: { [TestData.testBook01, TestData.testBook02] },
-                        recordListFetch: { [TestData.testRecord01, TestData.testRecord02] },
+                        fetchBookList: { [TestData.testBook01, TestData.testBook02] },
+                        fetchRecordList: { [TestData.testRecord01, TestData.testRecord02] },
                         addBook: { _ in },
                         addRecord: { _ in },
                         deleteBook: { _ in },

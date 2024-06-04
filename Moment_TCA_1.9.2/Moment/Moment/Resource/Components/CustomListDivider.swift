@@ -12,7 +12,6 @@ struct CustomListDivider: View {
         Rectangle()
             .fill(.offBrown)
             .frame(height: 1)
-            .padding(.horizontal, 20)
             .padding(.vertical, 5)
     }
 }

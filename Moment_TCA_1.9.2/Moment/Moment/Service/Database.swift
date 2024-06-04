@@ -13,7 +13,9 @@ import ComposableArchitecture
 // MARK: - Model Context
 fileprivate let modelContext: ModelContext = {
     let schema = Schema([
-        MomentBook.self, MomentRecord.self
+        MomentUser.self,
+        MomentBook.self,
+        MomentRecord.self
     ])
     let modelConfiguration = ModelConfiguration(schema: schema,
                                                 isStoredInMemoryOnly: false)

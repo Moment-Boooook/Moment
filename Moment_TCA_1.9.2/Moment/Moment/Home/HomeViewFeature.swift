@@ -17,25 +17,39 @@ struct HomeViewFeature {
     @ObservableState
     struct State: Equatable {
         @ObservationStateIgnored
-        @Shared var books: [MomentBook]                         // 유저의 전체 책 목록
+        @Shared var userName: String
         @ObservationStateIgnored
-        @Shared var records: [MomentRecord]                     // 유저의 전체 기록 목록
+        @Shared var books: [MomentBook]                             // 유저의 전체 책 목록
+        @ObservationStateIgnored
+        @Shared var records: [MomentRecord]                         // 유저의 전체 기록 목록
+        @ObservationStateIgnored
+        @Shared var recordDictionary: [LocalName: [MomentRecord]]   // 지역 별 기록 딕셔너리
+        @ObservationStateIgnored
+        @Shared var searchedBooks: [MomentBook]                     // 검색 된 책 목록
+        @ObservationStateIgnored
+        @Shared var searchedRecords: [MomentRecord]                 // 검색 된 기록 목록
         
-        var path = StackState<Path.State>()                     // 네비게이션 스택 Path
-        var selectedOption: HomeSegment = .bookShelf            // 세그먼트 옵션
-        var searchText: String = ""                             // 서치바 - 검색어
-        var focusedField: Bool = false                          // 서치바 - focus state
-        var recordDictionary = [LocalName: [MomentRecord]]()    // 지역 별 기록 딕셔너리
-        var searchedBooks: [MomentBook] = []                    // 검색 된 책 목록
-        var searchedRecords: [MomentRecord] = []                // 검색 된 기록 목록
-        var isSearching = false                                 // 검색 중
-        let options = HomeSegment.allCases                      // 세그먼트 - 옵션 목록
-        let localNames = LocalName.allCases                     // 지역 명 리스트
+        var path = StackState<Path.State>()                         // 네비게이션 스택 Path
+        var selectedOption: HomeSegment = .bookShelf                // 세그먼트 옵션
+        var searchText: String = .empty                             // 서치바 - 검색어
+        var focusedField: Bool = false                              // 서치바 - focus state
+        var isSearching = false                                     // 검색 중
+        let options = HomeSegment.allCases                          // 세그먼트 - 옵션 목록
+        let localNames = LocalName.allCases                         // 지역 명 리스트
+        
+        mutating func fetchUserName() {
+            @Dependency(\.swiftDataService) var swiftData
+            do {
+                self.userName = try swiftData.fetchUserName()
+            } catch {
+                print("error :: fetchUserName", error.localizedDescription)
+            }
+        }
         
         mutating func fetchBooks() {
             @Dependency(\.swiftDataService) var swiftData
             do {
-                self.books = try swiftData.bookListFetch()
+                self.books = try swiftData.fetchBookList()
             } catch {
                 print("error :: fetchBooks", error.localizedDescription)
             }
@@ -44,7 +58,7 @@ struct HomeViewFeature {
         mutating func fetchRecords() {
             @Dependency(\.swiftDataService) var swiftData
             do {
-                self.records = try swiftData.recordListFetch()
+                self.records = try swiftData.fetchRecordList()
             } catch {
                 print("error :: fetchRecords", error.localizedDescription)
             }
@@ -59,6 +73,7 @@ struct HomeViewFeature {
         case fetchBooks
         case fetchRecords
         case fetchRecordDictionary
+        case fetchUserName
         case removeSearchText
         case path(StackAction<Path.State, Path.Action>)
         case searchButtonTapped
@@ -67,6 +82,7 @@ struct HomeViewFeature {
         case setSearchText(String)
         case startSearch
         case toggleSelectedOption(HomeSegment)
+        case updateSearchedBooksAndRecords
     }
     
     @Dependency(\.swiftDataService) var swiftData
@@ -81,7 +97,9 @@ struct HomeViewFeature {
                 return .none
             // selectedOption 값 변경
             case let .changeSelectedOption(newOption):
-                state.selectedOption = newOption
+                withAnimation {
+                    state.selectedOption = newOption
+                }
                 return .none
             // focusedField 해제
             case .clearFocusState:
@@ -115,9 +133,13 @@ struct HomeViewFeature {
                     }
                 }
                 return .none
+            // 유저 fetch
+            case .fetchUserName:
+                state.fetchUserName()
+                return .none
             // 서치바 - 텍스트 삭제
             case .removeSearchText:
-                state.searchText = ""
+                state.searchText = .empty
                 return .none
             // Navigation Path
             case let .path(action):
@@ -129,6 +151,7 @@ struct HomeViewFeature {
                     return .run { @MainActor send in
                         send(.fetchBooks)
                         send(.fetchRecords)
+                        send(.fetchRecordDictionary)
                     }
                 case .element(id: _, action: .recordDetail(.initialNavigationStack)):
                     state.path.removeAll()
@@ -137,6 +160,18 @@ struct HomeViewFeature {
                     return .run { @MainActor send in
                         send(.fetchBooks)
                         send(.fetchRecords)
+                        send(.fetchRecordDictionary)
+                        send(.updateSearchedBooksAndRecords)
+                    }
+                case .element(id: _, action: .setting(.initialNavigationStack)):
+                    state.path.removeAll()
+                    return .none
+                case .element(id: _, action: .setting(.refetchBooksAndRecords)):
+                    return .run { @MainActor send in
+                        send(.fetchUserName)
+                        send(.fetchBooks)
+                        send(.fetchRecords)
+                        send(.fetchRecordDictionary)
                     }
                 default:
                     return .none
@@ -173,6 +208,11 @@ struct HomeViewFeature {
             // 세그먼트 - 값 토글
             case let .toggleSelectedOption(newOption):
                 return .send(.changeSelectedOption(newOption), animation: .interactiveSpring)
+            // 삭제 이후, 검색 결과 최신화
+            case .updateSearchedBooksAndRecords:
+                return .run { [searchText = state.searchText] send in
+                    await send(.searchBooksAndRecords(searchText))
+                }
             }
         }
         .forEach(\.path, action: \.path) {
@@ -193,6 +233,7 @@ extension HomeViewFeature {
             case recordList(RecordListViewFeature.State)
             case recordDetail(RecordDetailViewFeature.State)
             case imageFull(ImageFullViewFeature.State)
+            case setting(SettingViewFeature.State)
         }
         
         enum Action {
@@ -201,6 +242,7 @@ extension HomeViewFeature {
             case recordList(RecordListViewFeature.Action)
             case recordDetail(RecordDetailViewFeature.Action)
             case imageFull(ImageFullViewFeature.Action)
+            case setting(SettingViewFeature.Action)
         }
         
         var body: some ReducerOf<Self> {
@@ -223,6 +265,10 @@ extension HomeViewFeature {
             // Image Full
             Scope(state: \.imageFull, action: \.imageFull) {
                 ImageFullViewFeature()
+            }
+            // Setting View
+            Scope(state: \.setting, action: \.setting) {
+                SettingViewFeature()
             }
         }
     }
