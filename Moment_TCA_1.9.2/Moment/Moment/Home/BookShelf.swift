@@ -21,7 +21,11 @@ struct BookShelf: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             if store.books.isEmpty {
-                NoContent()
+                NoContent(text: "\(store.userName)\(AppLocalized.emptyBookShelfMessage)")
+                    .padding(.bottom, 60)
+                    .padding(.horizontal, 20)
+            } else if !store.searchText.isEmpty, store.searchedBooks.isEmpty, store.isSearching {
+                NoContent(text: AppLocalized.bookSearchEmptyResult)
                     .padding(.bottom, 60)
                     .padding(.horizontal, 20)
             } else {
@@ -46,9 +50,9 @@ struct BookShelf: View {
     
     // MARK: - 책이 책장에 없을 때 : No Content
     @ViewBuilder
-    private func NoContent() -> some View {
+    private func NoContent(text: String) -> some View {
         VStack {
-            Text("\(store.userName)\(AppLocalized.emptyBookShelfMessage)")
+            Text(text)
                 .font(.regular20)
                 .foregroundStyle(.lightBrown)
                 .lineSpacing(2)

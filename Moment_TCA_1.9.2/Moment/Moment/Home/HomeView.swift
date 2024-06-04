@@ -131,12 +131,16 @@ struct HomeView: View {
                         store.send(.searchButtonTapped)
                     }
                 }
+                .onChange(of: store.searchText) {
+                    if store.searchText.isEmpty {
+                        store.send(.endSearch)
+                    }
+                }
                 .submitLabel(.search)
             // 검색어 지우기
             if !store.searchText.isEmpty {
                 Button {
                     store.send(.removeSearchText)
-                    store.send(.endSearch)
                 } label: {
                     Image(systemName: AppLocalized.xImage)
                         .foregroundStyle(.mainBrown)
