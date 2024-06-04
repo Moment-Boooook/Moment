@@ -212,6 +212,7 @@ struct HomeView: View {
                 userName: Shared(.empty),
                 books: Shared([]),
                 records: Shared([]),
+                recordDictionary: Shared([:]),
                 searchText: .empty
             )
         ) {

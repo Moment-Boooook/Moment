@@ -75,10 +75,10 @@ struct BookShelf: View {
                             state: HomeViewFeature.Path.State.recordList(
                                 .init(books: store.$books,
                                       records: store.$records,
+                                      recordDictionary: store.$recordDictionary,
                                       usedTo: .usedToShelf,
                                       selectedBook: book,
-                                      localName: .empty,
-                                      recordsOfLocal: []))) {
+                                      localName: .defaultCase))) {
                             BookImage(urlString: book.theCoverOfBook,
                                       maxWidth: maxWidth - 100)
                                 .padding(.bottom, 10)
@@ -171,6 +171,7 @@ private struct CustomShelf: View {
                     userName: Shared(.empty),
                     books: Shared([]),
                     records: Shared([]),
+                    recordDictionary: Shared([:]),
                     searchText: .empty
                 )
             ) {

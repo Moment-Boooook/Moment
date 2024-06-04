@@ -19,6 +19,8 @@ struct RecordListViewFeature {
         @Shared var books: [MomentBook]             // 유저의 책장 책 목록
         @ObservationStateIgnored
         @Shared var records: [MomentRecord]         // 유저의 기록 목록
+        @ObservationStateIgnored
+        @Shared var recordDictionary: [LocalName: [MomentRecord]]   // 지역 별 기록 딕셔너리
         
         let usedTo: RecordListType                  // 시용되는 뷰
         
@@ -33,10 +35,12 @@ struct RecordListViewFeature {
         var showBookDataDialog: Bool = false        // 책에 대한 대략적인 내용을 보여주는 다이얼로그
         var dialogOffset: CGFloat = 1000            // 다이얼로그 띄울때, offset
         // 책에 따른 리스트 : in Map
-        let localName: String                       // 선택된 지역 이름
-        let recordsOfLocal: [MomentRecord]          // 지역에 대한 기록 목록
+        let localName: LocalName                    // 선택된 지역 이름
+        var recordsOfLocal: [MomentRecord] {        // 지역에 대한 기록 목록
+            recordDictionary[localName] ?? []
+        }
         var recordsBookData: [MomentBook] {         // 지역에 대한 책의 데이터
-            Set(recordsOfLocal.map { $0.bookISBN }).compactMap { isbn in
+            return Set(recordsOfLocal.map { $0.bookISBN }).compactMap { isbn in
                 if let book = books.first(where: { $0.bookISBN == isbn }) {
                     return book
                 }

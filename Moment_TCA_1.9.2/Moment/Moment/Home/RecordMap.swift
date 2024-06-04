@@ -25,13 +25,13 @@ struct RecordMap: View {
                 ForEach(store.recordDictionary.map { $0.key }, id: \.self) { local in
                     //
                     if let data = store.recordDictionary[local]?.first,
-                       let count = store.recordDictionary[local]?.count,
-                       let records = store.recordDictionary[local] {
+                       let count = store.recordDictionary[local]?.count {
                         Annotation(LocalizedStringKey(.empty), coordinate: local.coordinate, anchor: .bottom) {
                             NavigationLink(
                                 state: HomeViewFeature.Path.State.recordList(
                                     .init(books: store.$books,
                                           records: store.$records,
+                                          recordDictionary: store.$recordDictionary,
                                           usedTo: .usedToMap,
                                           selectedBook: MomentBook(bookISBN: .empty,
                                                                    theCoverOfBook: .empty,
@@ -39,8 +39,7 @@ struct RecordMap: View {
                                                                    author: .empty,
                                                                    publisher: .empty,
                                                                    plot: .empty),
-                                          localName: local.rawValue,
-                                          recordsOfLocal: records))) {
+                                          localName: local))) {
                                 MarkerButton(size: 65,
                                              innerSize: 60,
                                              data: data)
@@ -178,6 +177,7 @@ private struct NotificationCount: View {
                 userName: Shared(.empty),
                 books: Shared([]),
                 records: Shared([]),
+                recordDictionary: Shared([:]),
                 searchText: .empty
             )
         ) {

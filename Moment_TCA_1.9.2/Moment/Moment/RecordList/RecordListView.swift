@@ -36,7 +36,7 @@ struct RecordListView: View {
                 }
             }
             ToolbarItem(placement: .principal) {
-                Text(store.usedTo == .usedToShelf ? store.selectedBook.title : store.localName)
+                Text(store.usedTo == .usedToShelf ? store.selectedBook.title : store.localName.rawValue)
                     .font(.semibold18)
                     .foregroundStyle(.darkBrown)
                     .lineLimit(1)

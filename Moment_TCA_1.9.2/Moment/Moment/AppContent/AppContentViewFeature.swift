@@ -21,22 +21,29 @@ struct AppContentViewFeature {
         @Shared var books: [MomentBook]
         @ObservationStateIgnored
         @Shared var records: [MomentRecord]
+        @ObservationStateIgnored
+        @Shared var recordDictionary: [LocalName: [MomentRecord]]
         
         var appStart: AppStartFeature.State
         var home: HomeViewFeature.State
         
-        init(userName: Shared<String> = Shared(.empty),
-             books: Shared<[MomentBook]> = Shared([]),
-             records: Shared<[MomentRecord]> = Shared([])) {
+        init(
+            userName: Shared<String> = Shared(.empty),
+            books: Shared<[MomentBook]> = Shared([]),
+            records: Shared<[MomentRecord]> = Shared([]),
+            recordDictionary: Shared<[LocalName: [MomentRecord]]> = Shared([:])
+        ) {
             self._userName = userName
             self._books = books
             self._records = records
+            self._recordDictionary = recordDictionary
             self.appStart = AppStartFeature.State(userName: userName,
                                                   books: books,
                                                   records: records)
             self.home = HomeViewFeature.State(userName: userName,
                                               books: books,
-                                              records: records)
+                                              records: records, 
+                                              recordDictionary: recordDictionary)
         }
     }
     

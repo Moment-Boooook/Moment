@@ -19,20 +19,22 @@ struct HomeViewFeature {
         @ObservationStateIgnored
         @Shared var userName: String
         @ObservationStateIgnored
-        @Shared var books: [MomentBook]                         // 유저의 전체 책 목록
+        @Shared var books: [MomentBook]                             // 유저의 전체 책 목록
         @ObservationStateIgnored
-        @Shared var records: [MomentRecord]                     // 유저의 전체 기록 목록
+        @Shared var records: [MomentRecord]                         // 유저의 전체 기록 목록
+        @ObservationStateIgnored
+        @Shared var recordDictionary: [LocalName: [MomentRecord]]   // 지역 별 기록 딕셔너리
         
-        var path = StackState<Path.State>()                     // 네비게이션 스택 Path
-        var selectedOption: HomeSegment = .bookShelf            // 세그먼트 옵션
-        var searchText: String = .empty                         // 서치바 - 검색어
-        var focusedField: Bool = false                          // 서치바 - focus state
-        var recordDictionary = [LocalName: [MomentRecord]]()    // 지역 별 기록 딕셔너리
-        var searchedBooks: [MomentBook] = []                    // 검색 된 책 목록
-        var searchedRecords: [MomentRecord] = []                // 검색 된 기록 목록
-        var isSearching = false                                 // 검색 중
-        let options = HomeSegment.allCases                      // 세그먼트 - 옵션 목록
-        let localNames = LocalName.allCases                     // 지역 명 리스트
+        var path = StackState<Path.State>()                         // 네비게이션 스택 Path
+        var selectedOption: HomeSegment = .bookShelf                // 세그먼트 옵션
+        var searchText: String = .empty                             // 서치바 - 검색어
+        var focusedField: Bool = false                              // 서치바 - focus state
+//        var recordDictionary = [LocalName: [MomentRecord]]()        // 지역 별 기록 딕셔너리
+        var searchedBooks: [MomentBook] = []                        // 검색 된 책 목록
+        var searchedRecords: [MomentRecord] = []                    // 검색 된 기록 목록
+        var isSearching = false                                     // 검색 중
+        let options = HomeSegment.allCases                          // 세그먼트 - 옵션 목록
+        let localNames = LocalName.allCases                         // 지역 명 리스트
         
         mutating func fetchUserName() {
             @Dependency(\.swiftDataService) var swiftData
@@ -147,6 +149,7 @@ struct HomeViewFeature {
                     return .run { @MainActor send in
                         send(.fetchBooks)
                         send(.fetchRecords)
+                        send(.fetchRecordDictionary)
                     }
                 case .element(id: _, action: .recordDetail(.initialNavigationStack)):
                     state.path.removeAll()
@@ -155,6 +158,7 @@ struct HomeViewFeature {
                     return .run { @MainActor send in
                         send(.fetchBooks)
                         send(.fetchRecords)
+                        send(.fetchRecordDictionary)
                     }
                 case .element(id: _, action: .setting(.initialNavigationStack)):
                     state.path.removeAll()
@@ -164,6 +168,7 @@ struct HomeViewFeature {
                         send(.fetchUserName)
                         send(.fetchBooks)
                         send(.fetchRecords)
+                        send(.fetchRecordDictionary)
                     }
                 default:
                     return .none
