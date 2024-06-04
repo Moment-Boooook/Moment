@@ -104,28 +104,17 @@ struct SettingView: View {
                                 .foregroundStyle(.gray1)
                         }
                         .modifier(SettingListCell(width: geoWidth - 40))
-                        // What's Moment?
-                        Button {
-                            // TODO: - 모멘트 정보 뷰 이동
-                        } label: {
-                            HStack {
-                                Text(AppLocalized.aboutMomentButton)
-                                    .font(.regular16)
-                                    .foregroundStyle(.darkBrown)
-                            }
-                            .modifier(SettingListCell(width: geoWidth - 40))
-                        }
-                        // 오픈라이선스
-                        Button {
-                            // TODO: - 오픈라이선스 뷰 이동
-                        } label: {
-                            HStack {
-                                Text(AppLocalized.openSourceButton)
-                                    .font(.regular16)
-                                    .foregroundStyle(.darkBrown)
-                            }
-                            .modifier(SettingListCell(width: geoWidth - 40))
-                        }
+                        // TODO: - 오픈라이선스
+//                        Button {
+//                            // TODO: - 오픈라이선스 뷰 이동
+//                        } label: {
+//                            HStack {
+//                                Text(AppLocalized.openSourceButton)
+//                                    .font(.regular16)
+//                                    .foregroundStyle(.darkBrown)
+//                            }
+//                            .modifier(SettingListCell(width: geoWidth - 40))
+//                        }
                     }
                 }
                 .padding(.horizontal, 20)
