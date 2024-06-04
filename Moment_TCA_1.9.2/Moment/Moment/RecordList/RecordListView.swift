@@ -170,7 +170,6 @@ struct RecordListView: View {
                 }
             }
         }
-        .padding(.horizontal, 20)
     }
     
     // MARK: - 책 간단 상세 정보 보여주는 다이얼로그
