@@ -21,7 +21,10 @@ struct PhotoPicker: UIViewControllerRepresentable {
             self.parent = parent
         }
         
-        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        func picker(
+            _ picker: PHPickerViewController,
+            didFinishPicking results: [PHPickerResult]
+        ) {
             for result in results {
                 let itemProvider = result.itemProvider
                 guard itemProvider.canLoadObject(ofClass: UIImage.self) else { continue }

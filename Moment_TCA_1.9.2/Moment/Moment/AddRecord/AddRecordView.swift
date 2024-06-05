@@ -192,12 +192,12 @@ struct AddRecordView: View {
                             titleVisibility: .hidden
         ) {
             Button {
-                store.send(.openCamera)
+                store.send(.checkCameraAuthorization)
             } label: {
                 Text(AppLocalized.cameraButton)
             }
             Button {
-                store.send(.openPhotoLibrary)
+                store.send(.checkPhotoLibraryAuthorization)
             } label: {
                 Text(AppLocalized.libraryButton)
             }

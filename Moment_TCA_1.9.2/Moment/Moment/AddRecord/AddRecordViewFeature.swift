@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import Photos
 
 import ComposableArchitecture
 
@@ -60,6 +61,8 @@ struct AddRecordViewFeature {
         case alert(PresentationAction<Alert>)
         case binding(BindingAction<State>)
         case changeFocusedField
+        case checkCameraAuthorization
+        case checkPhotoLibraryAuthorization
         case clearFocusedField
         case dismiss
         case fetchLocation
@@ -67,6 +70,8 @@ struct AddRecordViewFeature {
         case openCamera
         case openPickerMap
         case openPhotoLibrary
+        case cameraAuthorizationChecked(Bool)
+        case photoLibraryAuthorizationChecked(Bool)
         case refetchBooksAndRecords
         case removePhoto(Int)
         case saveRecord
@@ -171,6 +176,42 @@ struct AddRecordViewFeature {
                     state.focusedField = nil
                 }
                 return .none
+            // 카메라 사용 권한 허용
+            case .checkCameraAuthorization:
+                return .run { @MainActor send in
+                    let status = AVCaptureDevice.authorizationStatus(for: .video)
+                    switch status {
+                    case .notDetermined:
+                        let access = await AVCaptureDevice.requestAccess(for: .video)
+                        if access {
+                            send(.cameraAuthorizationChecked(true))
+                        }
+                    case .authorized:
+                        send(.cameraAuthorizationChecked(true))
+                    case .denied, .restricted:
+                        send(.cameraAuthorizationChecked(false))
+                    @unknown default:
+                        send(.cameraAuthorizationChecked(false))
+                    }
+                }
+            // 앨범 사용 권한 허용
+            case .checkPhotoLibraryAuthorization:
+                return .run { @MainActor send in
+                    let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+                    switch status {
+                    case .notDetermined:
+                        let newStatus = await PHPhotoLibrary.requestAuthorization(for: .addOnly)
+                        if newStatus == .authorized || newStatus == .limited {
+                            send(.photoLibraryAuthorizationChecked(true))
+                        }
+                    case .authorized, .limited:
+                        send(.photoLibraryAuthorizationChecked(true))
+                    case .denied, .restricted:
+                        send(.photoLibraryAuthorizationChecked(false))
+                    @unknown default:
+                        send(.photoLibraryAuthorizationChecked(false))
+                    }
+                }
             // focusstate 해제
             case .clearFocusedField:
                 state.focusedField = nil
@@ -204,6 +245,24 @@ struct AddRecordViewFeature {
             case .openPhotoLibrary:
                 state.isPhotoPickerSheet = true
                 return .none
+            // 카메라 사용 권한 허용 결과에 따른 액션 실행
+            case let .cameraAuthorizationChecked(authorized):
+                if authorized {
+                    return .run { send in
+                        await send(.openCamera)
+                    }
+                } else {
+                    return .none
+                }
+            // 앨범 사용 권한 허용 결과에 따른 액션 실행
+            case let .photoLibraryAuthorizationChecked(authorized):
+                if authorized {
+                    return .run { send in
+                        await send(.openPhotoLibrary)
+                    }
+                } else {
+                    return .none
+                }
             // 기록 등록 이후, 최초 홈화면에서 refetch 받기 위함
             case .refetchBooksAndRecords:
                 return .none
