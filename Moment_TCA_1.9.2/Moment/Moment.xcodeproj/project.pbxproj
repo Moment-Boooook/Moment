@@ -108,6 +108,7 @@
 		0922B4972BFAF02E00375953 /* Date +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date +.swift"; sourceTree = "<group>"; };
 		0922B49C2BFC931F00375953 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = loading.json; path = "../../../../../../흐르미/모멘트/loading.json"; sourceTree = "<group>"; };
 		0922B49E2BFD166400375953 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		094F94F82C0F94CC0033ED93 /* MomentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		095131612B31216200F6BC4C /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		09731F7C2B26C5980045F6B4 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		09731F892B26D12A0045F6B4 /* CustomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtons.swift; sourceTree = "<group>"; };
@@ -170,7 +171,6 @@
 		09F9EFEB2C057D5C009DE3A0 /* URL +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL +.swift"; sourceTree = "<group>"; };
 		09F9EFED2C059CC5009DE3A0 /* TextWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWrapper.swift; sourceTree = "<group>"; };
 		09F9EFF72C097E33009DE3A0 /* DocumentPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerView.swift; sourceTree = "<group>"; };
-		09F9F01E2C0ED2DF009DE3A0 /* MomentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MomentTests.xctest; path = "/Users/phang/Desktop/Moment/Moment_TCA_1.9.2/Moment/build/Debug-iphoneos/MomentTests.xctest"; sourceTree = "<absolute>"; };
 		2CA6BED82B2733E0002E3589 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2CBA62CD2B2A282500D075B7 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		7B39C0C62B2ADC7400460278 /* UIImage +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage +.swift"; sourceTree = "<group>"; };
@@ -257,6 +257,7 @@
 				09AB7CE22B26A1350073EAD5 /* Moment */,
 				09E3B6CB2BC3D866001BC529 /* MomentTests */,
 				09E3B6E22BC3E8D4001BC529 /* Moment.app */,
+				094F94F82C0F94CC0033ED93 /* MomentTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -487,7 +488,7 @@
 			packageProductDependencies = (
 			);
 			productName = MomentTests;
-			productReference = 09F9F01E2C0ED2DF009DE3A0 /* MomentTests.xctest */;
+			productReference = 094F94F82C0F94CC0033ED93 /* MomentTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -522,7 +523,6 @@
 			packageReferences = (
 				09B59C4F2BB31F64009900E5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				09C31ADF2BDBF33D00623F5C /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				09C31AE62BE4C52D00623F5C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				09C31AFE2BE5130300623F5C /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				0922B4992BFC83F400375953 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
@@ -938,14 +938,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.11.0;
-			};
-		};
-		09C31AE62BE4C52D00623F5C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.25.0;
 			};
 		};
 		09C31AFE2BE5130300623F5C /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
