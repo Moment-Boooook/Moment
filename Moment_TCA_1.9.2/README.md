@@ -5,7 +5,7 @@
 
 ## 팀 소개
 
-  |👑|||||
+  ||||||
   | :-----: | :-----: | :-----: | :-----: | :-----: |
   |<img width="120" height="120" border:0px src="https://avatars.githubusercontent.com/u/103061387?v=4"/>|<img width="120" height="120" border:0px src="https://avatars.githubusercontent.com/u/80156515?v=4"/>|<img width="120" height="120" border:0px src="https://avatars.githubusercontent.com/u/75058050?v=4"/>|<img width="120" height="120" border:0px src="https://avatars.githubusercontent.com/u/109324421?v=4"/>|<img width="120" height="120" border:0px src="https://avatars.githubusercontent.com/u/120158212?v=4"/>|
   |[홍세희](https://github.com/SAY-Hong)|[김민재](https://github.com/bdrsky2010)|[백대홍](https://github.com/DevLarva)|[이창준](https://github.com/Phangg)|[정인선](https://github.com/withseon)|
@@ -94,18 +94,27 @@
 - API: Naver 도서 검색
 
 ### 프레임워크
-- 위치 기록: MapKit
-- 데이터 저장: SwiftData
-
+- MapKit
+- SwiftData
+- [Kingfisher](https://github.com/onevcat/Kingfisher) [ * refactoring 시, 적용 ]
+- [Lottie](https://github.com/airbnb/lottie-ios) [ * refactoring 시, 적용 ]
+- [ZIPFoundation](https://github.com/weichsel/ZIPFoundation) [ * refactoring 시, 적용 ]
+- [TCA](https://github.com/pointfreeco/swift-composable-architecture) [ * refactoring 시, 적용 ]
 
 ---
 
 
-## 리팩토링 - [ 2024.03.28 ~ 2024.04.09 ]
+## 리팩토링 - [ 2024.03.28 ~  ]
 - 참여: [이창준](https://github.com/Phangg)
 
+## AppStore Link
+- [ Moment - 모멘트 ](https://apps.apple.com/kr/app/moment-%EB%AA%A8%EB%A9%98%ED%8A%B8/id6503728275)
+
 ### 리팩토링 내용
-- [TCA](https://github.com/pointfreeco/swift-composable-architecture) 아키텍처 적용 (1.9.2)
+- [TCA](https://github.com/pointfreeco/swift-composable-architecture) 아키텍처 적용 (1.9.2 버전)
 - 불필요 코드 및 오탈자 / 오류 및 로직 일부분 수정
+- 일부 뷰 추가 및 수정
+- 추가 기능 구현
 - TDD 코드 작성
 - [Kingfisher](https://github.com/onevcat/Kingfisher) 라이브러리 적용
+- 로컬 데이터 복원 / 복구 기능 적용 ( [ZIPFoundation](https://github.com/weichsel/ZIPFoundation) 활용 )
